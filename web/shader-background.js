@@ -79,7 +79,7 @@ async function mountRipple() {
     uniforms.resolution.value.set(renderer.domElement.width, renderer.domElement.height);
   }
   function frame(now = 0) {
-    const paused = reduceMotion.matches || document.hidden || document.body.classList.contains('motion-paused');
+    const paused = reduceMotion.matches || document.hidden || document.documentElement.classList.contains('motion-paused');
     // Avoid dedicating a 60/120 Hz GPU animation to a decorative surface.
     // A motion pause renders its final frame once, then stays quiet.
     if ((!paused && now - previousFrame >= 32) || (paused && !lastPaused)) {
