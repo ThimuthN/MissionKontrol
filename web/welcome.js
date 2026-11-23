@@ -1,3 +1,7 @@
+import { workflowOptions } from './review-model.js';
+
+const sourceNames = { email: 'Outlook', teams: 'Teams', calendar: 'Calendar', screen: 'Screen log' };
+const date = new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeZone: 'Asia/Colombo' });
 let dialog;
 let handlers;
 
@@ -10,26 +14,21 @@ function createWelcome() {
     <div class="welcome-layout">
       <div class="welcome-content">
         <div class="welcome-brand"><span class="mark" aria-hidden="true"></span>Mission Control</div>
-        <h2 id="welcome-title">Choose a dataset</h2>
-        <p id="welcome-summary">Open the redacted assessment demo or inspect an export on this device.</p>
+        <h2 id="welcome-title">Harbourline casebook</h2>
+        <p id="welcome-summary"></p>
         <div class="welcome-actions">
           <button type="button" class="primary" data-welcome="demo" autofocus>Open demo <span class="arrow" aria-hidden="true"></span></button>
           <button type="button" class="secondary" data-welcome="import">Import ZIP</button>
-          <button type="button" class="quiet" data-welcome="close">Cancel</button>
+          <button type="button" class="quiet" data-welcome="close">Close</button>
         </div>
       </div>
-      <div class="welcome-visual" aria-hidden="true">
-        <img class="welcome-illos" alt="" referrerpolicy="no-referrer" width="640" height="400">
-        <div class="flow-illustration">
-          <div class="flow-sources"><div>Outlook</div><div>Teams</div><div>ZIP</div></div>
-          <div class="flow-link"></div>
-          <div class="flow-card">
-            <span class="flow-case">Workflow</span>
-            <div class="flow-stage"><i></i><span>Observed step</span></div>
-            <div class="flow-stage"><i></i><span>Inferred link</span></div>
-            <div class="flow-stage"><i></i><span>Evidence gap</span></div>
-          </div>
-        </div>
+      <div class="welcome-visual">
+        <figure class="source-sheet">
+          <figcaption><span class="welcome-record-label"></span><time></time></figcaption>
+          <blockquote></blockquote>
+          <p class="welcome-visual-note"></p>
+          <img class="welcome-illos" alt="" referrerpolicy="no-referrer" width="58" height="37">
+        </figure>
       </div>
     </div>`;
   const illustration = element.querySelector('.welcome-illos');
@@ -45,9 +44,28 @@ function createWelcome() {
   return element;
 }
 
+function fillDemo(report) {
+  const workflows = report ? workflowOptions(report) : [];
+  const names = workflows.map(item => item.report.process.toLowerCase());
+  dialog.querySelector('#welcome-summary').textContent = names.length
+    ? `Review ${new Intl.ListFormat('en', { style: 'long', type: 'conjunction' }).format(names)} in the redacted March 2026 export, or load a ZIP on this device.`
+    : 'Open the redacted assessment demo or inspect an export on this device.';
+  const item = workflows[0]?.report.cases.find(candidate => candidate.steps[0]?.evidence[0]);
+  const evidence = item?.steps[0]?.evidence[0];
+  dialog.querySelector('.welcome-visual').hidden = !evidence;
+  if (!evidence) return;
+  dialog.querySelector('.welcome-record-label').textContent = `${item.label ?? item.id} · ${sourceNames[evidence.source] ?? evidence.source}`;
+  const time = dialog.querySelector('time');
+  time.dateTime = evidence.at;
+  time.textContent = date.format(new Date(evidence.at));
+  dialog.querySelector('blockquote').textContent = evidence.text;
+  dialog.querySelector('.welcome-visual-note').textContent = `Redacted source summary. ${evidence.reason}`;
+}
+
 export function openWelcome(options = {}) {
   handlers = options;
   dialog ??= createWelcome();
+  fillDemo(options.report);
   if (!dialog.open) dialog.showModal();
   return dialog;
 }

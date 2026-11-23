@@ -1,0 +1,14 @@
+.account-control { min-width: 0; position: relative; }
+.account-link { color: inherit; text-decoration: none; white-space: nowrap; }
+.account-handle { display: block; max-width: 9rem; cursor: pointer; list-style: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.7; }
+.account-handle::-webkit-details-marker { display: none; }
+.account-panel {
+  position: absolute; z-index: 4; inset-inline-end: 0; top: calc(100% + .3rem); width: 13rem;
+  padding: .7rem; background: var(--panel); border: 1px solid var(--night-line); box-shadow: .22rem .28rem 0 #19355318;
+}
+.account-panel strong, .account-panel p, .account-status { font-size: .78rem; }
+.account-panel p { margin-block: .45rem .65rem; color: var(--muted); }
+.account-status:not(.sr-only) { display: block; margin-top: .4rem; }
+@media (max-width: 700px) {
+  .account-panel { inset-inline: 0 auto; }
+}

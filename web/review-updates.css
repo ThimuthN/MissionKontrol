@@ -1,0 +1,11 @@
+.evidence-history { border-top: 1px dashed var(--line); margin-top: .8rem; padding-top: .65rem; }
+.history-caption { color: var(--muted); font-size: .73rem; margin-bottom: .35rem; }
+.removed-record { background: var(--amber-wash); border-color: #e6ccbc; }
+.removed-reason { margin-top: .52rem; color: var(--amber-ink); font-size: .79rem; }
+.link-action { display: inline-flex; margin-top: .22rem; padding-inline: .5rem; text-decoration: underline; }
+.correction-form { margin-top: .55rem; }
+.correction-form p { color: var(--muted); font-size: .78rem; margin-bottom: .42rem; }
+.correction-form textarea { width: 100%; }
+.correction-form .actions { margin-top: .25rem; }
+#correction-status { color: var(--muted); font-size: .75rem; }
+#correction-status:not(:empty) { margin-bottom: .5rem; }

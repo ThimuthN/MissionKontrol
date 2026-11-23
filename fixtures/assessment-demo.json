@@ -20,7 +20,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The procurement channel records a laptop request and a required-by date.",
               "reason": "This message starts a procurement thread.",
-              "origin": "Source record 01"
+              "origin": "Source record 01",
+              "status": "observed"
             }
           ]
         },
@@ -36,7 +37,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier and price were proposed in the request thread.",
               "reason": "The quote is a reply under the original request.",
-              "origin": "Source record 02"
+              "origin": "Source record 02",
+              "status": "observed"
             }
           ]
         },
@@ -52,7 +54,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The quote received approval in the request thread.",
               "reason": "The approval is a reply after the quote in the same thread.",
-              "origin": "Source record 03"
+              "origin": "Source record 03",
+              "status": "observed"
             }
           ]
         },
@@ -69,6 +72,7 @@
               "text": "A supplier email records an order and names the delivery recipient.",
               "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
               "origin": "Source record 04",
+              "status": "observed",
               "checks": [
                 {
                   "label": "Recipient",
@@ -102,7 +106,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
               "reason": "The recipient named in the order reported receipt in a Teams chat after the order.",
-              "origin": "Source record 05"
+              "origin": "Source record 05",
+              "status": "observed"
             }
           ]
         }
@@ -125,7 +130,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The procurement channel records a laptop request and a required-by date.",
               "reason": "This message starts a procurement thread.",
-              "origin": "Source record 06"
+              "origin": "Source record 06",
+              "status": "observed"
             }
           ]
         },
@@ -141,7 +147,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier and price were proposed in the request thread.",
               "reason": "The quote is a reply under the original request.",
-              "origin": "Source record 07"
+              "origin": "Source record 07",
+              "status": "observed"
             }
           ]
         },
@@ -157,7 +164,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The quote received approval in the request thread.",
               "reason": "The approval is a reply after the quote in the same thread.",
-              "origin": "Source record 08"
+              "origin": "Source record 08",
+              "status": "observed"
             }
           ]
         },
@@ -174,6 +182,7 @@
               "text": "A supplier email records an order and names the delivery recipient.",
               "reason": "Only the first name matched. The vendor, model and earlier approval narrowed the order to one request.",
               "origin": "Source record 09",
+              "status": "inferred",
               "checks": [
                 {
                   "label": "Recipient",
@@ -208,7 +217,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
               "reason": "The recipient named in the order reported receipt in a Teams chat after the order.",
-              "origin": "Source record 10"
+              "origin": "Source record 10",
+              "status": "observed"
             }
           ]
         }
@@ -231,7 +241,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The procurement channel records a laptop request and a required-by date.",
               "reason": "This message starts a procurement thread.",
-              "origin": "Source record 11"
+              "origin": "Source record 11",
+              "status": "observed"
             }
           ]
         },
@@ -247,7 +258,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier and price were proposed in the request thread.",
               "reason": "The quote is a reply under the original request.",
-              "origin": "Source record 12"
+              "origin": "Source record 12",
+              "status": "observed"
             }
           ]
         },
@@ -263,7 +275,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The quote received approval in the request thread.",
               "reason": "The approval is a reply after the quote in the same thread.",
-              "origin": "Source record 13"
+              "origin": "Source record 13",
+              "status": "observed"
             }
           ]
         },
@@ -280,6 +293,7 @@
               "text": "A supplier email records an order and names the delivery recipient.",
               "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
               "origin": "Source record 14",
+              "status": "observed",
               "checks": [
                 {
                   "label": "Recipient",
@@ -313,7 +327,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
               "reason": "A coordinator reported receipt in the same request thread.",
-              "origin": "Source record 15"
+              "origin": "Source record 15",
+              "status": "observed"
             }
           ]
         }
@@ -336,7 +351,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The procurement channel records a laptop request and a required-by date.",
               "reason": "This message starts a procurement thread.",
-              "origin": "Source record 16"
+              "origin": "Source record 16",
+              "status": "observed"
             }
           ]
         },
@@ -352,7 +368,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier and price were proposed in the request thread.",
               "reason": "The quote is a reply under the original request.",
-              "origin": "Source record 17"
+              "origin": "Source record 17",
+              "status": "observed"
             }
           ]
         },
@@ -368,7 +385,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The quote received approval in the request thread.",
               "reason": "The approval is a reply after the quote in the same thread.",
-              "origin": "Source record 18"
+              "origin": "Source record 18",
+              "status": "observed"
             }
           ]
         },
@@ -385,6 +403,7 @@
               "text": "A supplier email records an order and names the delivery recipient.",
               "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
               "origin": "Source record 19",
+              "status": "observed",
               "checks": [
                 {
                   "label": "Recipient",
@@ -418,7 +437,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
               "reason": "The recipient named in the order reported receipt in a Teams chat after the order.",
-              "origin": "Source record 20"
+              "origin": "Source record 20",
+              "status": "observed"
             }
           ]
         }
@@ -441,7 +461,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The procurement channel records a laptop request and a required-by date.",
               "reason": "This message starts a procurement thread.",
-              "origin": "Source record 21"
+              "origin": "Source record 21",
+              "status": "observed"
             }
           ]
         },
@@ -457,7 +478,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier and price were proposed in the request thread.",
               "reason": "The quote is a reply under the original request.",
-              "origin": "Source record 22"
+              "origin": "Source record 22",
+              "status": "observed"
             }
           ]
         },
@@ -473,7 +495,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The quote received approval in the request thread.",
               "reason": "The approval is a reply after the quote in the same thread.",
-              "origin": "Source record 23"
+              "origin": "Source record 23",
+              "status": "observed"
             }
           ]
         },
@@ -490,6 +513,7 @@
               "text": "A supplier email records an order and names the delivery recipient.",
               "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
               "origin": "Source record 24",
+              "status": "observed",
               "checks": [
                 {
                   "label": "Recipient",
@@ -523,7 +547,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
               "reason": "A coordinator reported receipt in the same request thread.",
-              "origin": "Source record 25"
+              "origin": "Source record 25",
+              "status": "observed"
             }
           ]
         }
@@ -546,7 +571,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The procurement channel records a laptop request and a required-by date.",
               "reason": "This message starts a procurement thread.",
-              "origin": "Source record 26"
+              "origin": "Source record 26",
+              "status": "observed"
             }
           ]
         },
@@ -562,7 +588,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier and price were proposed in the request thread.",
               "reason": "The quote is a reply under the original request.",
-              "origin": "Source record 27"
+              "origin": "Source record 27",
+              "status": "observed"
             }
           ]
         },
@@ -578,7 +605,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The quote received approval in the request thread.",
               "reason": "The approval is a reply after the quote in the same thread.",
-              "origin": "Source record 28"
+              "origin": "Source record 28",
+              "status": "observed"
             }
           ]
         },
@@ -595,6 +623,7 @@
               "text": "A supplier email records an order and names the delivery recipient.",
               "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
               "origin": "Source record 29",
+              "status": "observed",
               "checks": [
                 {
                   "label": "Recipient",
@@ -628,7 +657,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
               "reason": "The recipient named in the order reported receipt in a Teams chat after the order.",
-              "origin": "Source record 30"
+              "origin": "Source record 30",
+              "status": "observed"
             }
           ]
         }
@@ -651,7 +681,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The procurement channel records a laptop request and a required-by date.",
               "reason": "This message starts a procurement thread.",
-              "origin": "Source record 31"
+              "origin": "Source record 31",
+              "status": "observed"
             }
           ]
         },
@@ -667,7 +698,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier and price were proposed in the request thread.",
               "reason": "The quote is a reply under the original request.",
-              "origin": "Source record 32"
+              "origin": "Source record 32",
+              "status": "observed"
             }
           ]
         },
@@ -683,7 +715,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The quote received approval in the request thread.",
               "reason": "The approval is a reply after the quote in the same thread.",
-              "origin": "Source record 33"
+              "origin": "Source record 33",
+              "status": "observed"
             }
           ]
         },
@@ -700,6 +733,7 @@
               "text": "A supplier email records an order and names the delivery recipient.",
               "reason": "Only the first name matched. The vendor, model and earlier approval narrowed the order to one request.",
               "origin": "Source record 34",
+              "status": "inferred",
               "checks": [
                 {
                   "label": "Recipient",
@@ -734,7 +768,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
               "reason": "A coordinator reported receipt in the same request thread.",
-              "origin": "Source record 35"
+              "origin": "Source record 35",
+              "status": "observed"
             }
           ]
         }
@@ -757,7 +792,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The procurement channel records a laptop request and a required-by date.",
               "reason": "This message starts a procurement thread.",
-              "origin": "Source record 36"
+              "origin": "Source record 36",
+              "status": "observed"
             }
           ]
         },
@@ -773,7 +809,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier and price were proposed in the request thread.",
               "reason": "The quote is a reply under the original request.",
-              "origin": "Source record 37"
+              "origin": "Source record 37",
+              "status": "observed"
             }
           ]
         },
@@ -789,7 +826,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The quote received approval in the request thread.",
               "reason": "The approval is a reply after the quote in the same thread.",
-              "origin": "Source record 38"
+              "origin": "Source record 38",
+              "status": "observed"
             }
           ]
         },
@@ -806,6 +844,7 @@
               "text": "A supplier email records an order and names the delivery recipient.",
               "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
               "origin": "Source record 39",
+              "status": "observed",
               "checks": [
                 {
                   "label": "Recipient",
@@ -839,7 +878,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
               "reason": "A coordinator reported receipt in the same request thread.",
-              "origin": "Source record 40"
+              "origin": "Source record 40",
+              "status": "observed"
             }
           ]
         }
@@ -862,7 +902,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The procurement channel records a laptop request and a required-by date.",
               "reason": "This message starts a procurement thread.",
-              "origin": "Source record 41"
+              "origin": "Source record 41",
+              "status": "observed"
             }
           ]
         },
@@ -878,7 +919,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier and price were proposed in the request thread.",
               "reason": "The quote is a reply under the original request.",
-              "origin": "Source record 42"
+              "origin": "Source record 42",
+              "status": "observed"
             }
           ]
         },
@@ -894,7 +936,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The quote received approval in the request thread.",
               "reason": "The approval is a reply after the quote in the same thread.",
-              "origin": "Source record 43"
+              "origin": "Source record 43",
+              "status": "observed"
             }
           ]
         },
@@ -911,6 +954,7 @@
               "text": "A supplier email records an order and names the delivery recipient.",
               "reason": "Only the first name matched. The vendor, model and earlier approval narrowed the order to one request.",
               "origin": "Source record 44",
+              "status": "inferred",
               "checks": [
                 {
                   "label": "Recipient",
@@ -945,7 +989,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
               "reason": "The recipient named in the order reported receipt in a Teams chat after the order.",
-              "origin": "Source record 45"
+              "origin": "Source record 45",
+              "status": "observed"
             }
           ]
         }
@@ -968,7 +1013,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The procurement channel records a laptop request and a required-by date.",
               "reason": "This message starts a procurement thread.",
-              "origin": "Source record 46"
+              "origin": "Source record 46",
+              "status": "observed"
             }
           ]
         },
@@ -984,7 +1030,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier and price were proposed in the request thread.",
               "reason": "The quote is a reply under the original request.",
-              "origin": "Source record 47"
+              "origin": "Source record 47",
+              "status": "observed"
             }
           ]
         },
@@ -1000,7 +1047,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The quote received approval in the request thread.",
               "reason": "The approval is a reply after the quote in the same thread.",
-              "origin": "Source record 48"
+              "origin": "Source record 48",
+              "status": "observed"
             }
           ]
         },
@@ -1017,6 +1065,7 @@
               "text": "A supplier email records an order and names the delivery recipient.",
               "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
               "origin": "Source record 49",
+              "status": "observed",
               "checks": [
                 {
                   "label": "Recipient",
@@ -1063,7 +1112,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The procurement channel records a laptop request and a required-by date.",
               "reason": "This message starts a procurement thread.",
-              "origin": "Source record 50"
+              "origin": "Source record 50",
+              "status": "observed"
             }
           ]
         },
@@ -1079,7 +1129,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier and price were proposed in the request thread.",
               "reason": "The quote is a reply under the original request.",
-              "origin": "Source record 51"
+              "origin": "Source record 51",
+              "status": "observed"
             }
           ]
         },
@@ -1095,7 +1146,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The quote received approval in the request thread.",
               "reason": "The approval is a reply after the quote in the same thread.",
-              "origin": "Source record 52"
+              "origin": "Source record 52",
+              "status": "observed"
             }
           ]
         },
@@ -1112,6 +1164,7 @@
               "text": "A supplier email records an order and names the delivery recipient.",
               "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
               "origin": "Source record 53",
+              "status": "observed",
               "checks": [
                 {
                   "label": "Recipient",
@@ -1158,7 +1211,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The procurement channel records a laptop request and a required-by date.",
               "reason": "This message starts a procurement thread.",
-              "origin": "Source record 54"
+              "origin": "Source record 54",
+              "status": "observed"
             }
           ]
         },
@@ -1174,7 +1228,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier and price were proposed in the request thread.",
               "reason": "The quote is a reply under the original request.",
-              "origin": "Source record 55"
+              "origin": "Source record 55",
+              "status": "observed"
             }
           ]
         },
@@ -1190,7 +1245,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The quote received approval in the request thread.",
               "reason": "The approval is a reply after the quote in the same thread.",
-              "origin": "Source record 56"
+              "origin": "Source record 56",
+              "status": "observed"
             }
           ]
         },
@@ -1207,6 +1263,7 @@
               "text": "A supplier email records an order and names the delivery recipient.",
               "reason": "Only the first name matched. The vendor, model and earlier approval narrowed the order to one request.",
               "origin": "Source record 57",
+              "status": "inferred",
               "checks": [
                 {
                   "label": "Recipient",
@@ -1254,7 +1311,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The procurement channel records a laptop request and a required-by date.",
               "reason": "This message starts a procurement thread.",
-              "origin": "Source record 58"
+              "origin": "Source record 58",
+              "status": "observed"
             }
           ]
         },
@@ -1270,7 +1328,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier and price were proposed in the request thread.",
               "reason": "The quote is a reply under the original request.",
-              "origin": "Source record 59"
+              "origin": "Source record 59",
+              "status": "observed"
             }
           ]
         },
@@ -1286,7 +1345,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The quote received approval in the request thread.",
               "reason": "The approval is a reply after the quote in the same thread.",
-              "origin": "Source record 60"
+              "origin": "Source record 60",
+              "status": "observed"
             }
           ]
         },
@@ -1303,6 +1363,7 @@
               "text": "A supplier email records an order and names the delivery recipient.",
               "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
               "origin": "Source record 61",
+              "status": "observed",
               "checks": [
                 {
                   "label": "Recipient",
@@ -1349,7 +1410,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The procurement channel records a laptop request and a required-by date.",
               "reason": "This message starts a procurement thread.",
-              "origin": "Source record 62"
+              "origin": "Source record 62",
+              "status": "observed"
             }
           ]
         },
@@ -1365,7 +1427,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier and price were proposed in the request thread.",
               "reason": "The quote is a reply under the original request.",
-              "origin": "Source record 63"
+              "origin": "Source record 63",
+              "status": "observed"
             }
           ]
         },
@@ -1406,7 +1469,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "The procurement channel records a laptop request and a required-by date.",
               "reason": "This message starts a procurement thread.",
-              "origin": "Source record 64"
+              "origin": "Source record 64",
+              "status": "observed"
             }
           ]
         },
@@ -1422,7 +1486,8 @@
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier and price were proposed in the request thread.",
               "reason": "The quote is a reply under the original request.",
-              "origin": "Source record 65"
+              "origin": "Source record 65",
+              "status": "observed"
             }
           ]
         },
@@ -1455,5 +1520,2694 @@
     "rows": 11346,
     "duplicates": 180,
     "rejected": 0
-  }
+  },
+  "processes": [
+    {
+      "version": 1,
+      "dataset": "public-march2026",
+      "process": "Recruitment screening",
+      "cases": [
+        {
+          "id": "RC-01",
+          "label": "RC-01",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 66",
+                  "source": "calendar",
+                  "at": "2026-03-02T03:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 66",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "inferred",
+              "evidence": [
+                {
+                  "id": "Source record 67",
+                  "source": "teams",
+                  "at": "2026-03-02T03:30:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "A Teams message reports that a recruiter spoke with the candidate.",
+                  "reason": "A candidate alias, mailbox and nearby prior slot narrowed the report to one case.",
+                  "origin": "Source record 67",
+                  "status": "inferred"
+                }
+              ]
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 68",
+                  "source": "calendar",
+                  "at": "2026-03-10T07:15:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 68",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-02",
+          "label": "RC-02",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 69",
+                  "source": "calendar",
+                  "at": "2026-03-02T04:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 69",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "inferred",
+              "evidence": [
+                {
+                  "id": "Source record 70",
+                  "source": "teams",
+                  "at": "2026-03-02T04:45:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "A Teams message reports that a recruiter spoke with the candidate.",
+                  "reason": "A candidate alias, mailbox and nearby prior slot narrowed the report to one case.",
+                  "origin": "Source record 70",
+                  "status": "inferred"
+                }
+              ]
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 71",
+                  "source": "calendar",
+                  "at": "2026-03-11T05:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 71",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 72",
+                  "source": "email",
+                  "at": "2026-03-17T05:00:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "The candidate explicitly accepted the offer by email.",
+                  "reason": "The full candidate name and role matched an interview with an earlier scheduled start.",
+                  "origin": "Source record 72",
+                  "status": "observed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "RC-03",
+          "label": "RC-03",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 73",
+                  "source": "calendar",
+                  "at": "2026-03-02T04:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 73",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "inferred",
+              "evidence": [
+                {
+                  "id": "Source record 74",
+                  "source": "teams",
+                  "at": "2026-03-02T05:00:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "A Teams message reports that a recruiter spoke with the candidate.",
+                  "reason": "A candidate alias, mailbox and nearby prior slot narrowed the report to one case.",
+                  "origin": "Source record 74",
+                  "status": "inferred"
+                }
+              ]
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 75",
+                  "source": "calendar",
+                  "at": "2026-03-10T04:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 75",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-04",
+          "label": "RC-04",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 76",
+                  "source": "calendar",
+                  "at": "2026-03-02T04:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 76",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "inferred",
+              "evidence": [
+                {
+                  "id": "Source record 77",
+                  "source": "teams",
+                  "at": "2026-03-02T05:30:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "A Teams message reports that a recruiter spoke with the candidate.",
+                  "reason": "A candidate alias, mailbox and nearby prior slot narrowed the report to one case.",
+                  "origin": "Source record 77",
+                  "status": "inferred"
+                }
+              ]
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 78",
+                  "source": "calendar",
+                  "at": "2026-03-09T04:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 78",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-05",
+          "label": "RC-05",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 79",
+                  "source": "calendar",
+                  "at": "2026-03-02T06:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 79",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 80",
+                  "source": "calendar",
+                  "at": "2026-03-05T12:15:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 80",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 81",
+                  "source": "email",
+                  "at": "2026-03-13T03:45:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "The candidate explicitly accepted the offer by email.",
+                  "reason": "The full candidate name and role matched an interview with an earlier scheduled start.",
+                  "origin": "Source record 81",
+                  "status": "observed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "RC-06",
+          "label": "RC-06",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 82",
+                  "source": "calendar",
+                  "at": "2026-03-02T07:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 82",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-07",
+          "label": "RC-07",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 83",
+                  "source": "calendar",
+                  "at": "2026-03-02T07:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 83",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-08",
+          "label": "RC-08",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 84",
+                  "source": "calendar",
+                  "at": "2026-03-03T06:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 84",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-09",
+          "label": "RC-09",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 85",
+                  "source": "calendar",
+                  "at": "2026-03-03T07:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 85",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-10",
+          "label": "RC-10",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 86",
+                  "source": "calendar",
+                  "at": "2026-03-04T04:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 86",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 87",
+                  "source": "calendar",
+                  "at": "2026-03-09T10:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 87",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 88",
+                  "source": "email",
+                  "at": "2026-03-13T05:15:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "The candidate declined or reported accepting another offer.",
+                  "reason": "The full candidate name and role matched an interview with an earlier scheduled start.",
+                  "origin": "Source record 88",
+                  "status": "observed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "RC-11",
+          "label": "RC-11",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 89",
+                  "source": "calendar",
+                  "at": "2026-03-04T06:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 89",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 90",
+                  "source": "calendar",
+                  "at": "2026-03-13T11:15:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 90",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-12",
+          "label": "RC-12",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 91",
+                  "source": "calendar",
+                  "at": "2026-03-04T12:15:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 91",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-13",
+          "label": "RC-13",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 92",
+                  "source": "calendar",
+                  "at": "2026-03-05T05:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 92",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-14",
+          "label": "RC-14",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 93",
+                  "source": "calendar",
+                  "at": "2026-03-05T11:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 93",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 94",
+                  "source": "teams",
+                  "at": "2026-03-05T11:30:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "A Teams message reports that a recruiter spoke with the candidate.",
+                  "reason": "The full candidate name and mailbox matched a nearby prior scheduled screening.",
+                  "origin": "Source record 94",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 95",
+                  "source": "calendar",
+                  "at": "2026-03-13T04:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 95",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-15",
+          "label": "RC-15",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 96",
+                  "source": "calendar",
+                  "at": "2026-03-06T04:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 96",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 97",
+                  "source": "teams",
+                  "at": "2026-03-06T05:15:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "A Teams message reports that a recruiter spoke with the candidate.",
+                  "reason": "The full candidate name and mailbox matched a nearby prior scheduled screening.",
+                  "origin": "Source record 97",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 98",
+                  "source": "calendar",
+                  "at": "2026-03-11T09:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 98",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 99",
+                  "source": "email",
+                  "at": "2026-03-18T03:45:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "The candidate explicitly accepted the offer by email.",
+                  "reason": "The full candidate name and role matched an interview with an earlier scheduled start.",
+                  "origin": "Source record 99",
+                  "status": "observed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "RC-16",
+          "label": "RC-16",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 100",
+                  "source": "calendar",
+                  "at": "2026-03-06T05:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 100",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-17",
+          "label": "RC-17",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 101",
+                  "source": "calendar",
+                  "at": "2026-03-06T05:15:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 101",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-18",
+          "label": "RC-18",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 102",
+                  "source": "calendar",
+                  "at": "2026-03-06T05:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 102",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 103",
+                  "source": "calendar",
+                  "at": "2026-03-13T05:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 103",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-19",
+          "label": "RC-19",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 104",
+                  "source": "calendar",
+                  "at": "2026-03-06T05:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 104",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-20",
+          "label": "RC-20",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 105",
+                  "source": "calendar",
+                  "at": "2026-03-06T06:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 105",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-21",
+          "label": "RC-21",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 106",
+                  "source": "calendar",
+                  "at": "2026-03-09T03:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 106",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-22",
+          "label": "RC-22",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 107",
+                  "source": "calendar",
+                  "at": "2026-03-09T04:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 107",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 108",
+                  "source": "calendar",
+                  "at": "2026-03-16T04:15:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 108",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 109",
+                  "source": "email",
+                  "at": "2026-03-19T09:45:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "The candidate explicitly accepted the offer by email.",
+                  "reason": "The full candidate name and role matched an interview with an earlier scheduled start.",
+                  "origin": "Source record 109",
+                  "status": "observed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "RC-23",
+          "label": "RC-23",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 110",
+                  "source": "calendar",
+                  "at": "2026-03-09T04:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 110",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "inferred",
+              "evidence": [
+                {
+                  "id": "Source record 111",
+                  "source": "teams",
+                  "at": "2026-03-09T05:00:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "A Teams message reports that a recruiter spoke with the candidate.",
+                  "reason": "A candidate alias, mailbox and nearby prior slot narrowed the report to one case.",
+                  "origin": "Source record 111",
+                  "status": "inferred"
+                }
+              ]
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-24",
+          "label": "RC-24",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 112",
+                  "source": "calendar",
+                  "at": "2026-03-09T05:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 112",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 113",
+                  "source": "calendar",
+                  "at": "2026-03-17T07:15:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 113",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-25",
+          "label": "RC-25",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 114",
+                  "source": "calendar",
+                  "at": "2026-03-09T05:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 114",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 115",
+                  "source": "calendar",
+                  "at": "2026-03-19T04:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 115",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 116",
+                  "source": "email",
+                  "at": "2026-03-25T09:00:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "The candidate explicitly accepted the offer by email.",
+                  "reason": "The full candidate name and role matched an interview with an earlier scheduled start.",
+                  "origin": "Source record 116",
+                  "status": "observed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "RC-26",
+          "label": "RC-26",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 117",
+                  "source": "calendar",
+                  "at": "2026-03-09T05:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 117",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "inferred",
+              "evidence": [
+                {
+                  "id": "Source record 118",
+                  "source": "teams",
+                  "at": "2026-03-09T06:15:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "A Teams message reports that a recruiter spoke with the candidate.",
+                  "reason": "A candidate alias, mailbox and nearby prior slot narrowed the report to one case.",
+                  "origin": "Source record 118",
+                  "status": "inferred"
+                }
+              ]
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 119",
+                  "source": "calendar",
+                  "at": "2026-03-17T05:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 119",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-27",
+          "label": "RC-27",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 120",
+                  "source": "calendar",
+                  "at": "2026-03-09T08:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 120",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-28",
+          "label": "RC-28",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 121",
+                  "source": "calendar",
+                  "at": "2026-03-10T04:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 121",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "inferred",
+              "evidence": [
+                {
+                  "id": "Source record 122",
+                  "source": "teams",
+                  "at": "2026-03-10T04:45:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "A Teams message reports that a recruiter spoke with the candidate.",
+                  "reason": "A candidate alias, mailbox and nearby prior slot narrowed the report to one case.",
+                  "origin": "Source record 122",
+                  "status": "inferred"
+                }
+              ]
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 123",
+                  "source": "calendar",
+                  "at": "2026-03-19T04:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 123",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-29",
+          "label": "RC-29",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 124",
+                  "source": "calendar",
+                  "at": "2026-03-10T04:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 124",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-30",
+          "label": "RC-30",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 125",
+                  "source": "calendar",
+                  "at": "2026-03-10T05:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 125",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 126",
+                  "source": "calendar",
+                  "at": "2026-03-18T05:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 126",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-31",
+          "label": "RC-31",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 127",
+                  "source": "calendar",
+                  "at": "2026-03-10T06:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 127",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 128",
+                  "source": "calendar",
+                  "at": "2026-03-17T05:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 128",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 129",
+                  "source": "email",
+                  "at": "2026-03-23T04:30:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "The candidate declined or reported accepting another offer.",
+                  "reason": "The full candidate name and role matched an interview with an earlier scheduled start.",
+                  "origin": "Source record 129",
+                  "status": "observed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "RC-32",
+          "label": "RC-32",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 130",
+                  "source": "calendar",
+                  "at": "2026-03-10T06:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 130",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-33",
+          "label": "RC-33",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 131",
+                  "source": "calendar",
+                  "at": "2026-03-10T07:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 131",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "inferred",
+              "evidence": [
+                {
+                  "id": "Source record 132",
+                  "source": "teams",
+                  "at": "2026-03-10T07:30:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "A Teams message reports that a recruiter spoke with the candidate.",
+                  "reason": "A candidate alias, mailbox and nearby prior slot narrowed the report to one case.",
+                  "origin": "Source record 132",
+                  "status": "inferred"
+                }
+              ]
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 133",
+                  "source": "calendar",
+                  "at": "2026-03-17T05:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 133",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-34",
+          "label": "RC-34",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 134",
+                  "source": "calendar",
+                  "at": "2026-03-11T03:15:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 134",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 135",
+                  "source": "calendar",
+                  "at": "2026-03-19T04:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 135",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 136",
+                  "source": "email",
+                  "at": "2026-03-26T03:30:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "The candidate explicitly accepted the offer by email.",
+                  "reason": "The full candidate name and role matched an interview with an earlier scheduled start.",
+                  "origin": "Source record 136",
+                  "status": "observed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "RC-35",
+          "label": "RC-35",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 137",
+                  "source": "calendar",
+                  "at": "2026-03-11T04:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 137",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-36",
+          "label": "RC-36",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 138",
+                  "source": "calendar",
+                  "at": "2026-03-11T04:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 138",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 139",
+                  "source": "calendar",
+                  "at": "2026-03-16T10:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 139",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-37",
+          "label": "RC-37",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 140",
+                  "source": "calendar",
+                  "at": "2026-03-12T05:15:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 140",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 141",
+                  "source": "calendar",
+                  "at": "2026-03-17T05:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 141",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-38",
+          "label": "RC-38",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 142",
+                  "source": "calendar",
+                  "at": "2026-03-13T03:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 142",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-39",
+          "label": "RC-39",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 143",
+                  "source": "calendar",
+                  "at": "2026-03-13T05:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 143",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "inferred",
+              "evidence": [
+                {
+                  "id": "Source record 144",
+                  "source": "teams",
+                  "at": "2026-03-13T05:30:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "A Teams message reports that a recruiter spoke with the candidate.",
+                  "reason": "A candidate alias, mailbox and nearby prior slot narrowed the report to one case.",
+                  "origin": "Source record 144",
+                  "status": "inferred"
+                }
+              ]
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 145",
+                  "source": "calendar",
+                  "at": "2026-03-25T07:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 145",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-40",
+          "label": "RC-40",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 146",
+                  "source": "calendar",
+                  "at": "2026-03-13T06:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 146",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "inferred",
+              "evidence": [
+                {
+                  "id": "Source record 147",
+                  "source": "teams",
+                  "at": "2026-03-13T06:45:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "A Teams message reports that a recruiter spoke with the candidate.",
+                  "reason": "A candidate alias, mailbox and nearby prior slot narrowed the report to one case.",
+                  "origin": "Source record 147",
+                  "status": "inferred"
+                }
+              ]
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 148",
+                  "source": "calendar",
+                  "at": "2026-03-23T11:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 148",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-41",
+          "label": "RC-41",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 149",
+                  "source": "calendar",
+                  "at": "2026-03-16T03:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 149",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-42",
+          "label": "RC-42",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 150",
+                  "source": "calendar",
+                  "at": "2026-03-16T04:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 150",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-43",
+          "label": "RC-43",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 151",
+                  "source": "calendar",
+                  "at": "2026-03-16T04:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 151",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-44",
+          "label": "RC-44",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 152",
+                  "source": "calendar",
+                  "at": "2026-03-16T05:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 152",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-45",
+          "label": "RC-45",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 153",
+                  "source": "calendar",
+                  "at": "2026-03-16T05:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 153",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 154",
+                  "source": "calendar",
+                  "at": "2026-03-26T04:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 154",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-46",
+          "label": "RC-46",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 155",
+                  "source": "calendar",
+                  "at": "2026-03-16T06:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 155",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-47",
+          "label": "RC-47",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 156",
+                  "source": "calendar",
+                  "at": "2026-03-16T06:15:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 156",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 157",
+                  "source": "calendar",
+                  "at": "2026-03-23T03:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 157",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 158",
+                  "source": "email",
+                  "at": "2026-03-26T08:15:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "The candidate explicitly accepted the offer by email.",
+                  "reason": "The full candidate name and role matched an interview with an earlier scheduled start.",
+                  "origin": "Source record 158",
+                  "status": "observed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "RC-48",
+          "label": "RC-48",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 159",
+                  "source": "calendar",
+                  "at": "2026-03-16T06:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 159",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 160",
+                  "source": "calendar",
+                  "at": "2026-03-24T03:15:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 160",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-49",
+          "label": "RC-49",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 161",
+                  "source": "calendar",
+                  "at": "2026-03-17T04:30:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 161",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-50",
+          "label": "RC-50",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 162",
+                  "source": "calendar",
+                  "at": "2026-03-17T05:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 162",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 163",
+                  "source": "teams",
+                  "at": "2026-03-17T06:30:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "A Teams message reports that a recruiter spoke with the candidate.",
+                  "reason": "The full candidate name and mailbox matched a nearby prior scheduled screening.",
+                  "origin": "Source record 163",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-51",
+          "label": "RC-51",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 164",
+                  "source": "calendar",
+                  "at": "2026-03-17T06:45:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 164",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 165",
+                  "source": "calendar",
+                  "at": "2026-03-23T05:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 165",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        },
+        {
+          "id": "RC-52",
+          "label": "RC-52",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 166",
+                  "source": "calendar",
+                  "at": "2026-03-19T03:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 166",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "missing",
+              "evidence": []
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        }
+      ],
+      "stats": {
+        "normalized": 11166,
+        "linked": 101,
+        "unlinked": 11065,
+        "files": 25,
+        "rows": 11346,
+        "duplicates": 180,
+        "rejected": 0
+      }
+    }
+  ]
 }

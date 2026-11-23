@@ -1,5 +1,54 @@
 export const publicDataset = 'public-march2026';
 
+export function workflowOptions(workspace) {
+  const { processes = [], ...primary } = workspace;
+  const siblings = Array.isArray(processes) ? processes : Object.values(processes ?? {});
+  return [primary, ...siblings.filter(item => Array.isArray(item?.cases) && item.process !== primary.process)]
+    .map((report, index) => ({
+      key: String(report.id ?? report.process),
+      primary: index === 0,
+      report: { ...report, dataset: workspace.dataset, stats: { ...workspace.stats, ...report.stats } },
+    }));
+}
+
+export function projectReviews(report, reviews) {
+  const removals = new Map();
+  const cases = report.cases.map(item => ({
+    ...item,
+    steps: item.steps.map(step => {
+      const key = `${item.id}/${step.id}`;
+      const history = reviews[key]?.corrections ?? [];
+      const current = new Map(history.map(entry => [entry.eventId, entry]));
+      const excludedEvidence = step.evidence.flatMap(record => {
+        const correction = current.get(record.id);
+        if (correction?.action !== 'unlink') return [];
+        return [{ ...record, correction }];
+      });
+      if (!excludedEvidence.length) return step;
+      const removed = new Set(excludedEvidence.map(record => record.id));
+      removals.set(key, removed);
+      const evidence = step.evidence.filter(record => !removed.has(record.id));
+      const inferred = step.status === 'inferred' ||
+        evidence.every(record => record.status === 'inferred' || record.checks?.some(check => check.partial));
+      return {
+        ...step,
+        machineStatus: step.status,
+        status: evidence.length === 0 ? 'missing' : inferred ? 'inferred' : 'observed',
+        evidence,
+        excludedEvidence,
+      };
+    }),
+  }));
+  if (removals.size === 0) return report;
+  const acceptedLinks = report.links?.filter(link => !removals.get(`${link.caseId}/${link.stage}`)?.has(link.eventId));
+  const removedEvidenceLinks = [...removals.values()].reduce((count, records) => count + records.size, 0);
+  const linked = new Set(cases.flatMap(item => item.steps.flatMap(step => step.evidence.map(record => record.id)))).size;
+  return {
+    ...report, cases, ...(acceptedLinks && { links: acceptedLinks }),
+    stats: { ...report.stats, linked, unlinked: report.stats.normalized - linked, removedEvidenceLinks },
+  };
+}
+
 export function summarize(report) {
   const definitions = report.cases[0]?.steps ?? [];
   const stages = definitions.map(({ id, label }) => ({

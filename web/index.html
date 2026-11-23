@@ -3,20 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#151b32">
+  <meta name="theme-color" content="#fffdf5">
   <meta name="description" content="Mission Control reconstructs how work moved across Teams and Outlook, with evidence you can inspect.">
   <title>Mission Control | Process intelligence</title>
   <link rel="icon" href="/mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/replay.css">
+  <link rel="stylesheet" href="/account.css">
+  <link rel="stylesheet" href="/review-updates.css">
   <script type="module" src="/app.js"></script>
 </head>
 <body>
-  <a class="skip" href="#case-lab">Skip to the case lab</a>
+  <a class="skip" href="#case-lab">Skip to the casebook</a>
   <header class="topbar">
     <div class="topbar-inner">
-      <button id="welcome-button" class="brand" type="button"><span class="mark" aria-hidden="true"></span>Mission Control</button>
+      <button id="welcome-button" class="brand" type="button" aria-label="Mission Control, choose a dataset"><span class="mark" aria-hidden="true"></span>Mission Control</button>
       <div class="top-actions">
         <span id="dataset" class="dataset">Assessment demo</span>
+        <button id="open-assistant" class="nav-button" type="button" disabled>Ask the evidence</button>
         <button id="import-button" class="nav-button" type="button" disabled>Import ZIP</button>
         <details id="export-menu" class="export">
           <summary class="nav-button">Export <span class="chevron" aria-hidden="true"></span></summary>
@@ -30,6 +34,7 @@
     </div>
   </header>
   <main>
+    <nav id="process-switch" class="process-switch" aria-label="Switch workflow process" hidden></nav>
     <section class="intro" aria-labelledby="process">
       <div class="intro-copy">
         <h1 id="process">Laptop procurement</h1>
@@ -37,7 +42,11 @@
       </div>
       <div class="briefing">
         <p class="period" id="period" hidden></p>
-        <button id="start-tour" class="primary" type="button" disabled>Take the walkthrough <span class="arrow" aria-hidden="true"></span></button>
+        <button id="start-tour" class="quiet" type="button" disabled>Walkthrough <span class="arrow" aria-hidden="true"></span></button>
+        <div class="trace-controls" id="trace-controls" hidden>
+          <div class="ink-trace" id="ink-trace" aria-hidden="true"></div>
+          <button id="trace-toggle" class="quiet" type="button" aria-pressed="false">Pause motion</button>
+        </div>
       </div>
     </section>
     <p id="workspace-status" class="workspace-status" role="status" hidden></p>
@@ -45,7 +54,7 @@
     <section id="case-lab" class="lab" aria-labelledby="lab-title" hidden>
       <div class="brief">
         <div>
-          <h2 id="lab-title" class="sr-only">Case lab</h2>
+          <h2 id="lab-title" class="sr-only">Casebook</h2>
           <p id="insight"></p>
         </div>
         <button id="copy-link" class="secondary" type="button">Copy case link</button>
@@ -83,12 +92,14 @@
             </div>
           </div>
           <p class="panel-subtitle" id="case-context"></p>
+          <div id="case-replay"></div>
           <ol id="steps"></ol>
           <a class="jump-evidence" href="#evidence-title">View selected evidence <span class="arrow" aria-hidden="true"></span></a>
         </section>
         <section class="panel inspector" aria-labelledby="evidence-title">
-          <div class="panel-title"><h3 id="evidence-title"></h3></div>
+          <div class="panel-title"><h3 id="evidence-title" tabindex="-1"></h3></div>
           <p class="panel-subtitle" id="evidence-context"></p>
+          <p id="correction-status" role="status"></p>
           <div class="inspection-sheet">
             <div id="records"></div>
             <form id="review-form">

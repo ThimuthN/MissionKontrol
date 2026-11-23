@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { assemble, fromFixture } from '../src/pipeline.mjs';
+import { parseExport } from '../src/normalize.mjs';
+import { projectReviews } from '../web/review-model.js';
 import fixture from '../fixtures/interviews.json' with { type: 'json' };
 
 test('a calendar window and ambiguous match do not establish a booked interview', () => {
@@ -106,4 +108,81 @@ test('receipt evidence distinguishes the recipient from the coordinator', () => 
   assert.match(evidence[0].reason, /coordinator/);
   assert.match(evidence[1].reason, /recipient/);
   assert.equal(report.stats.unlinked, 1);
+});
+
+function candidateEvent(id, source, day, hour, subject, text = subject, other = {}) {
+  return {
+    id, source, subject, text, body: text, at: `2026-03-${day}T${hour}:00:00Z`,
+    origin: `data/owner/${source === 'teams' ? 'teams' : 'outlook'}/${source}.jsonl:1`,
+    ...other,
+  };
+}
+
+test('recruitment separates scheduled events, reported screening, and explicit offer decisions', () => {
+  const screen = candidateEvent('s', 'calendar', '10', '10', 'Screening call – Pat Doe (Legal Assistant)', '', { timeKind: 'Scheduled start' });
+  const report = candidateEvent('r', 'teams', '10', '11', '', 'Spoke to Pat for the Ingram role, good fit', {
+    origin: 'data/manager/teams/messages.jsonl:1',
+    origins: ['data/manager/teams/messages.jsonl:1', 'data/owner/teams/messages.jsonl:1'],
+  });
+  const interview = candidateEvent('i', 'calendar', '12', '12', 'Interview: Pat Doe – Legal Assistant', '', { timeKind: 'Scheduled start' });
+  const offer = (id, day, text, other = {}) =>
+    candidateEvent(id, 'email', day, '14', 'RE: Offer – Legal Assistant with Harbourline Talent', text, { actor: 'Pat Doe', ...other });
+  const input = [
+    offer('declined', '13', "I've decided to accept another offer."),
+    report, interview, screen,
+    offer('early', '11', 'Happy to accept the offer, thank you.'),
+    offer('ambiguous', '13', 'I have not accepted.'),
+    offer('wrong-name', '13', 'Happy to accept the offer, thank you.', { actor: 'Pat Smith' }),
+  ];
+  const [process] = assemble(input, 'assessment').processes;
+  assert.equal(process.stats.linked, 4);
+  assert.equal(process.cases.length, 1);
+  assert.deepEqual(process.cases[0].steps.map(step => step.status), ['observed', 'inferred', 'observed', 'observed']);
+  assert.equal(process.cases[0].steps[2].evidence[0].timeKind, 'Scheduled start');
+  assert.equal(process.cases[0].steps[3].evidence[0].outcome, 'declined');
+});
+
+test('recruitment leaves ambiguous aliases and canceled slots unresolved', () => {
+  const [process] = assemble([
+    candidateEvent('s1', 'calendar', '10', '10', 'Screening call – Pat Doe (Legal Assistant)'),
+    candidateEvent('s2', 'calendar', '10', '10', 'Screening call – Pat Smith (Legal Assistant)'),
+    candidateEvent('s3', 'calendar', '10', '10', 'Screening call – Pat West (Legal Assistant)', '', { cancelled: true }),
+    candidateEvent('r', 'teams', '10', '11', '', 'Spoke to Pat for the Ingram role, good fit'),
+  ], 'assessment').processes;
+  assert.equal(process.cases.length, 2);
+  assert.equal(process.stats.linked, 2);
+  assert.ok(process.cases.every(item => item.steps.find(step => step.id === 'screening_reported').status === 'missing'));
+});
+
+test('an exported calendar cancellation survives deduplication and excludes the slot', async () => {
+  const scheduled = { id: 'p-1', iCalUId: 'appt-1', subject: 'Screening call – Pat Doe (Legal Assistant)',
+    start: { dateTime: '2026-03-10T10:00:00', timeZone: 'Asia/Colombo' }, isCancelled: false };
+  const { events, counts } = await parseExport([
+    ['owner/outlook/calendar.jsonl', JSON.stringify(scheduled)],
+    ['attendee/outlook/calendar.jsonl', JSON.stringify({ ...scheduled, id: 'p-2', isCancelled: true })],
+    ['owner/outlook/calendar.jsonl', JSON.stringify({
+      ...scheduled, id: 'p-3', iCalUId: 'appt-2', subject: 'Screening call – Robin Doe (Legal Assistant)',
+    })],
+  ]);
+  const [recruitment] = assemble(events, 'assessment').processes;
+  assert.equal(counts.duplicates, 1);
+  assert.equal(events[0].cancelled, true);
+  assert.equal(events[0].at, '2026-03-10T04:30:00.000Z');
+  assert.deepEqual(recruitment.cases.map(item => item.label), ['Robin Doe']);
+});
+
+test('unlinking observed recruitment evidence leaves the remaining inferred evidence marked correctly', () => {
+  const [recruitment] = assemble([
+    candidateEvent('s1', 'calendar', '10', '10', 'Screening call – Pat Doe (Legal Assistant)'),
+    candidateEvent('alias', 'teams', '10', '11', '', 'Spoke to Pat for the Ingram role, good fit'),
+    candidateEvent('full', 'teams', '10', '12', '', 'Spoke to Pat Doe for the Ingram role, good fit'),
+  ], 'assessment').processes;
+  const [item] = recruitment.cases;
+  assert.equal(item.steps[1].status, 'observed');
+  assert.deepEqual(item.steps[1].evidence.map(record => record.status), ['inferred', 'observed']);
+  const corrected = projectReviews(recruitment, {
+    [`${item.id}/screening_reported`]: { corrections: [{ eventId: 'full', action: 'unlink' }] },
+  });
+  assert.equal(corrected.cases[0].steps[1].status, 'inferred');
+  assert.deepEqual(corrected.cases[0].steps[1].evidence.map(record => record.id), ['alias']);
 });

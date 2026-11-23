@@ -44,6 +44,7 @@ function normalize(row, source, relative, line) {
   return { id, source, at, text, body, subject, origin, scope, providerId, replyToId: row.replyToId,
     channelName: row.channelIdentity?._channelName,
     actor: row.from?.user?.displayName ?? row.sender?.emailAddress?.name ?? row.from?.emailAddress?.name,
+    ...(calendarRecord && { cancelled: row.isCancelled === true }),
     timeKind: calendarRecord ? 'Scheduled start' : 'Recorded time' };
 }
 
@@ -72,6 +73,7 @@ export async function parseExport(entries) {
       if (existing) {
         duplicates += 1;
         existing.origins.push(origin);
+        if (event.cancelled) existing.cancelled = true;
       } else {
         events.set(event.id, { ...event, origins: [origin] });
       }

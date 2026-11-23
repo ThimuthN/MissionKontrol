@@ -1,3 +1,5 @@
+import { assembleRecruitment } from './recruitment.mjs';
+
 const stages = [
   { id: 'requested', label: 'Interview requested' },
   { id: 'coordinated', label: 'Availability coordinated' },
@@ -39,6 +41,7 @@ function assembleInterviews(events, dataset) {
         evidence: matching.map(({ event }) => ({
           id: event.id, source: event.source, at: event.at, timeKind: event.timeKind ?? 'recorded',
           text: event.text, origin: event.origin,
+          status: stage.id === 'coordinated' ? 'inferred' : 'observed',
           reason: `Contains ${id} and matches the ${stage.label.toLowerCase()} rule for ${event.source}.`,
         })),
       };
@@ -203,10 +206,11 @@ function assembleProcurement(events, dataset) {
       return {
         ...stage,
         status: matching.length === 0 ? 'missing' : matching.every(record => record.inferred) ? 'inferred' : 'observed',
-        evidence: matching.map(({ event, reason, checks }) => {
+        evidence: matching.map(({ event, reason, inferred, checks }) => {
           links.push({ eventId: event.id, caseId: item.id, stage: stage.id, rule: reason });
           return { id: event.id, source: event.source, at: event.at, timeKind: event.timeKind ?? 'recorded',
-            text: event.text, origin: event.origin, reason, ...(checks && { checks }) };
+            text: event.text, origin: event.origin, reason, status: inferred ? 'inferred' : 'observed',
+            ...(checks && { checks }) };
         }),
       };
     }),
@@ -220,5 +224,7 @@ export function assemble(events, dataset) {
   if (dataset === 'sample' && !events.some(event => isChannel(event) && purchaseRequest.test(body(event).trim()))) {
     return assembleInterviews(events, dataset);
   }
-  return assembleProcurement(events, dataset);
+  const procurement = assembleProcurement(events, dataset);
+  const recruitment = assembleRecruitment([...events].sort(chronology), dataset);
+  return recruitment ? { ...procurement, processes: [recruitment] } : procurement;
 }
