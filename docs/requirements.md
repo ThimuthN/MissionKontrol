@@ -14,7 +14,7 @@ This checklist is based on the supplied **Mission Control Take-Home Assessment**
 | Architecture and raw-to-UI explanation | [`architecture.md`](architecture.md), matching rules, system flow, data contracts | Includes proposed production direction but no production ingestion infrastructure |
 | Schemas / data structures | [`architecture.md`](architecture.md#file-shapes), typed fields documented per layer, JSON examples | JavaScript data contracts, not an API schema registry |
 | Intermediate outputs as files reviewers can open | [`examples/counts.json`](examples/counts.json), [`normalized.sample.json`](examples/normalized.sample.json), [`links.sample.json`](examples/links.sample.json), [`rejected.sample.json`](examples/rejected.sample.json), [`report.sample.json`](examples/report.sample.json) | Small redacted excerpts; full source-derived outputs are created by `npm run ingest` in ignored `private/` |
-| Short README, public project and demonstration | [`README.md`](../README.md), tests, [96-second interactive walkthrough](https://missionkontrol.vercel.app/demo.html), live workspace | The walkthrough is a self-hosted playable web film, not an MP4 export |
+| Short README, public project and demonstration | [`README.md`](../README.md), tests, [96-second interactive walkthrough](https://missionkontrol.vercel.app/demo.html), live workspace | The walkthrough is a self-hosted playable web film with captions and optional device narration, not an MP4 export or a studio voice track |
 
 ## What we deliberately did not infer
 

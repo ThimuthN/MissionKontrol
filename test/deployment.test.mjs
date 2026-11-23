@@ -41,3 +41,25 @@ test('walkthrough offers mobile-readable chapters alongside accessible playback'
   assert.match(player, /root\.setAttribute\('aria-hidden', 'true'\)/);
   assert.match(player, /root\.removeAttribute\('aria-hidden'\)/);
 });
+
+test('walkthrough narration and captions stay navigable without audio', async () => {
+  const page = await source('web/demo.html');
+  const player = await source('web/demo.js');
+  const style = await source('web/demo-player.css');
+  const captions = await source('web/demo-captions.vtt');
+  assert.equal([...page.matchAll(/data-chapter="[0-7]"/g)].length, 8);
+  assert.match(page, /id="demo-caption"[^>]*aria-live="off"/);
+  assert.match(page, /id="demo-narration"[^>]*aria-pressed="false"/);
+  assert.match(page, /id="demo-captions"[^>]*aria-pressed="true"/);
+  assert.match(page, /id="demo-chapter-drawer"[^>]*hidden/);
+  assert.match(page, /href="\/demo-player\.css"/);
+  assert.match(page, /href="\/demo-captions\.vtt"/);
+  assert.match(captions, /^WEBVTT/);
+  assert.equal([...captions.matchAll(/-->/g)].length, 16);
+  assert.match(player, /caption\.hidden = !captionsEnabled/);
+  assert.match(player, /const canSpeak =/);
+  assert.match(player, /if \(!canSpeak\)/);
+  assert.match(player, /utterance\.onerror =/);
+  assert.match(player, /document\.hidden && !tl\.paused\(\)/);
+  assert.match(style, /@media \(prefers-reduced-motion: reduce\)/);
+});

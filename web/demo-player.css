@@ -1,0 +1,131 @@
+/* The film frame is authored at 1920 × 1080. Controls live outside that canvas. */
+.demo-toolbar {
+  gap: 10px;
+  padding: 9px 12px;
+  border-color: #89d1c562;
+  box-shadow: 0 18px 48px #00141dcc, inset 0 1px #ffffff18;
+}
+.demo-toolbar button,
+.demo-toolbar a { min-height: 44px; transition: background-color .2s, border-color .2s, color .2s; }
+.demo-toolbar button:hover,
+.demo-toolbar a:hover { background: #205466; border-color: #9be7d6; }
+.demo-toolbar button[aria-pressed="true"] { background: #d0f5e9; color: #063c40; border-color: #d0f5e9; }
+.demo-toolbar button[aria-pressed="true"]:hover { background: #a9e7d8; }
+.demo-toolbar .demo-secondary { background: #103b4b; border: 1px solid #73a8ae63; }
+.demo-toolbar .demo-secondary:disabled { cursor: not-allowed; opacity: .42; }
+.demo-toolbar .demo-progress { width: clamp(105px, 19vw, 305px); }
+.demo-toolbar .demo-time { min-width: 85px; text-align: center; }
+.demo-toolbar .demo-chapters[aria-expanded="true"] { background: #285a67; border-color: #9be7d6; }
+.demo-chapter-drawer {
+  position: fixed;
+  z-index: 19;
+  right: max(24px, calc((100vw - 900px) / 2));
+  bottom: 102px;
+  width: min(550px, calc(100vw - 28px));
+  max-height: min(620px, 67dvh);
+  padding: 24px;
+  overflow: auto;
+  color: #effffb;
+  background: #092c3bf5;
+  border: 1px solid #8ee0d361;
+  border-radius: 22px;
+  box-shadow: 0 28px 70px #000b;
+  backdrop-filter: blur(18px);
+}
+.demo-chapter-drawer[hidden],.demo-caption[hidden] { display: none !important; }
+.demo-drawer-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.demo-drawer-header h2 { font: 750 25px/1.15 Bricolage,Arial,sans-serif; letter-spacing: -.04em; }
+.demo-drawer-header button { width: 34px; height: 34px; color: #effffb; background: #194555; border: 1px solid #54858a; border-radius: 9px; cursor: pointer; }
+.demo-drawer-header button:focus-visible,.demo-chapter-list button:focus-visible { outline: 3px solid #baf9ed; outline-offset: 3px; }
+.demo-chapter-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+.demo-chapter-list button {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  align-items: center;
+  gap: 10px;
+  min-height: 68px;
+  padding: 12px;
+  color: #c8e5e7;
+  background: #143c4b;
+  border: 1px solid #40717c87;
+  border-radius: 12px;
+  text-align: left;
+  cursor: pointer;
+  font: 580 13px/1.25 Inter,Arial,sans-serif;
+}
+.demo-chapter-list button:hover { background: #205568; }
+.demo-chapter-list button[aria-current="step"] { border-color: #9ae4d3; background: #25605f; color: #fff; }
+.demo-chapter-list .chapter-number { font: 750 19px Bricolage,Arial,sans-serif; color: #9cddd2; }
+.demo-chapter-list small { display: block; margin-top: 4px; color: #a2c4ce; font-size: 11px; font-variant-numeric: tabular-nums; }
+.demo-drawer-note { margin-top: 16px; color: #adced2; font: 400 12px/1.5 Inter,Arial,sans-serif; }
+.demo-drawer-note a { color: #b5f3de; text-underline-offset: 3px; }
+.demo-drawer-note a:hover { color: #fff; }
+.demo-drawer-note a:focus-visible { outline: 3px solid #baf9ed; outline-offset: 3px; }
+.demo-caption {
+  position: fixed;
+  z-index: 15;
+  left: 50%;
+  bottom: 100px;
+  transform: translateX(-50%);
+  max-width: min(920px,calc(100% - 42px));
+  padding: 13px 23px;
+  color: #f4fffb;
+  border: 1px solid #b6ecdf40;
+  border-radius: 13px;
+  background: #062636e8;
+  text-align: center;
+  text-wrap: balance;
+  font: 570 clamp(16px,1.6vw,21px)/1.45 Inter,Arial,sans-serif;
+  box-shadow: 0 10px 34px #02141c7a;
+  pointer-events: none;
+}
+.demo-audio-notice {
+  position: fixed; z-index: 22; left: 50%; bottom: 172px; transform: translateX(-50%);
+  width: min(480px,calc(100% - 30px)); padding: 13px 17px; border: 1px solid #e8cc93;
+  border-radius: 11px; background: #fff5e3; color: #553c25; text-align: center;
+  font: 560 13px/1.4 Inter,Arial,sans-serif; box-shadow: 0 14px 34px #02141c70;
+}
+.demo-audio-notice[hidden] { display: none; }
+.film-transition {
+  position: absolute;
+  z-index: 60;
+  left: -2350px;
+  top: -80px;
+  width: 2300px;
+  height: 1250px;
+  clip-path: polygon(9% 0,100% 0,91% 100%,0 100%);
+  pointer-events: none;
+  background: linear-gradient(90deg,#051b2b 0%,#0c5058 34%,#8fe0ca 48%,#0a5e69 62%,#041e2e 100%);
+  box-shadow: 0 0 90px #98edcf59;
+}
+/* Elements that arrive mid-chapter never flash into view before their cue. */
+#s0-email,#s0-warning,#s1-uncertain,#s2-partial,#s3-case,#s3-note,
+#s3-result,#s4-missing,#s5-booking,#s5-report,#s6-agent,#s6-answer,
+#s6-export,#s7-mark,#s7-copy,#s7-url,
+.s1-flow .flow-step:not(.inferred),.s2-ledger .ledger-row:not(.partial),
+.s4-line .gap-step:not(.missing) { opacity: 0; }
+@media (max-width: 900px) {
+  .demo-toolbar { max-width: calc(100vw - 20px); gap: 7px; }
+  .demo-toolbar button,.demo-toolbar a { padding-inline: 10px; font-size: 12px; }
+  .demo-toolbar .demo-progress { width: clamp(85px,17vw,195px); }
+  .demo-caption { bottom: 94px; font-size: 16px; }
+}
+@media (max-width: 700px) and (orientation: portrait) {
+  .demo-caption { display: none !important; }
+  .demo-toolbar { grid-template-columns: auto minmax(0,1fr) auto auto; gap: 8px; }
+  .demo-toolbar .demo-progress { width: 100%; min-width: 0; }
+  .demo-toolbar .demo-time { min-width: 0; grid-column: 3 / 5; grid-row: 1; }
+  .demo-toolbar #demo-narration,.demo-toolbar #demo-captions,.demo-toolbar #demo-chapters { grid-row: 2; }
+  .demo-toolbar #demo-narration { grid-column: 1 / 3; }
+  .demo-toolbar #demo-captions { grid-column: 3; }
+  .demo-toolbar #demo-chapters { grid-column: 4; }
+  .demo-toolbar a { grid-row: 3; }
+  .demo-chapter-drawer { left: 12px; right: 12px; bottom: 170px; width: auto; padding: 17px; max-height: min(485px,60dvh); }
+  .demo-audio-notice { bottom: 196px; }
+  .demo-chapter-list { grid-template-columns: 1fr; }
+  .mobile-story { max-height: calc(100dvh - 76px - 56.25vw - 188px); }
+  .mobile-story.captions-off #mobile-story-description { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .demo-toolbar button,.demo-toolbar a { transition: none; }
+}
