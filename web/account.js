@@ -1,6 +1,7 @@
 const endpoint = '/api/session';
 const accountsKey = 'mission-control:local-accounts:v1';
 const activeAccountKey = 'mission-control:active-local-account';
+const demoAccountId = 'admin';
 const passwordIterations = 210_000;
 
 let mounted = false;
@@ -71,9 +72,20 @@ export async function signInLocalProfile(email, password, storage = localStorage
   return profile;
 }
 
+// An intentionally public, browser-only sample identity. This is not a server
+// administrator or a credential that grants access to private records.
+export function isDemoLogin(identifier, password) {
+  return identifier.trim().toLowerCase() === demoAccountId && password === demoAccountId;
+}
+
+function demoReviewer() {
+  return { kind: 'demo', name: 'Demo reviewer', email: 'admin' };
+}
+
 function finishAuthentication(user) {
   currentReviewer = user.kind === 'github' ? user.login : user.name;
-  currentReviewerId = user.kind === 'github' ? `github:${user.login}` : `local:${user.email}`;
+  currentReviewerId = user.kind === 'github' ? `github:${user.login}` :
+    user.kind === 'demo' ? 'demo:workspace' : `local:${user.email}`;
   render(accountControl, user);
   if (user.kind === 'local' && user.appearance && document.documentElement.dataset.theme !== user.appearance)
     document.dispatchEvent(new CustomEvent('mission-theme-request', { detail: { theme: user.appearance } }));
@@ -116,8 +128,8 @@ function accessPrompt() {
           <label class="access-field signup-only">Your name
             <input name="displayName" type="text" autocomplete="name" maxlength="80" placeholder="Alex Morgan">
           </label>
-          <label class="access-field">Email address
-            <input name="email" type="email" autocomplete="email" placeholder="you@company.com" maxlength="254" required>
+          <label class="access-field"><span class="access-identifier-label">Email or username</span>
+            <input name="email" type="text" autocomplete="username" placeholder="you@company.com" maxlength="254" required>
           </label>
           <label class="access-field">Password
             <span class="access-password-wrap">
@@ -136,6 +148,14 @@ function accessPrompt() {
           <p class="access-error" role="alert" hidden></p>
           <button class="access-submit" type="submit">Sign in</button>
         </form>
+        <div class="access-demo-card" id="access-demo-card">
+          <div class="access-demo-card-top"><span class="access-demo-spark" aria-hidden="true"></span><strong>Explore the sample workspace</strong><span class="access-demo-tag">DEMO</span></div>
+          <p>Use these details to try the cases and review tools.</p>
+          <div class="access-demo-credentials" aria-label="Demo sign-in details">
+            <span>Username <code>admin</code></span><span>Password <code>admin</code></span>
+          </div>
+          <button type="button" class="access-demo-fill">Fill in demo details <span aria-hidden="true">↗</span></button>
+        </div>
         <div class="access-github-area">
           <p class="access-divider"><span>or</span></p>
           <a class="access-github" href="/api/session?action=login"><span class="access-github-mark" aria-hidden="true">GH</span> Continue with GitHub</a>
@@ -150,6 +170,8 @@ function accessPrompt() {
   const error = dialog.querySelector('.access-error');
   const submit = dialog.querySelector('.access-submit');
   const password = form.querySelector('[name="password"]');
+  const identifier = form.querySelector('[name="email"]');
+  const identifierLabel = dialog.querySelector('.access-identifier-label');
   const name = form.querySelector('[name="displayName"]');
   const showPassword = dialog.querySelector('.access-show-password');
   dialog.querySelector('.access-theme-toggle').addEventListener('click', () => {
@@ -166,7 +188,14 @@ function accessPrompt() {
       : 'Sign in to continue reviewing cases on this device.';
     submit.textContent = signUp ? 'Create account' : 'Sign in';
     name.required = signUp;
+    identifier.type = signUp ? 'email' : 'text';
+    identifier.autocomplete = signUp ? 'email' : 'username';
+    identifier.placeholder = signUp ? 'you@company.com' : 'Email or demo username';
+    identifierLabel.textContent = signUp ? 'Email address' : 'Email or username';
+    password.minLength = signUp ? 10 : 0;
+    password.placeholder = signUp ? 'At least 10 characters' : 'Your password';
     password.autocomplete = signUp ? 'new-password' : 'current-password';
+    dialog.querySelector('#access-demo-card').hidden = signUp;
     dialog.querySelectorAll('[data-access-mode]').forEach(button =>
       button.setAttribute('aria-pressed', String(button.dataset.accessMode === mode)));
     error.hidden = true;
@@ -178,6 +207,12 @@ function accessPrompt() {
     showPassword.setAttribute('aria-label', 'Show password');
   }
   dialog.querySelectorAll('[data-access-mode]').forEach(button => button.addEventListener('click', () => selectMode(button.dataset.accessMode)));
+  dialog.querySelector('.access-demo-fill').addEventListener('click', () => {
+    selectMode('sign-in');
+    identifier.value = demoAccountId;
+    password.value = demoAccountId;
+    submit.focus();
+  });
   function setAppearance(choice, animate = true) {
     dialog.dataset.appearance = choice;
     dialog.querySelectorAll('[data-appearance]').forEach(button =>
@@ -198,7 +233,7 @@ function accessPrompt() {
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if (submit.disabled) return;
-    const email = form.querySelector('[name="email"]').value.trim().toLowerCase();
+    const email = identifier.value.trim().toLowerCase();
     const passphrase = password.value;
     error.hidden = true;
     submit.disabled = true;
@@ -209,6 +244,11 @@ function accessPrompt() {
       if (dialog.dataset.mode === 'sign-up') {
         if (!dialog.dataset.appearance) throw new Error('Choose a light or dark appearance to continue.');
         profile = await createLocalProfile(name.value, email, passphrase, localStorage, dialog.dataset.appearance);
+      } else if (isDemoLogin(email, passphrase)) {
+        sessionStorage.setItem(activeAccountKey, demoAccountId);
+        password.value = '';
+        finishAuthentication(demoReviewer());
+        return;
       } else {
         profile = await signInLocalProfile(email, passphrase);
       }
@@ -226,14 +266,14 @@ function accessPrompt() {
   document.body.append(dialog);
   accessDialog = dialog;
   dialog.classList.toggle('access-enabled', accessEnabled);
-  selectMode(profiles().length ? 'sign-in' : 'sign-up');
+  selectMode('sign-in');
   return dialog;
 }
 
 function showAccess(message = '') {
   const dialog = accessPrompt();
   dialog.classList.toggle('access-enabled', accessEnabled);
-  dialog.querySelector(profiles().length ? '[data-access-mode="sign-in"]' : '[data-access-mode="sign-up"]').click();
+  dialog.querySelector('[data-access-mode="sign-in"]').click();
   dialog.querySelector('.access-error').textContent = message;
   dialog.querySelector('.access-error').hidden = !message;
   if (!dialog.open) dialog.showModal();
@@ -255,8 +295,10 @@ function render(control, user) {
   const handle = element('summary', 'nav-button account-handle', visibleName);
   handle.setAttribute('aria-label', `Account menu for ${visibleName}`);
   const body = element('div', 'account-panel');
-  const heading = element('strong', '', user.kind === 'github' ? 'Connected with GitHub' : 'Your local account');
-  const note = element('p', '', user.kind === 'github' ? 'Your review notes stay on this device.' : user.email);
+  const heading = element('strong', '', user.kind === 'github' ? 'Connected with GitHub' :
+    user.kind === 'demo' ? 'Sample workspace' : 'Your local account');
+  const note = element('p', '', user.kind === 'demo' ? 'Your demo reviews stay in this browser.' :
+    user.kind === 'github' ? 'Your review notes stay on this device.' : user.email);
   const signOut = element('button', 'secondary', 'Sign out');
   signOut.type = 'button';
   const status = element('span', 'account-status');
@@ -309,13 +351,17 @@ export async function mountAccount() {
   if (!user) {
     try {
       const email = sessionStorage.getItem(activeAccountKey);
-      const profile = profiles().find(item => item.email === email);
-      if (profile) user = { kind: 'local', email: profile.email, name: profile.name, appearance: profile.appearance };
+      if (email === demoAccountId) user = demoReviewer();
+      else {
+        const profile = profiles().find(item => item.email === email);
+        if (profile) user = { kind: 'local', email: profile.email, name: profile.name, appearance: profile.appearance };
+      }
     } catch { /* Storage may be unavailable; the form will report the problem. */ }
   }
   if (user) {
     currentReviewer = user.kind === 'github' ? user.login : user.name;
-    currentReviewerId = user.kind === 'github' ? `github:${user.login}` : `local:${user.email}`;
+    currentReviewerId = user.kind === 'github' ? `github:${user.login}` :
+      user.kind === 'demo' ? 'demo:workspace' : `local:${user.email}`;
     render(accountControl, user);
     if (user.kind === 'local' && user.appearance && document.documentElement.dataset.theme !== user.appearance)
       document.dispatchEvent(new CustomEvent('mission-theme-request', { detail: { theme: user.appearance } }));

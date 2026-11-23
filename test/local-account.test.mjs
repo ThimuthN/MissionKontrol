@@ -1,6 +1,14 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createLocalProfile, passwordDigest, randomSalt, signInLocalProfile } from '../web/account.js';
+import { createLocalProfile, isDemoLogin, passwordDigest, randomSalt, signInLocalProfile } from '../web/account.js';
+
+test('public demo access accepts only the explicitly advertised sample credentials', () => {
+  assert.equal(isDemoLogin('admin', 'admin'), true);
+  assert.equal(isDemoLogin('  ADMIN ', 'admin'), true);
+  assert.equal(isDemoLogin('admin', 'Admin'), false);
+  assert.equal(isDemoLogin('admin', 'wrong'), false);
+  assert.equal(isDemoLogin('someone@example.com', 'admin'), false);
+});
 
 test('local passwords have a distinct random salt and stable derived digest', async () => {
   const first = randomSalt();
