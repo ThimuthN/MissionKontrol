@@ -2,7 +2,7 @@
 
 [Open Mission Control](https://missionkontrol.vercel.app/)
 
-**Reviewer route:** [Try the prototype](https://missionkontrol.vercel.app/) · [Check requirement coverage](docs/requirements.md) · [Read the system design](docs/architecture.md) · [Open the pipeline outputs](docs/examples/normalized.sample.json).
+**Reviewer route:** [Watch the 96-second walkthrough](https://missionkontrol.vercel.app/demo.html) · [Open the workspace](https://missionkontrol.vercel.app/) · [Check requirement coverage](docs/requirements.md) · [Read the system design](docs/architecture.md) · [Open the pipeline outputs](docs/examples/normalized.sample.json).
 
 For a fast evaluation, follow the [five-minute reviewer walkthrough](docs/walkthrough.md).
 
@@ -17,13 +17,14 @@ Across 11,346 input rows, the two workflows link 166 records. Each record carrie
 
 ## Run the prototype
 
-Use Node.js 22. The project has no package dependencies.
+Use Node.js 22. Install the two browser-animation dependencies and start the local server:
 
 ```sh
+npm ci
 npm run dev
 ```
 
-Open [http://127.0.0.1:4173](http://127.0.0.1:4173). Create a local account with your name, email, a password of at least 10 characters and your preferred light or dark appearance. The preference is applied with the theme transition and remembered for that account. Sign in to return to your reviews on the same browser. Use the workflow tabs to change registers, **Import ZIP** to open an export, or the Mission Control mark to return to the workspace chooser.
+Open [http://127.0.0.1:4173](http://127.0.0.1:4173). The [short walkthrough](http://127.0.0.1:4173/demo.html) plays without an account and can be paused or scrubbed. For the workspace, create a local account with your name, email, a password of at least 10 characters, and your preferred light or dark appearance. The preference is applied with a two-pass sweep and remembered for that account. Sign in to return to your reviews in the same browser. Use the collapsible sidebar to switch between the overview, review queue and casebook, or to import and export records.
 
 1. Follow a complete Teams thread through request, quote and approval.
 2. Inspect an Outlook order whose recipient matched an approved request by first name. Check what supported the link and why the app still calls it inferred.
@@ -74,6 +75,7 @@ After importing the original ZIP in the CLI, run `node scripts/public-examples.m
 ## Verify and deploy
 
 ```sh
+npm ci
 npm test
 npm run build
 ```
@@ -82,7 +84,9 @@ Import the repository into Vercel, select Node.js 22, and use the checked-in con
 
 Mica, the side-drawer assistant, chooses among six read-only tools. It uses a compatible, already-installed browser language model when available and a small local intent classifier otherwise. Answers are assembled from current records and stage states. Ask for a team brief to download recurring handoffs, examples and questions to discuss before automating. It cites the current case and source records rather than inventing answers. No paid model key is required.
 
-The interface offers persistent **light and dark modes**, with a teal-and-navy scene set apart from the evidence workspace. Creating an account asks for an appearance preference, and switching appearance uses a staged, luminous diagonal sweep; reduced-motion users receive an instant change. An ambient canvas animates the network in the workflow overview and responds to a pointer within that scene. Mica has an original, code-native constellation mark and a restrained floating animation. The page explains observed records, suggested links and evidence gaps in a compact status key, while selected checkpoints display a plain-language interpretation of their evidentiary limits. Buttons, source sheets, menus, assistant answers, and review controls have subtle tactile and entrance transitions. The canvas is capped near 30fps, pauses in background tabs, and stops with **Pause motion** or the operating system's reduced-motion preference. It does not process or transmit records. No remote images, font CDNs, analytics, or animation packages are needed.
+The interface offers persistent **light and dark modes**, with a deep-petrol, sea-glass and copper palette separating the luminous overview from the practical evidence desk. Creating an account asks for an appearance preference; switching uses two distinct diagonal passes, including when the account dialog is open. Reduced-motion users receive an instant change. The overview blends the original source-trail illustration with a pointer-responsive Light Ripple shader when WebGL is available, and keeps the authored illustration as its fallback. The shader is capped near 30fps, pauses in background tabs and respects **Pause motion** and the operating system's reduced-motion preference. Mica has an original constellation mark and a restrained floating animation. The layout includes a collapsible desktop rail and a small-screen drawer. All artwork, fonts, Three.js and GSAP are served from the project; there are no runtime third-party CDNs, trackers or external model requests.
+
+The [96-second walkthrough](https://missionkontrol.vercel.app/demo.html) is a self-hosted, animated, scrubbable scene sequence with keyboard and reduced-motion controls. It follows an uncertain order link, a reviewer correction, a missing receipt, the difference between a scheduled and reported screening, and a source-cited Mica answer. This is an interactive web film rather than a separately rendered MP4.
 
 The account screen is required to enter the workspace; there is no guest bypass. The account menu supports sign-out, and a new sign-in is required before the workspace can be used again. A separate workspace chooser includes a source-record illustration. The public sample data remains shipped in the client bundle; account gating is a user-experience boundary, not server-side access control for private records.
 
