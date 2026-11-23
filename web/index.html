@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#fffdf5">
+  <meta name="theme-color" content="#090f22">
   <meta name="description" content="Mission Control reconstructs how work moved across Teams and Outlook, with evidence you can inspect.">
   <title>Mission Control | Process intelligence</title>
   <link rel="icon" href="/mark.svg" type="image/svg+xml">
@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/case-sheet.css">
   <link rel="stylesheet" href="/paper-motion.css">
   <link rel="stylesheet" href="/review-updates.css">
+  <link rel="stylesheet" href="/experience.css">
   <script type="module" src="/app.js"></script>
 </head>
 <body>
@@ -39,7 +40,9 @@
   <main>
     <nav id="process-switch" class="process-switch" aria-label="Switch workflow process" hidden></nav>
     <section class="intro" aria-labelledby="process">
+      <div class="hero-orbit" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       <div class="intro-copy">
+        <p class="eyebrow"><span class="eyebrow-spark" aria-hidden="true"></span>THE WORK, RECONSTRUCTED</p>
         <h1 id="process">Laptop procurement</h1>
         <p id="description">Open a case to trace a request through Teams and Outlook.</p>
       </div>
@@ -124,6 +127,6 @@
       </div>
     </section>
   </main>
-  <footer><span>Mission Control</span><span id="counts"></span></footer>
+  <footer><span class="footer-credit"><span class="footer-dot" aria-hidden="true"></span>Mission Control <span class="footer-separator">/</span> Every conclusion has a source.</span><span id="counts"></span></footer>
 </body>
 </html>

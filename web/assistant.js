@@ -17,7 +17,7 @@ drawer.innerHTML = `
     <div class="assistant-log" role="log" aria-label="Conversation" aria-live="polite"></div></div>
   <form class="assistant-form"><label for="assistant-question">Your question</label>
     <div><textarea id="assistant-question" rows="2" maxlength="700" placeholder="What’s missing from this case?"></textarea>
-    <button type="submit">Ask ↗</button></div>
+    <button type="submit">Ask</button></div>
     <small>Your questions and records stay on this device.</small></form>`;
 document.body.append(drawer);
 const find = selector => drawer.querySelector(selector);
@@ -44,7 +44,7 @@ function display(result, mode) {
     section.append(element('p', finding.message));
     if (finding.ref) {
       const ref = finding.ref;
-      const link = element('button', (ref.evidenceId ? 'Open record · ' : 'Inspect stage · ') + ref.label + ' ↗');
+      const link = element('button', (ref.evidenceId ? 'Open record · ' : 'Inspect stage · ') + ref.label);
       link.type = 'button';
       link.addEventListener('click', () => {
         drawer.close();
@@ -64,7 +64,7 @@ function display(result, mode) {
   group.scrollIntoView({ block: 'start' });
 }
 for (const title of ['Walk me through this case', 'What needs a second look?', 'Find a case to review next', 'Prepare a team brief']) {
-  const button = element('button', title + ' ↗');
+  const button = element('button', title);
   button.type = 'button';
   button.onclick = () => { input.value = title; form.requestSubmit(); };
   starters.append(button);

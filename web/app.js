@@ -6,6 +6,7 @@ import { currentReviewer, mountAccount } from './account.js';
 import { mountPaperMotion } from './paper-motion.js';
 import { printCase } from './case-sheet.js';
 import './assistant.js';
+import './experience.js';
 
 const $ = id => document.getElementById(id);
 const states = { observed: 'Observed', inferred: 'Inferred link', missing: 'Evidence gap' };
