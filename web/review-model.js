@@ -1,5 +1,13 @@
 export const publicDataset = 'public-march2026';
 
+export function nextReview(cases, reviews, currentCase, currentStep) {
+  const candidates = cases.flatMap(item => item.steps.map(step => ({ item, step })));
+  const index = candidates.findIndex(({ item, step }) => item.id === currentCase && step.id === currentStep);
+  const after = [...candidates.slice(index + 1), ...candidates.slice(0, Math.max(0, index))];
+  const open = after.filter(({ item, step }) => !reviews[`${item.id}/${step.id}`]?.decision);
+  return open.find(({ step }) => step.status === 'inferred') ?? open.find(({ step }) => step.status === 'missing');
+}
+
 export function workflowOptions(workspace) {
   const { processes = [], ...primary } = workspace;
   const siblings = Array.isArray(processes) ? processes : Object.values(processes ?? {});

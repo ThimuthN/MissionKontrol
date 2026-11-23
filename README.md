@@ -1,5 +1,7 @@
 # Mission Control
 
+[Open the MissionKontrol demo](https://missionkontrol.vercel.app/)
+
 Mission Control lets Harbourline Talent employees check how a piece of work unfolded across Teams and Outlook. The casebook reconstructs two workflows from the March assessment export.
 
 | Workflow | Cases in the redacted demo | What the records support |
@@ -24,6 +26,8 @@ Open [http://127.0.0.1:4173](http://127.0.0.1:4173). The demo opens directly on 
 3. Open a recruitment case and replay its records in timestamp order. Inspect a calendar slot, then look for a separate report of the conversation.
 4. Open **Ask the evidence** and ask “What needs a second look?” Select a cited record to check the answer. “Find a case to review next” ranks cases by inferred links and missing stages across the active workflow.
 5. Remove an incorrect link and enter a reason. The timeline, assistant and exports reflect the correction. Restore the link from the excluded records. Review history stays on this device.
+
+After saving a decision, **Next step to check** takes you to an unreviewed inferred link or an evidence gap. Unsubmitted notes stay in the current tab as you move between cases. **Export → Print current case** opens a print sheet with the linked records, source times, matching reasons and saved decisions. Use your browser’s PDF option to share that case.
 
 Outside the walkthrough, select a stage to filter cases and use **Evidence gaps** to reverse the filter. **Copy case link** opens the same case and step in the redacted demo. Export the evidence and decisions as JSON or the case summary as CSV.
 

@@ -1,9 +1,10 @@
 import { openWelcome } from './welcome.js';
 import { casesCsv, download, importWorkspace } from './workspace.js';
-import { chooseTour, projectReviews, publicDataset, readSelection, selectCases, summarize, workflowOptions } from './review-model.js';
+import { chooseTour, nextReview, projectReviews, publicDataset, readSelection, selectCases, summarize, workflowOptions } from './review-model.js';
 import { renderReplay } from './replay.js';
 import { currentReviewer, mountAccount } from './account.js';
 import { mountPaperMotion } from './paper-motion.js';
+import { printCase } from './case-sheet.js';
 import './assistant.js';
 
 const $ = id => document.getElementById(id);
@@ -15,6 +16,7 @@ const timestamp = new Intl.DateTimeFormat('en-GB', {
 });
 const number = new Intl.NumberFormat('en');
 let citationHandler = null;
+const draftNotes = new Map();
 
 function node(tag, value, className) {
   const el = document.createElement(tag);
@@ -159,6 +161,13 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
   $('counts').textContent = `${number.format(report.stats.rows ?? report.stats.normalized)} source rows / ${number.format(report.stats.linked)} linked records / Sri Lanka time`;
   $('copy-link').hidden = !isDemo || !activeCase;
   $('open-assistant').disabled = !activeCase;
+  $('print-case').disabled = !activeCase;
+  $('print-case').onclick = () => {
+    if (!activeCase) return;
+    $('export-menu').open = false;
+    $('export-menu').querySelector('summary').focus();
+    printCase(report, activeCase, reviews, isDemo);
+  };
   $('open-assistant').onclick = () => {
     if (!activeCase || !activeStep) return;
     $('open-assistant').dispatchEvent(new CustomEvent('mission-assistant', {
@@ -195,6 +204,7 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
   if (!activeCase) { renderReplay(report, null); return; }
 
   const activeKey = () => `${activeCase.id}/${activeStep.id}`;
+  const draftKey = () => JSON.stringify([storageKey, activeKey()]);
   const focusButton = (container, index) => $(container).querySelectorAll('button')[index]?.focus();
 
   function showCase(item, stepId = stage) {
@@ -265,9 +275,10 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
     const hasCases = filtered.length > 0;
     registerToggle.textContent = hasCases ? `Choose a case · ${activeCase.label ?? activeCase.id}` : 'Change case filters';
     $('steps').parentElement.hidden = !hasCases;
-    $('records').parentElement.hidden = !hasCases;
+    $('records').closest('.inspector').hidden = !hasCases;
     $('copy-link').hidden = !isDemo || !hasCases;
     $('open-assistant').disabled = !hasCases;
+    $('print-case').disabled = !hasCases;
     $('desk').classList.toggle('no-cases', !hasCases);
     if (!hasCases) {
       $('case-list').append(node('p', 'No cases match these filters.', 'empty'));
@@ -341,8 +352,15 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
       $('records').append(history);
     }
     const review = reviews[activeKey()];
-    $('review-note').value = review?.note ?? '';
-    $('review-state').textContent = review?.decision ? `Saved locally as ${review.decision}.` : 'Your review stays in this browser.';
+    $('review-note').value = draftNotes.get(draftKey()) ?? review?.note ?? '';
+    $('review-state').textContent = draftNotes.has(draftKey()) ? 'Draft in this tab. Confirm or flag to save.' :
+      review?.decision ? `Saved locally as ${review.decision}.` : 'Your review stays in this browser.';
+    const next = review?.decision && nextReview(report.cases, reviews, activeCase.id, activeStep.id);
+    $('next-review').hidden = !next;
+    $('next-review').onclick = next ? () => {
+      clearFilters(); moveTour(-1); showCase(next.item, next.step.id); render();
+      $('evidence-title').focus();
+    } : null;
     $('clear-review').hidden = !review?.decision;
     $('review-form').querySelector('[value="confirmed"]').disabled = activeStep.status === 'missing';
   }
@@ -354,7 +372,9 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
     if (decision) updated[key] = { decision, note: $('review-note').value.trim(), reviewer: currentReviewer, at: new Date().toISOString(), corrections };
     else if (corrections.length) updated[key] = { corrections };
     else delete updated[key];
-    return persist(updated);
+    if (!persist(updated)) return false;
+    draftNotes.delete(draftKey());
+    return true;
   }
 
   function persist(updated) {
@@ -421,6 +441,12 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
   $('review-form').onsubmit = event => {
     event.preventDefault();
     if (event.submitter?.value && save(event.submitter.value)) render();
+  };
+  $('review-note').oninput = () => {
+    const value = $('review-note').value;
+    if (value === (reviews[activeKey()]?.note ?? '')) draftNotes.delete(draftKey());
+    else draftNotes.set(draftKey(), value);
+    $('review-state').textContent = draftNotes.has(draftKey()) ? 'Draft in this tab. Confirm or flag to save.' : 'Your review stays in this browser.';
   };
   $('clear-review').onclick = () => { if (save(null)) render(); $('review-note').focus(); };
   $('case-search').oninput = render;

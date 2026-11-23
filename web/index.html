@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/replay.css">
   <link rel="stylesheet" href="/account.css">
+  <link rel="stylesheet" href="/case-sheet.css">
   <link rel="stylesheet" href="/paper-motion.css">
   <link rel="stylesheet" href="/review-updates.css">
   <script type="module" src="/app.js"></script>
@@ -26,6 +27,7 @@
         <details id="export-menu" class="export">
           <summary class="nav-button">Export <span class="chevron" aria-hidden="true"></span></summary>
           <div class="export-items">
+            <button id="print-case" type="button" disabled>Print current case</button>
             <button id="export-csv" type="button" disabled>Case and stage CSV</button>
             <button id="export-json" type="button" disabled>Evidence and reviews JSON</button>
           </div>
@@ -115,6 +117,7 @@
               <button id="clear-review" class="quiet" type="button" hidden>Clear</button>
             </div>
             <p class="review-state" id="review-state" role="status"></p>
+            <button id="next-review" class="quiet" type="button" hidden>Next step to check →</button>
             </form>
           </div>
         </section>

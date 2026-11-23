@@ -1,0 +1,8 @@
+.agents/
+.git/
+.env*
+private/
+data/
+*.zip
+*.pdf
+dist/

@@ -1,0 +1,12 @@
+.case-printout { display:none; }
+@media print {
+  @page { margin:17mm; }
+  body:has(> .case-printout) > :not(.case-printout) { display:none !important; }
+  .case-printout { display:block; font:11pt/1.45 Georgia,serif; color:#172c42; background:white; }
+  .case-printout h1 { margin:.18em 0; font-size:27pt; }
+  .case-printout h2 { font:600 13pt/1.3 system-ui,sans-serif; margin:1em 0 .5em; border-top:1pt solid #8b9baa; padding-top:.6em; break-after:avoid; }
+  .case-printout section>div { margin:.5em 0; break-inside:avoid-page; }
+  .case-printout small { display:block; color:#415264; font:9pt/1.4 system-ui,sans-serif; overflow-wrap:anywhere; }
+  .case-printout p,.case-printout blockquote { margin:.22em 0; overflow-wrap:anywhere; }
+  .case-printout blockquote { padding-left:.65em; border-left:2pt solid #b5a272; white-space:pre-line; }
+}
