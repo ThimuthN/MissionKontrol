@@ -1,4 +1,36 @@
 /* The film frame is authored at 1920 × 1080. Controls live outside that canvas. */
+/* Genuine Microsoft product marks identify the system of record; the status
+   colours still communicate what the underlying evidence can establish. */
+.mail-app .mail-symbol.brand-image {
+  display: block;
+  width: 66px;
+  height: 66px;
+  flex: 0 0 66px;
+  background: none;
+  border-radius: 0;
+}
+.flow-step .flow-source {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px 10px;
+  font-size: 25px;
+  line-height: 1.25;
+}
+.flow-source .source-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  color: #c4e5e0;
+  font-size: 24px;
+}
+.flow-source .source-brand img { display: block; width: 31px; height: 31px; }
+.flow-step.inferred .flow-source .source-brand { color: #f9cf9b; }
+.inline-brand { display: inline-block; width: 34px; height: 34px; vertical-align: -.22em; margin-right: 3px; }
+.s5-cards .schedule-card .source { display: flex; align-items: center; gap: 14px; }
+.schedule-card .source-logo { display: block; width: 47px; height: 47px; flex: 0 0 47px; }
+.s6-agent .agent-avatar img { width: 57px; height: 57px; object-fit: contain; }
 .demo-toolbar {
   gap: 10px;
   padding: 9px 12px;

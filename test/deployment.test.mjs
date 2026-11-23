@@ -63,3 +63,15 @@ test('walkthrough narration and captions stay navigable without audio', async ()
   assert.match(player, /document\.hidden && !tl\.paused\(\)/);
   assert.match(style, /@media \(prefers-reduced-motion: reduce\)/);
 });
+
+test('walkthrough source labels use local Microsoft product artwork', async () => {
+  const page = await source('web/demo.html');
+  for (const brand of ['outlook', 'teams', 'calendar']) {
+    assert.match(page, new RegExp(`src="/brands/${brand}\\.svg"`));
+    const svg = await source(`web/brands/${brand}.svg`);
+    assert.match(svg, /<svg\b/);
+    assert.doesNotMatch(svg, /<script|<foreignObject|(?:xlink:)?href=["']https?:/i);
+  }
+  assert.doesNotMatch(page, /<span class="mail-symbol">O<\/span>/);
+  assert.match(page, /src="\/signal-mark\.svg"/);
+});
