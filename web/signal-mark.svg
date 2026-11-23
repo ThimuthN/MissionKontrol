@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" role="img" aria-label="Mica constellation mark">
+  <defs>
+    <radialGradient id="field" cx="0" cy="0" r="1" gradientTransform="translate(28 20) rotate(54) scale(70)">
+      <stop stop-color="#2AC9BD"/><stop offset=".55" stop-color="#127F87"/><stop offset="1" stop-color="#07334B"/>
+    </radialGradient>
+    <linearGradient id="trail" x1="13" y1="15" x2="68" y2="65">
+      <stop stop-color="#E3FFF8"/><stop offset=".52" stop-color="#90F9E4"/><stop offset="1" stop-color="#54BECB"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.8"/></filter>
+  </defs>
+  <circle cx="40" cy="40" r="37" fill="url(#field)"/>
+  <circle cx="40" cy="40" r="36.5" stroke="#D2FFF3" stroke-opacity=".27"/>
+  <path d="M20 53C19 35 30 20 43 19C56 18 62 26 62 37C61 48 49 58 33 57" stroke="url(#trail)" stroke-width="1.7" stroke-linecap="round" stroke-dasharray="2 5" opacity=".7"/>
+  <path d="M20 53L43 19L62 37L33 57L20 53Z" stroke="url(#trail)" stroke-width="1.5" stroke-linejoin="round" opacity=".72"/>
+  <circle cx="40" cy="40" r="13" fill="#A9FFF0" fill-opacity=".2" filter="url(#glow)"/>
+  <path d="M32 43C35 34 41 34 45 37C48 39 49 45 45 48" stroke="#F1FFFA" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="20" cy="53" r="4.6" fill="#EDFFF9"/>
+  <circle cx="43" cy="19" r="4.2" fill="#B9FFE9"/>
+  <circle cx="62" cy="37" r="4.4" fill="#A5F7E7"/>
+  <circle cx="33" cy="57" r="3.3" fill="#E7FFF6"/>
+  <circle cx="40" cy="40" r="2.2" fill="#F8FFFD"/>
+</svg>

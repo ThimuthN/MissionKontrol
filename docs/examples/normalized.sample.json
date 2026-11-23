@@ -1,0 +1,90 @@
+[
+  {
+    "id": "Source record 06",
+    "source": "teams",
+    "at": "2026-03-02T09:30:00.000Z",
+    "timeKind": "Time rounded to 15 minutes",
+    "text": "The procurement channel records a laptop request and a required-by date.",
+    "origin": "Source record 06",
+    "origins": [
+      "Source record 06"
+    ]
+  },
+  {
+    "id": "Source record 07",
+    "source": "teams",
+    "at": "2026-03-03T03:45:00.000Z",
+    "timeKind": "Time rounded to 15 minutes",
+    "text": "A supplier and price were proposed in the request thread.",
+    "origin": "Source record 07",
+    "origins": [
+      "Source record 07"
+    ]
+  },
+  {
+    "id": "Source record 08",
+    "source": "teams",
+    "at": "2026-03-03T05:00:00.000Z",
+    "timeKind": "Time rounded to 15 minutes",
+    "text": "The quote received approval in the request thread.",
+    "origin": "Source record 08",
+    "origins": [
+      "Source record 08"
+    ]
+  },
+  {
+    "id": "Source record 09",
+    "source": "email",
+    "at": "2026-03-03T06:45:00.000Z",
+    "timeKind": "Time rounded to 15 minutes",
+    "text": "A supplier email records an order and names the delivery recipient.",
+    "origin": "Source record 09",
+    "origins": [
+      "Source record 09"
+    ]
+  },
+  {
+    "id": "Source record 10",
+    "source": "teams",
+    "at": "2026-03-06T04:15:00.000Z",
+    "timeKind": "Time rounded to 15 minutes",
+    "text": "A Teams message reports that the laptop was received.",
+    "origin": "Source record 10",
+    "origins": [
+      "Source record 10"
+    ]
+  },
+  {
+    "id": "Source record 66",
+    "source": "calendar",
+    "at": "2026-03-02T03:00:00.000Z",
+    "timeKind": "Scheduled start, rounded to 15 minutes",
+    "text": "An Outlook event records the scheduled start of a screening call.",
+    "origin": "Source record 66",
+    "origins": [
+      "Source record 66"
+    ]
+  },
+  {
+    "id": "Source record 67",
+    "source": "teams",
+    "at": "2026-03-02T03:30:00.000Z",
+    "timeKind": "Time rounded to 15 minutes",
+    "text": "A Teams message reports that a recruiter spoke with the candidate.",
+    "origin": "Source record 67",
+    "origins": [
+      "Source record 67"
+    ]
+  },
+  {
+    "id": "Source record 68",
+    "source": "calendar",
+    "at": "2026-03-10T07:15:00.000Z",
+    "timeKind": "Scheduled start, rounded to 15 minutes",
+    "text": "An Outlook event records the scheduled start of a client interview.",
+    "origin": "Source record 68",
+    "origins": [
+      "Source record 68"
+    ]
+  }
+]

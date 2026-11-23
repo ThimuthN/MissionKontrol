@@ -10,7 +10,7 @@ export function printCase(report, item, reviews, isDemo) {
     parent.append(element);
     return element;
   }
-  line(page, 'small', 'Mission Control / ' + (isDemo ? 'Redacted assessment demo' : 'Imported workspace'));
+  line(page, 'small', 'Mission Control / ' + (isDemo ? 'Harbourline sample workspace' : 'Imported workspace'));
   line(page, 'h1', report.process);
   line(page, 'p', [item.label ?? item.id, item.role ?? item.requestType, 'Sri Lanka time'].filter(Boolean).join(' · '));
   for (const step of item.steps) {

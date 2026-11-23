@@ -2,7 +2,7 @@ import { openWelcome } from './welcome.js';
 import { casesCsv, download, importWorkspace } from './workspace.js';
 import { chooseTour, nextReview, projectReviews, publicDataset, readSelection, selectCases, summarize, workflowOptions } from './review-model.js';
 import { renderReplay } from './replay.js';
-import { currentReviewer, mountAccount } from './account.js';
+import { currentReviewer, currentReviewerId, mountAccount } from './account.js';
 import { mountPaperMotion } from './paper-motion.js';
 import { printCase } from './case-sheet.js';
 import './assistant.js';
@@ -119,9 +119,18 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
   const active = options.find(item => item.key === (processKey ?? fromProcessLink))
     ?? options.find(item => item.report.cases.length) ?? options[0];
   const machineReport = active.report;
-  const storageKey = active.primary
+  const legacyStorageKey = active.primary
     ? `mission-control:v1:${machineReport.dataset}:reviews`
     : `mission-control:v1:${machineReport.dataset}:process:${encodeURIComponent(active.key)}:reviews`;
+  const storageKey = `${legacyStorageKey}:reviewer:${encodeURIComponent(currentReviewerId ?? 'local')}`;
+  try {
+    // Give existing browser reviews to the first account that opens this workspace.
+    const legacy = localStorage.getItem(legacyStorageKey);
+    if (legacy && !localStorage.getItem(`${legacyStorageKey}:assigned`) && !localStorage.getItem(storageKey)) {
+      localStorage.setItem(storageKey, legacy);
+      localStorage.setItem(`${legacyStorageKey}:assigned`, currentReviewerId ?? 'local');
+    }
+  } catch { /* Browser storage can be disabled. */ }
   const processSwitch = $('process-switch');
   processSwitch.hidden = options.length < 2;
   processSwitch.replaceChildren(...options.map(item => {
@@ -149,12 +158,17 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
   let tourIndex = -1;
 
   $('process').textContent = report.process;
-  $('dataset').textContent = isDemo ? 'Redacted assessment demo' : 'On-device import';
-  $('description').textContent = machineReport.description ?? (isDemo
+  $('dataset').textContent = isDemo ? 'Harbourline · Sample workspace' : 'Imported workspace';
+  $('description').textContent = isDemo
     ? active.primary
-      ? 'Follow a laptop request from the first Teams message to the last record of delivery.'
-      : 'Check which calls were booked, which conversations were reported, and which candidates replied.'
-    : 'Choose a case to see its source records and check the links.');
+      ? 'Follow a device request from the first message through to delivery.'
+      : 'Track scheduled screenings, interview progress and candidate responses.'
+    : machineReport.description ?? 'Choose a case to review its activity and supporting records.';
+  $('method-note').textContent = isDemo
+    ? active.primary
+      ? 'A matching name can suggest an order. It cannot prove the link on its own.'
+      : 'A calendar invite proves a booking—not that the conversation happened.'
+    : 'Source records, inferred links and evidence gaps stay distinct as you review.';
   $('period').textContent = isDemo ? 'Harbourline Talent / March 2026' : 'Your workspace';
   $('period').hidden = false;
   $('case-lab').hidden = !activeCase;
@@ -163,6 +177,8 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
   $('counts').textContent = `${number.format(report.stats.rows ?? report.stats.normalized)} source rows / ${number.format(report.stats.linked)} linked records / Sri Lanka time`;
   $('copy-link').hidden = !isDemo || !activeCase;
   $('open-assistant').disabled = !activeCase;
+  $('agent-launcher').hidden = !activeCase;
+  $('agent-launcher').disabled = !activeCase;
   $('print-case').disabled = !activeCase;
   $('print-case').onclick = () => {
     if (!activeCase) return;
@@ -176,6 +192,7 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
       bubbles: true, detail: { report, currentCase: activeCase, step: activeStep },
     }));
   };
+  $('agent-launcher').onclick = () => $('open-assistant').click();
   document.removeEventListener('mission-citation', citationHandler);
   citationHandler = null;
   $('start-tour').hidden = stops.length === 0;
@@ -228,7 +245,9 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
 
   function render() {
     const { stages, gaps } = summarize(report);
-    $('insight').textContent = `${number.format(gaps)} of ${number.format(report.cases.length)} cases have an evidence gap.`;
+    $('insight').textContent = gaps
+      ? `${number.format(gaps)} of ${number.format(report.cases.length)} cases need a closer look.`
+      : `All ${number.format(report.cases.length)} cases have supporting records at every checkpoint.`;
     const removed = report.stats.removedEvidenceLinks ?? 0;
     const summary = [`${number.format(report.stats.rows ?? report.stats.normalized)} source rows`,
       `${number.format(report.stats.linked)} linked records`, 'Sri Lanka time'];
@@ -270,7 +289,7 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
       const missing = item.steps.filter(step => step.status === 'missing').length;
       const inferred = item.steps.filter(step => step.status === 'inferred').length;
       const state = missing ? `${missing} ${missing === 1 ? 'gap' : 'gaps'}` : inferred ? `${inferred} inferred` : 'All observed';
-      header.append(node('strong', item.label ?? item.id), node('span', state, `case-tag ${missing || inferred ? 'gap' : ''}`));
+      header.append(node('strong', item.label ?? item.id), node('span', state, `case-tag ${missing ? 'gap' : inferred ? 'inferred' : ''}`));
       button.append(header, node('span', item.requestType, 'case-type'));
       return button;
     }));
@@ -280,6 +299,8 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
     $('records').closest('.inspector').hidden = !hasCases;
     $('copy-link').hidden = !isDemo || !hasCases;
     $('open-assistant').disabled = !hasCases;
+    $('agent-launcher').disabled = !hasCases;
+    $('agent-launcher').hidden = !hasCases;
     $('print-case').disabled = !hasCases;
     $('desk').classList.toggle('no-cases', !hasCases);
     if (!hasCases) {
@@ -311,11 +332,11 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
       return counts;
     }, {});
     $('case-summary').replaceChildren(...[
-      `${activeCase.steps.length} checkpoint${activeCase.steps.length === 1 ? '' : 's'}`,
-      `${totals.observed ?? 0} observed`,
-      ...(totals.inferred ? [`${totals.inferred} inferred`] : []),
-      ...(totals.missing ? [`${totals.missing} gap${totals.missing === 1 ? '' : 's'}`] : []),
-    ].map((label, index) => node('span', label, `case-summary-chip ${index === 0 ? 'case-summary-total' : ''}`)));
+      [`${activeCase.steps.length} checkpoint${activeCase.steps.length === 1 ? '' : 's'}`, 'total'],
+      [`${totals.observed ?? 0} observed`, 'observed'],
+      ...(totals.inferred ? [[`${totals.inferred} inferred`, 'inferred']] : []),
+      ...(totals.missing ? [[`${totals.missing} gap${totals.missing === 1 ? '' : 's'}`, 'missing']] : []),
+    ].map(([label, kind]) => node('span', label, `case-summary-chip chip-${kind}`)));
     renderReplay(report, activeCase);
     const trace = $('ink-trace');
     if (trace.children.length !== activeCase.steps.length) {
@@ -350,6 +371,13 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
     }));
     $('evidence-title').textContent = activeStep.label;
     $('evidence-context').replaceChildren(badge(activeStep.status), node('span', `${activeStep.evidence.length} ${activeStep.evidence.length === 1 ? 'record' : 'records'}`));
+    const interpretations = {
+      observed: 'Direct source evidence is linked to this checkpoint. Open the record below to check exactly what it says.',
+      inferred: 'This link was reconstructed from matching clues, not a uniquely verified identifier. Check the matching rationale before confirming.',
+      missing: 'No supporting record was linked in the export. This does not establish that the work did not happen.',
+    };
+    $('step-interpretation').textContent = interpretations[activeStep.status] ?? '';
+    $('step-interpretation').dataset.status = activeStep.status;
     $('records').replaceChildren(...activeStep.evidence.map((record, index) => openRecord(record, index === 0, isDemo, correct)));
     if (!activeStep.evidence.length) {
       const message = activeStep.excludedEvidence?.length
@@ -499,7 +527,7 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
 }
 
 async function start() {
-  void mountAccount();
+  await mountAccount();
   const response = await fetch('/report.json');
   if (!response.ok) throw new Error('Report unavailable');
   const report = await response.json();

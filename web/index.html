@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#e8f5f3">
-  <meta name="description" content="Mission Control reconstructs how work moved across Teams and Outlook, with evidence you can inspect.">
-  <title>Mission Control | Process intelligence</title>
+  <meta name="description" content="Mission Control helps teams follow workflows, review source records and move work forward with confidence.">
+  <title>Mission Control | Workflow operations</title>
   <script src="/theme-init.js"></script>
   <link rel="icon" href="/mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/style.css">
@@ -24,8 +24,8 @@
     <div class="topbar-inner">
       <button id="welcome-button" class="brand" type="button" aria-label="Mission Control, choose a dataset"><span class="mark" aria-hidden="true"></span>Mission Control</button>
       <div class="top-actions">
-        <span id="dataset" class="dataset">Assessment demo</span>
-        <button id="open-assistant" class="nav-button" type="button" disabled>Ask the evidence</button>
+        <span id="dataset" class="dataset">Harbourline · Sample workspace</span>
+        <button id="open-assistant" class="nav-button" type="button" disabled hidden>Insights</button>
         <button id="import-button" class="nav-button" type="button" disabled>Import ZIP</button>
         <details id="export-menu" class="export">
           <summary class="nav-button">Export <span class="chevron" aria-hidden="true"></span></summary>
@@ -45,9 +45,10 @@
       <section class="intro" aria-labelledby="process">
         <div class="hero-orbit" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
         <div class="intro-copy">
-          <p class="eyebrow"><span class="eyebrow-spark" aria-hidden="true"></span>THE WORK, RECONSTRUCTED</p>
+          <p class="eyebrow"><span class="eyebrow-spark" aria-hidden="true"></span>WORKFLOW OVERVIEW</p>
           <h1 id="process">Laptop procurement</h1>
           <p id="description">Open a case to trace a request through Teams and Outlook.</p>
+          <p id="method-note" class="method-note"></p>
         </div>
         <div class="briefing">
           <p class="period" id="period" hidden></p>
@@ -63,11 +64,19 @@
     <p id="load-state" class="workspace-status" role="status">Loading cases.</p>
     <section id="case-lab" class="lab" aria-labelledby="lab-title" hidden>
       <div class="brief">
-        <div>
-          <h2 id="lab-title" class="sr-only">Casebook</h2>
+        <div class="brief-message">
+          <p class="brief-eyebrow">CASE REVIEW</p>
+          <h2 id="lab-title">Review the work, step by step.</h2>
           <p id="insight"></p>
         </div>
-        <button id="copy-link" class="secondary" type="button">Copy case link</button>
+        <div class="brief-tools">
+          <div class="evidence-legend" role="group" aria-label="How to read evidence statuses">
+            <span class="legend-item"><i class="legend-dot observed" aria-hidden="true"></i><strong>Observed</strong><small>Direct record</small></span>
+            <span class="legend-item"><i class="legend-dot inferred" aria-hidden="true"></i><strong>Inferred</strong><small>Clue-based link</small></span>
+            <span class="legend-item"><i class="legend-dot missing" aria-hidden="true"></i><strong>Gap</strong><small>No linked record</small></span>
+          </div>
+          <button id="copy-link" class="secondary" type="button">Copy case link</button>
+        </div>
         <span id="copy-status" class="sr-only" role="status"></span>
       </div>
       <div id="tour" class="tour" aria-label="Guided walkthrough" hidden>
@@ -113,6 +122,7 @@
         <section class="panel inspector" aria-labelledby="evidence-title">
           <div class="panel-title"><h3 id="evidence-title" tabindex="-1"></h3></div>
           <p class="panel-subtitle" id="evidence-context"></p>
+          <p id="step-interpretation" class="step-interpretation"></p>
           <p id="correction-status" role="status"></p>
           <div class="inspection-sheet">
             <div id="records"></div>
@@ -133,6 +143,11 @@
     </section>
   </main>
   <footer><span class="footer-credit"><span class="footer-dot" aria-hidden="true"></span>Mission Control <span class="footer-separator">/</span> Every conclusion has a source.</span><span id="counts"></span></footer>
+  <button id="agent-launcher" class="agent-launcher" type="button" aria-label="Ask Mica about this case" title="Ask Mica" disabled hidden>
+    <span class="agent-avatar" aria-hidden="true"><img src="/signal-mark.svg" alt=""></span>
+    <span class="agent-label"><strong>Mica</strong><small>Here to help</small></span>
+    <span class="agent-availability" aria-hidden="true"></span>
+  </button>
   <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode"><span class="theme-icon" aria-hidden="true"></span><span class="theme-label">Dark mode</span></button>
 </body>
 </html>

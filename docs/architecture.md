@@ -16,6 +16,8 @@ flowchart TD
 
 The browser and Node.js use the same source adapters and matching rules. The browser passes the ZIP to a module worker, which normalizes, links, and returns the report. The main thread can still handle the case register during import. Browsers without module workers use the same reader on the main thread. The CLI also accepts a directory and writes the intermediate files. The hosted site begins with a separately redacted report so reviewers can try it without importing anything.
 
+The repository has [small redacted examples of every intermediate file](examples/counts.json), including [normalized events](examples/normalized.sample.json), [links](examples/links.sample.json), [rejected rows](examples/rejected.sample.json) and a [report excerpt](examples/report.sample.json). These were reproduced from the supplied challenge ZIP; record text, names, provider identifiers and original source paths were replaced with public-safe aliases. The full outputs are written to ignored `private/` only when you run the ingestion CLI locally.
+
 ## From exports to evidence
 
 | Stage | Rule and practical limit |
@@ -57,5 +59,6 @@ The language model only receives the question and previous question. Record sear
 - The prototype recognizes procurement message templates in this dataset and extracts vendor names from the records. Different templates, missing records, and overlapping cases reduce coverage. Screen titles indicate activity context and are insufficient to establish a procurement stage.
 - The public build includes a redacted report. Raw exports and full CLI output stay local. Anyone exporting an imported report from the browser should treat it like the source data.
 - Browser review state is saved on the current device. It is suitable for a prototype walkthrough. A shared workflow would need an audit history and authenticated reviewer identities.
+- The login gate collects name, email and password locally with salted PBKDF2 digests. This gives a realistic reviewer journey and account-scoped decisions in the offline demo, but the public dataset is still served to browsers and no server grants or denies source access. GitHub OAuth identity can be configured separately. For private organization data, use server-side authentication, tenancy and authorization before serving any record.
 
 For production, queue source ingestion by organization and cursor, store events and evidence links separately, and preserve the rule version beside each result. Keep source access scoped by role. Any future model-assisted match should return candidate event IDs with reasons and pass validation before it becomes a reviewable inference.

@@ -1,0 +1,58 @@
+[
+  {
+    "process": "Laptop procurement",
+    "eventId": "Source record 06",
+    "caseId": "LP-02",
+    "stage": "requested",
+    "rule": "Original Teams channel request and thread root."
+  },
+  {
+    "process": "Laptop procurement",
+    "eventId": "Source record 07",
+    "caseId": "LP-02",
+    "stage": "quoted",
+    "rule": "Quote posted as a reply to this request."
+  },
+  {
+    "process": "Laptop procurement",
+    "eventId": "Source record 08",
+    "caseId": "LP-02",
+    "stage": "approved",
+    "rule": "Approval posted after a quote in the same request thread."
+  },
+  {
+    "process": "Laptop procurement",
+    "eventId": "Source record 09",
+    "caseId": "LP-02",
+    "stage": "ordered",
+    "rule": "The unique request matches the recipient’s first name, vendor, product, and earlier approval."
+  },
+  {
+    "process": "Laptop procurement",
+    "eventId": "Source record 10",
+    "caseId": "LP-02",
+    "stage": "received",
+    "rule": "The recipient named in the order confirmed receipt in a Teams chat."
+  },
+  {
+    "process": "Recruitment screening",
+    "eventId": "Source record 66",
+    "caseId": "RC-01",
+    "stage": "screening_scheduled",
+    "rule": "The calendar title names the candidate and role. It records a scheduled start."
+  },
+  {
+    "process": "Recruitment screening",
+    "eventId": "Source record 67",
+    "caseId": "RC-01",
+    "stage": "screening_reported",
+    "rule": "A matching candidate alias, mailbox and nearby prior screening slot point to one case."
+  },
+  {
+    "process": "Recruitment screening",
+    "eventId": "Source record 68",
+    "caseId": "RC-01",
+    "stage": "interview_scheduled",
+    "rule": "The calendar title names the candidate and role. It records a scheduled start."
+  }
+]

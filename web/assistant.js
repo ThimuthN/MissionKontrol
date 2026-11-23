@@ -10,7 +10,7 @@ const drawer = document.createElement('dialog');
 drawer.className = 'case-assistant';
 drawer.setAttribute('aria-labelledby', 'assistant-heading');
 drawer.innerHTML = `
-  <header class="assistant-head"><div><h2 id="assistant-heading">Ask the evidence</h2></div>
+  <header class="assistant-head"><div class="assistant-identity"><img src="/signal-mark.svg" alt="" aria-hidden="true"><div><p class="assistant-kicker">YOUR WORKFLOW GUIDE</p><h2 id="assistant-heading">Mica</h2></div></div>
     <button class="assistant-close" type="button" aria-label="Close assistant">×</button></header>
   <p class="assistant-context"></p>
   <div class="assistant-body"><div class="assistant-starters"><p>Where would you like to start?</p></div>
@@ -33,10 +33,10 @@ function element(tag, value, className) {
   if (className) el.className = className;
   return el;
 }
-function display(result, mode) {
+function display(result) {
   const group = document.createElement('article');
   group.className = 'assistant-answer';
-  group.append(element('small', result.title + ' · ' + mode), element('p', result.intro));
+  group.append(element('small', `${result.title} · Workspace insight`), element('p', result.intro));
   for (const finding of result.findings) {
     const section = document.createElement('section');
     section.append(element('strong', finding.title));
@@ -46,8 +46,8 @@ function display(result, mode) {
       const ref = finding.ref;
       const link = element('button', (ref.evidenceId ? 'Open record · ' : 'Inspect stage · ') + ref.label);
       link.type = 'button';
-      link.addEventListener('click', () => {
-        drawer.close();
+      link.addEventListener('click', async () => {
+        await closeDrawer();
         document.dispatchEvent(new CustomEvent('mission-citation', { detail: ref }));
       });
       section.append(link);
@@ -69,11 +69,24 @@ for (const title of ['Walk me through this case', 'What needs a second look?', '
   button.onclick = () => { input.value = title; form.requestSubmit(); };
   starters.append(button);
 }
-find('.assistant-close').onclick = () => drawer.close();
+let closing = false;
+async function closeDrawer() {
+  if (!drawer.open || closing) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { drawer.close(); return; }
+  closing = true;
+  try {
+    await drawer.animate([{ transform: 'translateX(0)', opacity: 1 }, { transform: 'translateX(100%)', opacity: .55 }],
+      { duration: 250, easing: 'cubic-bezier(.55,0,.9,.7)' }).finished;
+  } catch { /* The dialog may already be closing. */ }
+  drawer.close();
+  closing = false;
+}
+find('.assistant-close').onclick = closeDrawer;
+drawer.addEventListener('cancel', event => { event.preventDefault(); void closeDrawer(); });
 drawer.addEventListener('close', () => activeRequest?.abort());
 drawer.addEventListener('click', event => { if (event.target === drawer) {
   const rect = drawer.getBoundingClientRect();
-  if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) drawer.close();
+  if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) void closeDrawer();
 } });
 document.addEventListener('mission-assistant', ({ detail }) => {
   const key = JSON.stringify([detail.report.dataset, detail.report.process, detail.currentCase.id, detail.step.id]);
@@ -104,7 +117,7 @@ form.onsubmit = async event => {
   const pending = element('p', 'Checking the case…', 'assistant-pending');
   log.append(pending);
   try {
-    const { intent, mode } = await plan(question, previous, globalThis.LanguageModel,
+    const { intent } = await plan(question, previous, globalThis.LanguageModel,
       AbortSignal.any([controller.signal, AbortSignal.timeout(4500)]));
     if (controller.signal.aborted) return;
     let scope = context;
@@ -117,7 +130,7 @@ form.onsubmit = async event => {
     }
     const result = investigate(scope, question, intent);
     previous = question; previousResult = result;
-    display(result, mode);
+    display(result);
   } catch {
     if (!controller.signal.aborted) log.append(element('p', 'I couldn’t look that up. Try a stage name or ask for a case summary.'));
   } finally {

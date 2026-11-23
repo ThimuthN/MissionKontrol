@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "dataset": "public-march2026",
+  "process": "Laptop procurement",
+  "cases": [
+    {
+      "id": "LP-02",
+      "label": "LP-02",
+      "requestType": "replacement",
+      "steps": [
+        {
+          "id": "requested",
+          "label": "Request raised",
+          "status": "observed",
+          "evidence": [
+            {
+              "id": "Source record 06",
+              "source": "teams",
+              "at": "2026-03-02T09:30:00.000Z",
+              "timeKind": "Time rounded to 15 minutes",
+              "text": "The procurement channel records a laptop request and a required-by date.",
+              "reason": "This message starts a procurement thread.",
+              "origin": "Source record 06",
+              "status": "observed"
+            }
+          ]
+        },
+        {
+          "id": "quoted",
+          "label": "Quote proposed",
+          "status": "observed",
+          "evidence": [
+            {
+              "id": "Source record 07",
+              "source": "teams",
+              "at": "2026-03-03T03:45:00.000Z",
+              "timeKind": "Time rounded to 15 minutes",
+              "text": "A supplier and price were proposed in the request thread.",
+              "reason": "The quote is a reply under the original request.",
+              "origin": "Source record 07",
+              "status": "observed"
+            }
+          ]
+        },
+        {
+          "id": "approved",
+          "label": "Purchase approved",
+          "status": "observed",
+          "evidence": [
+            {
+              "id": "Source record 08",
+              "source": "teams",
+              "at": "2026-03-03T05:00:00.000Z",
+              "timeKind": "Time rounded to 15 minutes",
+              "text": "The quote received approval in the request thread.",
+              "reason": "The approval is a reply after the quote in the same thread.",
+              "origin": "Source record 08",
+              "status": "observed"
+            }
+          ]
+        },
+        {
+          "id": "ordered",
+          "label": "Order confirmed",
+          "status": "inferred",
+          "evidence": [
+            {
+              "id": "Source record 09",
+              "source": "email",
+              "at": "2026-03-03T06:45:00.000Z",
+              "timeKind": "Time rounded to 15 minutes",
+              "text": "A supplier email records an order and names the delivery recipient.",
+              "reason": "Only the first name matched. The vendor, model and earlier approval narrowed the order to one request.",
+              "origin": "Source record 09",
+              "status": "inferred",
+              "checks": [
+                {
+                  "label": "Recipient",
+                  "result": "First name only",
+                  "partial": true
+                },
+                {
+                  "label": "Supplier",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Laptop model",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Approval",
+                  "result": "Recorded before the email"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "received",
+          "label": "Receipt reported",
+          "status": "observed",
+          "evidence": [
+            {
+              "id": "Source record 10",
+              "source": "teams",
+              "at": "2026-03-06T04:15:00.000Z",
+              "timeKind": "Time rounded to 15 minutes",
+              "text": "A Teams message reports that the laptop was received.",
+              "reason": "The recipient named in the order reported receipt in a Teams chat after the order.",
+              "origin": "Source record 10",
+              "status": "observed"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "normalized": 11166,
+    "linked": 65,
+    "unlinked": 11101,
+    "files": 25,
+    "rows": 11346,
+    "duplicates": 180,
+    "rejected": 0
+  },
+  "processes": [
+    {
+      "version": 1,
+      "dataset": "public-march2026",
+      "process": "Recruitment screening",
+      "cases": [
+        {
+          "id": "RC-01",
+          "label": "RC-01",
+          "steps": [
+            {
+              "id": "screening_scheduled",
+              "label": "Screening scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 66",
+                  "source": "calendar",
+                  "at": "2026-03-02T03:00:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a screening call.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 66",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "screening_reported",
+              "label": "Screening reported",
+              "status": "inferred",
+              "evidence": [
+                {
+                  "id": "Source record 67",
+                  "source": "teams",
+                  "at": "2026-03-02T03:30:00.000Z",
+                  "timeKind": "Time rounded to 15 minutes",
+                  "text": "A Teams message reports that a recruiter spoke with the candidate.",
+                  "reason": "A candidate alias, mailbox and nearby prior slot narrowed the report to one case.",
+                  "origin": "Source record 67",
+                  "status": "inferred"
+                }
+              ]
+            },
+            {
+              "id": "interview_scheduled",
+              "label": "Interview scheduled",
+              "status": "observed",
+              "evidence": [
+                {
+                  "id": "Source record 68",
+                  "source": "calendar",
+                  "at": "2026-03-10T07:15:00.000Z",
+                  "timeKind": "Scheduled start, rounded to 15 minutes",
+                  "text": "An Outlook event records the scheduled start of a client interview.",
+                  "reason": "The calendar title identifies the candidate and role. Attendance is unverified.",
+                  "origin": "Source record 68",
+                  "status": "observed"
+                }
+              ]
+            },
+            {
+              "id": "offer_response",
+              "label": "Offer response recorded",
+              "status": "missing",
+              "evidence": []
+            }
+          ]
+        }
+      ],
+      "stats": {
+        "normalized": 11166,
+        "linked": 101,
+        "unlinked": 11065,
+        "files": 25,
+        "rows": 11346,
+        "duplicates": 180,
+        "rejected": 0
+      }
+    }
+  ]
+}
