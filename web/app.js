@@ -7,6 +7,7 @@ import { mountPaperMotion } from './paper-motion.js';
 import { printCase } from './case-sheet.js';
 import './assistant.js';
 import './experience.js';
+import './theme.js';
 
 const $ = id => document.getElementById(id);
 const states = { observed: 'Observed', inferred: 'Inferred link', missing: 'Evidence gap' };
@@ -302,9 +303,19 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
         if (button.disabled) $('case-title').focus({ preventScroll: true });
       };
     }
-    $('case-title').textContent = activeCase.label ?? activeCase.id;
+    $('case-title').textContent = `Case ${activeCase.label ?? activeCase.id}`;
     $('case-context').textContent = [activeCase.requestType ?? activeCase.role,
       first ? `${first.source === 'calendar' ? 'First booking' : 'First record'} · ${date.format(new Date(first.at))}` : undefined].filter(Boolean).join(' / ');
+    const totals = activeCase.steps.reduce((counts, step) => {
+      counts[step.status] = (counts[step.status] ?? 0) + 1;
+      return counts;
+    }, {});
+    $('case-summary').replaceChildren(...[
+      `${activeCase.steps.length} checkpoint${activeCase.steps.length === 1 ? '' : 's'}`,
+      `${totals.observed ?? 0} observed`,
+      ...(totals.inferred ? [`${totals.inferred} inferred`] : []),
+      ...(totals.missing ? [`${totals.missing} gap${totals.missing === 1 ? '' : 's'}`] : []),
+    ].map((label, index) => node('span', label, `case-summary-chip ${index === 0 ? 'case-summary-total' : ''}`)));
     renderReplay(report, activeCase);
     const trace = $('ink-trace');
     if (trace.children.length !== activeCase.steps.length) {
@@ -493,6 +504,7 @@ async function start() {
   if (!response.ok) throw new Error('Report unavailable');
   const report = await response.json();
   mount(report, { useLink: true });
+  document.dispatchEvent(new Event('mission-ready'));
   const input = $('import-file');
   const feedback = $('workspace-status');
   const openPicker = () => input.click();

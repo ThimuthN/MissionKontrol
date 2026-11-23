@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#090f22">
+  <meta name="theme-color" content="#e8f5f3">
   <meta name="description" content="Mission Control reconstructs how work moved across Teams and Outlook, with evidence you can inspect.">
   <title>Mission Control | Process intelligence</title>
+  <script src="/theme-init.js"></script>
   <link rel="icon" href="/mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/replay.css">
@@ -14,6 +15,7 @@
   <link rel="stylesheet" href="/paper-motion.css">
   <link rel="stylesheet" href="/review-updates.css">
   <link rel="stylesheet" href="/experience.css">
+  <link rel="stylesheet" href="/refinement.css">
   <script type="module" src="/app.js"></script>
 </head>
 <body>
@@ -38,22 +40,24 @@
     </div>
   </header>
   <main>
-    <nav id="process-switch" class="process-switch" aria-label="Switch workflow process" hidden></nav>
-    <section class="intro" aria-labelledby="process">
-      <div class="hero-orbit" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-      <div class="intro-copy">
-        <p class="eyebrow"><span class="eyebrow-spark" aria-hidden="true"></span>THE WORK, RECONSTRUCTED</p>
-        <h1 id="process">Laptop procurement</h1>
-        <p id="description">Open a case to trace a request through Teams and Outlook.</p>
-      </div>
-      <div class="briefing">
-        <p class="period" id="period" hidden></p>
-        <button id="start-tour" class="quiet" type="button" disabled>Walkthrough <span class="arrow" aria-hidden="true"></span></button>
-        <div class="trace-controls" id="trace-controls" hidden>
-          <div class="ink-trace" id="ink-trace" aria-hidden="true"></div>
-          <button id="trace-toggle" class="quiet" type="button" aria-pressed="false">Pause motion</button>
+    <section class="scene-frame" aria-label="Workflow overview">
+      <nav id="process-switch" class="process-switch" aria-label="Switch workflow process" hidden></nav>
+      <section class="intro" aria-labelledby="process">
+        <div class="hero-orbit" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <div class="intro-copy">
+          <p class="eyebrow"><span class="eyebrow-spark" aria-hidden="true"></span>THE WORK, RECONSTRUCTED</p>
+          <h1 id="process">Laptop procurement</h1>
+          <p id="description">Open a case to trace a request through Teams and Outlook.</p>
         </div>
-      </div>
+        <div class="briefing">
+          <p class="period" id="period" hidden></p>
+          <button id="start-tour" class="quiet" type="button" disabled>Walkthrough <span class="arrow" aria-hidden="true"></span></button>
+          <div class="trace-controls" id="trace-controls" hidden>
+            <div class="ink-trace" id="ink-trace" aria-hidden="true"></div>
+            <button id="trace-toggle" class="quiet" type="button" aria-pressed="false">Pause motion</button>
+          </div>
+        </div>
+      </section>
     </section>
     <p id="workspace-status" class="workspace-status" role="status" hidden></p>
     <p id="load-state" class="workspace-status" role="status">Loading cases.</p>
@@ -93,7 +97,7 @@
         </nav>
         <section class="panel timeline" aria-labelledby="case-title">
           <div class="panel-title">
-            <h3 id="case-title" tabindex="-1"></h3>
+            <div class="case-heading"><p class="case-heading-kicker">CASE IN FOCUS</p><h3 id="case-title" tabindex="-1"></h3></div>
             <div class="case-nav" role="group" aria-label="Browse cases">
               <button id="previous-case" type="button" aria-label="Previous case"><span class="arrow" aria-hidden="true"></span></button>
               <span id="case-position"></span>
@@ -101,6 +105,7 @@
             </div>
           </div>
           <p class="panel-subtitle" id="case-context"></p>
+          <div id="case-summary" class="case-summary" aria-live="polite"></div>
           <div id="case-replay"></div>
           <ol id="steps"></ol>
           <a class="jump-evidence" href="#evidence-title">View selected evidence <span class="arrow" aria-hidden="true"></span></a>
@@ -128,5 +133,6 @@
     </section>
   </main>
   <footer><span class="footer-credit"><span class="footer-dot" aria-hidden="true"></span>Mission Control <span class="footer-separator">/</span> Every conclusion has a source.</span><span id="counts"></span></footer>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode"><span class="theme-icon" aria-hidden="true"></span><span class="theme-label">Dark mode</span></button>
 </body>
 </html>

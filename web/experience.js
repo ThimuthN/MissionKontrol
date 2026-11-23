@@ -6,10 +6,13 @@ stage.className = 'ambient-stage';
 stage.setAttribute('aria-hidden', 'true');
 const canvas = document.createElement('canvas');
 stage.append(canvas);
-document.body.prepend(stage);
+const scene = document.querySelector('.scene-frame');
+scene?.prepend(stage);
 // The assistant mounts its stylesheet dynamically; keep our shared design layer last.
 const designLayer = document.querySelector('link[href="/experience.css"]');
 if (designLayer) document.head.append(designLayer);
+const refinementLayer = document.querySelector('link[href="/refinement.css"]');
+if (refinementLayer) document.head.append(refinementLayer);
 
 const ctx = canvas.getContext('2d', { alpha: true });
 const nodes = Array.from({ length: 26 }, (_, i) => ({
@@ -28,6 +31,7 @@ let pointerX = .73;
 let pointerY = .32;
 let targetX = .73;
 let targetY = .32;
+let pointerInside = false;
 
 function allowed() {
   return !!ctx && !reduce.matches && !document.hidden &&
@@ -60,10 +64,13 @@ function draw(time) {
   const points = nodes.map((item, i) => {
     const driftX = Math.sin(tick * item.speed + item.phase) * 12;
     const driftY = Math.cos(tick * item.speed * .78 + item.phase) * 10;
-    const attraction = Math.max(0, 1 - Math.hypot(item.x - pointerX, item.y - pointerY) * 1.5);
+    const baseX = item.x * width;
+    const baseY = item.y * height;
+    const distanceToPointer = Math.hypot(baseX - pointerX * width, baseY - pointerY * height);
+    const attraction = pointerInside ? Math.max(0, 1 - distanceToPointer / 290) : 0;
     return {
-      x: item.x * width + driftX + (pointerX - .5) * 26 * attraction,
-      y: item.y * height + driftY + (pointerY - .5) * 15 * attraction,
+      x: baseX + driftX + (pointerX * width - baseX) * .105 * attraction,
+      y: baseY + driftY + (pointerY * height - baseY) * .105 * attraction,
       radius: item.radius,
     };
   });
@@ -75,7 +82,7 @@ function draw(time) {
       const distance = Math.hypot(a.x - b.x, a.y - b.y);
       if (distance > maxDistance) continue;
       const intensity = (1 - distance / maxDistance) * .17;
-      ctx.strokeStyle = `rgba(170, 171, 255, ${intensity})`;
+      ctx.strokeStyle = `rgba(87, 217, 206, ${intensity})`;
       ctx.lineWidth = .8;
       ctx.beginPath();
       ctx.moveTo(a.x, a.y);
@@ -87,18 +94,30 @@ function draw(time) {
     const glow = i % 7 === 0;
     if (glow) {
       const halo = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, 24);
-      halo.addColorStop(0, 'rgba(174,152,255,.22)');
-      halo.addColorStop(1, 'rgba(174,152,255,0)');
+      halo.addColorStop(0, 'rgba(83,222,210,.27)');
+      halo.addColorStop(1, 'rgba(83,222,210,0)');
       ctx.fillStyle = halo;
       ctx.beginPath();
       ctx.arc(point.x, point.y, 24, 0, Math.PI * 2);
       ctx.fill();
     }
-    ctx.fillStyle = glow ? 'rgba(213,205,255,.75)' : 'rgba(167,176,240,.4)';
+    ctx.fillStyle = glow ? 'rgba(166,255,239,.78)' : 'rgba(131,224,222,.49)';
     ctx.beginPath();
     ctx.arc(point.x, point.y, point.radius, 0, Math.PI * 2);
     ctx.fill();
   });
+  if (pointerInside) {
+    const x = pointerX * width, y = pointerY * height;
+    const nearby = points.map(point => ({ point, distance: Math.hypot(point.x - x, point.y - y) }))
+      .filter(item => item.distance < 220).sort((a, b) => a.distance - b.distance).slice(0, 6);
+    for (const { point, distance } of nearby) {
+      const beam = ctx.createLinearGradient(x, y, point.x, point.y);
+      beam.addColorStop(0, `rgba(129,255,236,${(1 - distance / 220) * .43})`);
+      beam.addColorStop(1, 'rgba(129,255,236,.03)');
+      ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(point.x, point.y);
+      ctx.strokeStyle = beam; ctx.lineWidth = 1.1; ctx.stroke();
+    }
+  }
 }
 
 function synchronize() {
@@ -115,18 +134,21 @@ window.addEventListener('resize', () => { sizeCanvas(); synchronize(); }, { pass
 document.addEventListener('visibilitychange', synchronize);
 reduce.addEventListener('change', synchronize);
 new MutationObserver(synchronize).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-stage.addEventListener('pointerleave', () => { targetX = .73; targetY = .32; });
-if (precise.matches) {
-  document.addEventListener('pointermove', event => {
-    targetX = Math.max(0, Math.min(1, event.clientX / Math.max(1, innerWidth)));
-    targetY = Math.max(0, Math.min(1, (event.clientY - 70) / Math.max(1, height)));
-  }, { passive: true });
-}
+scene?.addEventListener('pointerleave', () => { pointerInside = false; targetX = .73; targetY = .32; });
+scene?.addEventListener('pointermove', event => {
+  if (!precise.matches || event.pointerType === 'touch') return;
+  const rect = scene.getBoundingClientRect();
+  targetX = Math.max(0, Math.min(1, (event.clientX - rect.left) / Math.max(1, rect.width)));
+  targetY = Math.max(0, Math.min(1, (event.clientY - rect.top) / Math.max(1, rect.height)));
+  pointerInside = true;
+  scene.style.setProperty('--scene-x', `${Math.round(targetX * 100)}%`);
+  scene.style.setProperty('--scene-y', `${Math.round(targetY * 100)}%`);
+}, { passive: true });
 sizeCanvas();
 synchronize();
 
 // Every interactive surface has a small, reversible response. Never move focus.
-const touchable = 'button, .process-choice, .record summary, .coverage summary, .replay-book summary, .export summary, .account-handle, a.jump-evidence';
+const touchable = 'button, .process-choice, .record, .record summary, .coverage summary, .replay-book summary, .export summary, .account-handle, a.jump-evidence';
 document.addEventListener('pointermove', event => {
   if (!precise.matches || reduce.matches) return;
   const target = event.target.closest?.(touchable);
