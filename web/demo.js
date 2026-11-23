@@ -140,7 +140,14 @@ function speakChapter(index) {
     narrationEnabled = false;
     narrationButton.setAttribute('aria-pressed', 'false');
     narrationButton.setAttribute('aria-label', 'Turn narration on');
+    // If narration fails, restore the text rather than leaving a silent film.
+    captionsEnabled = true;
+    captionsButton.setAttribute('aria-pressed', 'true');
+    captionsButton.setAttribute('aria-label', 'Hide captions');
+    caption.hidden = false;
+    mobileStory.classList.remove('captions-off');
     audioNotice.hidden = false;
+    window.setTimeout(() => { audioNotice.hidden = true; }, 6000);
   };
   window.speechSynthesis.speak(utterance);
   spokenChapter = index;
