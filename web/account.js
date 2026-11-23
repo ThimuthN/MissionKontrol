@@ -99,7 +99,7 @@ function accessPrompt() {
       <section class="access-story" aria-label="Mission Control workspace">
         <div class="access-brand"><span class="mark" aria-hidden="true"></span>Mission Control</div>
         <p class="access-eyebrow">HARBOURLINE WORKSPACE</p>
-        <h2>See the work<br>behind each case.</h2>
+        <h2>Trace a case<br>to its source.</h2>
         <p>See the messages, approvals and updates behind each case. Keep your review notes together.</p>
         <div class="access-path" aria-hidden="true"><span>Find a case</span><i></i><span>Check the sources</span><i></i><span>Leave a decision</span></div>
       </section>
