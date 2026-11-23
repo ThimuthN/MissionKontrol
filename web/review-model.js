@@ -1,5 +1,16 @@
 export const publicDataset = 'public-march2026';
 
+// A workflow question is either an unverified proposed link or a checkpoint
+// without a source. Keep confirmed/flagged decisions out of the open queue.
+export function reviewPriorities(cases, reviews) {
+  const open = cases.flatMap(item => item.steps
+    .filter(step => (step.status === 'inferred' || step.status === 'missing') &&
+      !reviews[`${item.id}/${step.id}`]?.decision)
+    .map(step => ({ item, step })));
+  return [...open.filter(entry => entry.step.status === 'inferred'),
+    ...open.filter(entry => entry.step.status === 'missing')];
+}
+
 export function nextReview(cases, reviews, currentCase, currentStep) {
   const candidates = cases.flatMap(item => item.steps.map(step => ({ item, step })));
   const index = candidates.findIndex(({ item, step }) => item.id === currentCase && step.id === currentStep);

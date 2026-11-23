@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { nextReview } from '../web/review-model.js';
+import { nextReview, reviewPriorities } from '../web/review-model.js';
 import { printCase } from '../web/case-sheet.js';
 
 test('continue review skips decisions, prioritizes inferences and stops at the last open step', () => {
@@ -11,6 +11,15 @@ test('continue review skips decisions, prioritizes inferences and stops at the l
   reviews['B/2'] = { decision:'confirmed' };
   assert.equal(nextReview(cases, reviews, 'B','2').item.id, 'A');
   assert.equal(nextReview(cases, reviews, 'A','1'), undefined);
+});
+
+test('review priorities put unverified links ahead of evidence gaps and respect saved decisions', () => {
+  const cases = [{ id:'A', steps:[{ id:'missing', status:'missing' }, { id:'inferred', status:'inferred' }] },
+    { id:'B', steps:[{ id:'inferred', status:'inferred' }, { id:'observed', status:'observed' }] }];
+  const items = reviewPriorities(cases, { 'A/inferred':{ decision:'confirmed' } });
+  assert.deepEqual(items.map(({item,step}) => `${item.id}/${step.id}`), ['B/inferred','A/missing']);
+  assert.equal(reviewPriorities(cases, { 'A/inferred':{decision:'flagged'}, 'B/inferred':{decision:'confirmed'},
+    'A/missing':{decision:'flagged'} }).length, 0);
 });
 
 test('case print sheet includes sources, saved review and exclusions, and clears after printing', t => {

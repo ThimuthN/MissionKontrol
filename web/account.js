@@ -76,7 +76,7 @@ function finishAuthentication(user) {
   currentReviewerId = user.kind === 'github' ? `github:${user.login}` : `local:${user.email}`;
   render(accountControl, user);
   if (user.kind === 'local' && user.appearance && document.documentElement.dataset.theme !== user.appearance)
-    document.getElementById('theme-toggle')?.click();
+    document.dispatchEvent(new CustomEvent('mission-theme-request', { detail: { theme: user.appearance } }));
   if (accessDialog?.open) accessDialog.close();
   if (readyResolver) {
     const resolve = readyResolver;
@@ -99,9 +99,9 @@ function accessPrompt() {
       <section class="access-story" aria-label="Mission Control workspace">
         <div class="access-brand"><span class="mark" aria-hidden="true"></span>Mission Control</div>
         <p class="access-eyebrow">KEEP WORK MOVING</p>
-        <h2>Know what<br>happened.</h2>
-        <p>One place to follow your workflows, understand their history, and make the next decision with confidence.</p>
-        <div class="access-path" aria-hidden="true"><span>Choose a case</span><i></i><span>Review the trail</span><i></i><span>Move forward</span></div>
+        <h2>Follow the<br>handoff.</h2>
+        <p>A message in Teams. An approval somewhere else. Piece together what the records show—and leave room for what they don't.</p>
+        <div class="access-path" aria-hidden="true"><span>Find a case</span><i></i><span>Check the sources</span><i></i><span>Leave a decision</span></div>
       </section>
       <section class="access-panel">
         <button class="access-theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme"></button>
@@ -151,7 +151,10 @@ function accessPrompt() {
   const password = form.querySelector('[name="password"]');
   const name = form.querySelector('[name="displayName"]');
   const showPassword = dialog.querySelector('.access-show-password');
-  dialog.querySelector('.access-theme-toggle').addEventListener('click', () => document.getElementById('theme-toggle')?.click());
+  dialog.querySelector('.access-theme-toggle').addEventListener('click', () => {
+    const theme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    document.dispatchEvent(new CustomEvent('mission-theme-request', { detail: { theme } }));
+  });
 
   function selectMode(mode) {
     const signUp = mode === 'sign-up';
@@ -178,7 +181,8 @@ function accessPrompt() {
     dialog.dataset.appearance = choice;
     dialog.querySelectorAll('[data-appearance]').forEach(button =>
       button.setAttribute('aria-pressed', String(button.dataset.appearance === choice)));
-    if (animate && document.documentElement.dataset.theme !== choice) document.getElementById('theme-toggle')?.click();
+    if (animate && document.documentElement.dataset.theme !== choice)
+      document.dispatchEvent(new CustomEvent('mission-theme-request', { detail: { theme: choice } }));
   }
   dialog.querySelectorAll('[data-appearance]').forEach(button => button.addEventListener('click', () => setAppearance(button.dataset.appearance)));
   document.addEventListener('mission-theme-changed', event => {
@@ -310,7 +314,7 @@ export async function mountAccount() {
     currentReviewerId = user.kind === 'github' ? `github:${user.login}` : `local:${user.email}`;
     render(accountControl, user);
     if (user.kind === 'local' && user.appearance && document.documentElement.dataset.theme !== user.appearance)
-      document.getElementById('theme-toggle')?.click();
+      document.dispatchEvent(new CustomEvent('mission-theme-request', { detail: { theme: user.appearance } }));
     workspaceUnlocked = true;
     return;
   }

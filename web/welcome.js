@@ -15,10 +15,10 @@ function createWelcome() {
       <div class="welcome-content">
         <div class="welcome-brand"><span class="mark" aria-hidden="true"></span>Mission Control <span class="welcome-kicker">/ WORKSPACE</span></div>
         <p class="welcome-eyebrow">WORKFLOW OPERATIONS</p>
-        <h2 id="welcome-title">Your work.<br><em>All in context.</em></h2>
+        <h2 id="welcome-title">The work.<br><em>The whole trail.</em></h2>
         <p id="welcome-summary"></p>
         <div class="welcome-actions">
-          <button type="button" class="primary" data-welcome="demo" autofocus>Open sample workspace <span class="arrow" aria-hidden="true"></span></button>
+          <button type="button" class="primary" data-welcome="demo" autofocus>Open sample workspace</button>
           <button type="button" class="secondary" data-welcome="import">Bring your own export</button>
           <button type="button" class="quiet" data-welcome="close">Close</button>
         </div>

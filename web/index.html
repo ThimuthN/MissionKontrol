@@ -45,14 +45,25 @@
       <section class="intro" aria-labelledby="process">
         <div class="hero-orbit" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
         <div class="intro-copy">
-          <p class="eyebrow"><span class="eyebrow-spark" aria-hidden="true"></span>WORKFLOW OVERVIEW</p>
+          <p class="eyebrow"><span class="eyebrow-spark" aria-hidden="true"></span>THE EVIDENCE TRAIL</p>
           <h1 id="process">Laptop procurement</h1>
           <p id="description">Open a case to trace a request through Teams and Outlook.</p>
           <p id="method-note" class="method-note"></p>
         </div>
-        <div class="briefing">
+        <div class="briefing" aria-label="Review priority">
+          <div class="priority-top">
+            <p class="priority-eyebrow"><span class="priority-indicator" aria-hidden="true"></span>NEXT TO VERIFY</p>
+            <span id="priority-count" class="priority-count"></span>
+          </div>
+          <div id="priority-rail" class="priority-rail" aria-hidden="true"></div>
+          <p id="priority-case" class="priority-case"></p>
+          <h2 id="priority-title" class="priority-title">Find the next uncertain link.</h2>
+          <p id="priority-rationale" class="priority-rationale"></p>
+          <div class="priority-actions">
+            <button id="priority-open" class="priority-open" type="button" disabled>Review this step</button>
+            <button id="start-tour" class="quiet" type="button" disabled>Tour</button>
+          </div>
           <p class="period" id="period" hidden></p>
-          <button id="start-tour" class="quiet" type="button" disabled>Walkthrough <span class="arrow" aria-hidden="true"></span></button>
           <div class="trace-controls" id="trace-controls" hidden>
             <div class="ink-trace" id="ink-trace" aria-hidden="true"></div>
             <button id="trace-toggle" class="quiet" type="button" aria-pressed="false">Pause motion</button>
@@ -66,7 +77,7 @@
       <div class="brief">
         <div class="brief-message">
           <p class="brief-eyebrow">CASE REVIEW</p>
-          <h2 id="lab-title">Review the work, step by step.</h2>
+          <h2 id="lab-title">The review desk</h2>
           <p id="insight"></p>
         </div>
         <div class="brief-tools">
@@ -83,7 +94,7 @@
         <div class="tour-copy"><p id="tour-count"></p><h3 id="tour-title"></h3><p id="tour-text"></p></div>
         <div class="tour-actions">
           <button id="tour-close" class="secondary" type="button">Exit walkthrough</button>
-          <button id="tour-next" class="primary" type="button">Next <span class="arrow" aria-hidden="true"></span></button>
+          <button id="tour-next" class="primary" type="button">Next</button>
         </div>
       </div>
       <div id="desk" class="desk">
@@ -117,7 +128,7 @@
           <div id="case-summary" class="case-summary" aria-live="polite"></div>
           <div id="case-replay"></div>
           <ol id="steps"></ol>
-          <a class="jump-evidence" href="#evidence-title">View selected evidence <span class="arrow" aria-hidden="true"></span></a>
+          <a class="jump-evidence" href="#evidence-title">View selected evidence</a>
         </section>
         <section class="panel inspector" aria-labelledby="evidence-title">
           <div class="panel-title"><h3 id="evidence-title" tabindex="-1"></h3></div>
@@ -135,7 +146,8 @@
               <button id="clear-review" class="quiet" type="button" hidden>Clear</button>
             </div>
             <p class="review-state" id="review-state" role="status"></p>
-            <button id="next-review" class="quiet" type="button" hidden>Next step to check →</button>
+            <p class="review-byline" id="review-byline" hidden></p>
+            <button id="next-review" class="quiet" type="button" hidden>Next step to check</button>
             </form>
           </div>
         </section>
@@ -145,7 +157,7 @@
   <footer><span class="footer-credit"><span class="footer-dot" aria-hidden="true"></span>Mission Control <span class="footer-separator">/</span> Every conclusion has a source.</span><span id="counts"></span></footer>
   <button id="agent-launcher" class="agent-launcher" type="button" aria-label="Ask Mica about this case" title="Ask Mica" disabled hidden>
     <span class="agent-avatar" aria-hidden="true"><img src="/signal-mark.svg" alt=""></span>
-    <span class="agent-label"><strong>Mica</strong><small>Here to help</small></span>
+    <span class="agent-label"><strong>Mica</strong><small>Ask about a case</small></span>
     <span class="agent-availability" aria-hidden="true"></span>
   </button>
   <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode"><span class="theme-icon" aria-hidden="true"></span><span class="theme-label">Dark mode</span></button>

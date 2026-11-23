@@ -1,6 +1,6 @@
 import { openWelcome } from './welcome.js';
 import { casesCsv, download, importWorkspace } from './workspace.js';
-import { chooseTour, nextReview, projectReviews, publicDataset, readSelection, selectCases, summarize, workflowOptions } from './review-model.js';
+import { chooseTour, nextReview, projectReviews, publicDataset, readSelection, reviewPriorities, selectCases, summarize, workflowOptions } from './review-model.js';
 import { renderReplay } from './replay.js';
 import { currentReviewer, currentReviewerId, mountAccount } from './account.js';
 import { mountPaperMotion } from './paper-motion.js';
@@ -220,7 +220,16 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
       $('export-menu').querySelector('summary').focus();
     };
   }
-  if (!activeCase) { renderReplay(report, null); return; }
+  if (!activeCase) {
+    $('priority-count').textContent = 'No cases';
+    $('priority-case').textContent = report.process;
+    $('priority-title').textContent = 'No cases to review.';
+    $('priority-rationale').textContent = 'This export did not produce a case for the selected workflow.';
+    $('priority-rail').replaceChildren();
+    $('priority-open').disabled = true;
+    renderReplay(report, null);
+    return;
+  }
 
   const activeKey = () => `${activeCase.id}/${activeStep.id}`;
   const draftKey = () => JSON.stringify([storageKey, activeKey()]);
@@ -245,6 +254,32 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
 
   function render() {
     const { stages, gaps } = summarize(report);
+    const priorities = reviewPriorities(report.cases, reviews);
+    const priority = priorities[0];
+    $('priority-count').textContent = `${priorities.length} open ${priorities.length === 1 ? 'question' : 'questions'}`;
+    $('priority-case').textContent = priority
+      ? `${priority.item.label ?? priority.item.id} / ${priority.step.status === 'inferred' ? 'Suggested link' : 'Missing evidence'}`
+      : `${report.cases.length} cases / Review queue clear`;
+    $('priority-title').textContent = priority ? priority.step.label : 'The open queue is clear.';
+    $('priority-rationale').textContent = priority
+      ? priority.step.status === 'inferred'
+        ? priority.step.evidence[0]?.reason ?? 'The link is based on matching clues. Check the source before accepting it.'
+        : 'There is no linked record for this step. Check with the team before treating it as complete.'
+      : 'Every uncertain link and evidence gap has a recorded decision. You can revisit any case.';
+    $('priority-rail').replaceChildren(...(priority?.item.steps ?? []).map(step => {
+      const dot = node('span', undefined, `priority-node ${step.status}`);
+      dot.title = `${step.label}: ${states[step.status]}`;
+      return dot;
+    }));
+    $('priority-open').textContent = priority ? 'Review this step' : 'Browse cases';
+    $('priority-open').disabled = !report.cases.length;
+    $('priority-open').onclick = () => {
+      clearFilters(); moveTour(-1);
+      if (priority) showCase(priority.item, priority.step.id);
+      render();
+      $('case-lab').scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      $('evidence-title').focus({ preventScroll: true });
+    };
     $('insight').textContent = gaps
       ? `${number.format(gaps)} of ${number.format(report.cases.length)} cases need a closer look.`
       : `All ${number.format(report.cases.length)} cases have supporting records at every checkpoint.`;
@@ -395,6 +430,9 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
     $('review-note').value = draftNotes.get(draftKey()) ?? review?.note ?? '';
     $('review-state').textContent = draftNotes.has(draftKey()) ? 'Draft in this tab. Confirm or flag to save.' :
       review?.decision ? `Saved locally as ${review.decision}.` : 'Your review stays in this browser.';
+    $('review-byline').hidden = !review?.decision;
+    $('review-byline').textContent = review?.decision
+      ? `Reviewed by ${review.reviewer ?? 'Local reviewer'} · ${review.at ? timestamp.format(new Date(review.at)) : 'Date not recorded'}` : '';
     const next = review?.decision && nextReview(report.cases, reviews, activeCase.id, activeStep.id);
     $('next-review').hidden = !next;
     $('next-review').onclick = next ? () => {

@@ -13,7 +13,7 @@ drawer.innerHTML = `
   <header class="assistant-head"><div class="assistant-identity"><img src="/signal-mark.svg" alt="" aria-hidden="true"><div><p class="assistant-kicker">YOUR WORKFLOW GUIDE</p><h2 id="assistant-heading">Mica</h2></div></div>
     <button class="assistant-close" type="button" aria-label="Close assistant">×</button></header>
   <p class="assistant-context"></p>
-  <div class="assistant-body"><div class="assistant-starters"><p>Where would you like to start?</p></div>
+  <div class="assistant-body"><div class="assistant-starters"><p>What would you like to check?</p></div>
     <div class="assistant-log" role="log" aria-label="Conversation" aria-live="polite"></div></div>
   <form class="assistant-form"><label for="assistant-question">Your question</label>
     <div><textarea id="assistant-question" rows="2" maxlength="700" placeholder="What’s missing from this case?"></textarea>

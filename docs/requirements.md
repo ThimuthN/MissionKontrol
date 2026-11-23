@@ -23,7 +23,7 @@ The evidence does not prove a meeting happened just because Outlook contains an 
 ## Distinctive product decisions beyond the minimum
 
 - **Mica:** a floating source-grounded guide that routes questions through six read-only tools, cites records and reflects local corrections. It can suggest the next case but cannot silently change evidence.
-- **Reviewer continuity:** a priority-ordered “next step to check,” saved decisions, reasons for exclusions, and a case print sheet suitable for discussing the trail.
+- **Reviewer continuity:** an overview queue that prioritizes unverified links before gaps, “next step to check,” reviewer and timestamp attribution, reasons for exclusions, and a case print sheet suitable for discussing the trail.
 - **Human-first semantics:** compact source status key, step-specific interpretation, and plain-language workflow copy in place of assignment terminology.
 - **Own visual language:** original signal icon, animated network scene, staged diagonal appearance transition chosen on signup, light and dark modes, restrained interactive surfaces, and a reduced-motion escape hatch.
 
