@@ -2,6 +2,8 @@
 
 [Open Mission Control](https://missionkontrol.vercel.app/)
 
+**Reviewer route:** [Try the prototype](https://missionkontrol.vercel.app/) · [Check requirement coverage](docs/requirements.md) · [Read the system design](docs/architecture.md) · [Open the pipeline outputs](docs/examples/normalized.sample.json).
+
 Mission Control gives operations teams a place to follow a workflow, inspect its supporting records and make documented review decisions. The public Harbourline sample workspace reconstructs two workflows from a redacted March export.
 
 | Workflow | Cases in the sample workspace | What the records support |
