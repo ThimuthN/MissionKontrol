@@ -14,7 +14,7 @@ flowchart TD
     C --> G["Case-to-event links with matching reasons"]
 ```
 
-The browser and Node.js use the same source adapters and matching rules. The browser reads supported ZIP contents in memory and draws the report locally. The CLI also accepts a directory and writes the intermediate files. The hosted site begins with a separately redacted report so reviewers can try it without importing anything.
+The browser and Node.js use the same source adapters and matching rules. The browser passes the ZIP to a module worker, which normalizes, links, and returns the report. The main thread can still handle the case register during import. Browsers without module workers use the same reader on the main thread. The CLI also accepts a directory and writes the intermediate files. The hosted site begins with a separately redacted report so reviewers can try it without importing anything.
 
 ## From exports to evidence
 

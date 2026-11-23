@@ -127,6 +127,7 @@ h1 { font: 680 clamp(1.75rem, 3.8vw, 3.2rem)/1 var(--display); letter-spacing: -
 .desk.no-cases { grid-template-columns: 1fr; }
 .panel { min-width: 0; padding: 1rem clamp(.9rem, 2.5vw, 1.65rem); }
 .cases { grid-row: span 2; position: relative; padding-inline-start: 1.85rem; background: var(--paper); }
+.register-toggle { display:none; }
 .cases::before {
   content: ''; position: absolute; inset: .75rem auto .75rem 0; width: 21px;
   background: radial-gradient(circle at 10px 12px, #c9c0a9 0 3px, #e4dcc9 3.4px 4.4px, transparent 5px) 0 0/21px 80px;
@@ -265,6 +266,10 @@ footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .3
   #start-tour { min-height: 38px; }
   .desk { display: block; }
   .cases { padding: .65rem .65rem .65rem 1.26rem; }
+  .register-toggle { display:flex; width:100%; justify-content:space-between; align-items:center; gap:.5rem; min-height:44px; padding:.3rem .45rem; border:0; background:transparent; font-weight:650; text-align:left; }
+  .register-toggle::after { content:'⌄'; }
+  .register-toggle[aria-expanded=true]::after { transform:rotate(180deg); }
+  .register-toggle[aria-expanded=false] + #case-register { display:none; }
   .cases::before { width: 14px; background-position: -3px 0; }
   .timeline, .inspector { border-left: 0; border-top: 1px solid var(--line); }
   .panel { padding-block: .78rem; }

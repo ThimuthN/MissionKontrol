@@ -3,6 +3,7 @@ import { casesCsv, download, importWorkspace } from './workspace.js';
 import { chooseTour, projectReviews, publicDataset, readSelection, selectCases, summarize, workflowOptions } from './review-model.js';
 import { renderReplay } from './replay.js';
 import { currentReviewer, mountAccount } from './account.js';
+import { mountPaperMotion } from './paper-motion.js';
 import './assistant.js';
 
 const $ = id => document.getElementById(id);
@@ -111,7 +112,8 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
   const isDemo = workspace.dataset === publicDataset;
   const options = workflowOptions(workspace);
   const fromProcessLink = isDemo && useLink ? new URLSearchParams(location.hash.slice(1)).get('process') : null;
-  const active = options.find(item => item.key === (processKey ?? fromProcessLink)) ?? options[0];
+  const active = options.find(item => item.key === (processKey ?? fromProcessLink))
+    ?? options.find(item => item.report.cases.length) ?? options[0];
   const machineReport = active.report;
   const storageKey = active.primary
     ? `mission-control:v1:${machineReport.dataset}:reviews`
@@ -133,8 +135,11 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
   let report = projectReviews(machineReport, reviews);
   let stops = active.primary ? chooseTour(report.cases) : [];
   const fromLink = isDemo && useLink ? readSelection(location.hash, report.cases) : null;
-  let activeCase = fromLink?.item ?? report.cases[0];
-  let activeStep = fromLink?.step ?? activeCase?.steps[0];
+  const firstInference = isDemo && !fromLink ? report.cases.find(item =>
+    item.steps.some(step => step.status === 'inferred' && !reviews[`${item.id}/${step.id}`]?.decision)) : undefined;
+  let activeCase = fromLink?.item ?? firstInference ?? report.cases[0];
+  let activeStep = fromLink?.step ?? firstInference?.steps.find(step => step.status === 'inferred'
+    && !reviews[`${firstInference.id}/${step.id}`]?.decision) ?? activeCase?.steps[0];
   let stage = '';
   let gapsOnly = false;
   let tourIndex = -1;
@@ -165,6 +170,13 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
   $('start-tour').hidden = stops.length === 0;
   $('start-tour').disabled = false;
   $('case-search').value = '';
+  const registerToggle = $('register-toggle');
+  registerToggle.setAttribute('aria-expanded', 'false');
+  registerToggle.onclick = () => {
+    const open = registerToggle.getAttribute('aria-expanded') !== 'true';
+    registerToggle.setAttribute('aria-expanded', String(open));
+    if (open) $('case-search').focus();
+  };
   $('tour').hidden = true;
   $('trace-controls').hidden = !activeCase;
   $('desk').classList.remove('tour-active');
@@ -237,15 +249,21 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
       const button = activated(undefined, 'case-button', item === activeCase, () => {
         showCase(item);
         render();
-        focusButton('case-list', index);
+        if (matchMedia('(max-width:600px)').matches) {
+          registerToggle.setAttribute('aria-expanded', 'false');
+          registerToggle.focus();
+        } else focusButton('case-list', index);
       });
       const header = node('span', undefined, 'case-label');
       const missing = item.steps.filter(step => step.status === 'missing').length;
-      header.append(node('strong', item.label ?? item.id), node('span', missing ? `${missing} ${missing === 1 ? 'gap' : 'gaps'}` : 'Full trail', `case-tag ${missing ? 'gap' : ''}`));
+      const inferred = item.steps.filter(step => step.status === 'inferred').length;
+      const state = missing ? `${missing} ${missing === 1 ? 'gap' : 'gaps'}` : inferred ? `${inferred} inferred` : 'All observed';
+      header.append(node('strong', item.label ?? item.id), node('span', state, `case-tag ${missing || inferred ? 'gap' : ''}`));
       button.append(header, node('span', item.requestType, 'case-type'));
       return button;
     }));
     const hasCases = filtered.length > 0;
+    registerToggle.textContent = hasCases ? `Choose a case · ${activeCase.label ?? activeCase.id}` : 'Change case filters';
     $('steps').parentElement.hidden = !hasCases;
     $('records').parentElement.hidden = !hasCases;
     $('copy-link').hidden = !isDemo || !hasCases;
@@ -253,6 +271,7 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
     $('desk').classList.toggle('no-cases', !hasCases);
     if (!hasCases) {
       $('case-list').append(node('p', 'No cases match these filters.', 'empty'));
+      renderReplay(report, null);
       $('trace-controls').hidden = true;
       return;
     }
@@ -272,7 +291,8 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
       };
     }
     $('case-title').textContent = activeCase.label ?? activeCase.id;
-    $('case-context').textContent = [activeCase.requestType, first ? `Opened ${date.format(new Date(first.at))}` : undefined].filter(Boolean).join(' / ');
+    $('case-context').textContent = [activeCase.requestType ?? activeCase.role,
+      first ? `${first.source === 'calendar' ? 'First booking' : 'First record'} · ${date.format(new Date(first.at))}` : undefined].filter(Boolean).join(' / ');
     renderReplay(report, activeCase);
     const trace = $('ink-trace');
     if (trace.children.length !== activeCase.steps.length) {
@@ -449,14 +469,7 @@ async function start() {
   const input = $('import-file');
   const feedback = $('workspace-status');
   const openPicker = () => input.click();
-  const traceToggle = $('trace-toggle');
-  function setMotion(paused) {
-    document.documentElement.classList.toggle('motion-paused', paused);
-    traceToggle.setAttribute('aria-pressed', String(paused));
-    traceToggle.textContent = paused ? 'Resume motion' : 'Pause motion';
-  }
-  traceToggle.onclick = () => setMotion(traceToggle.getAttribute('aria-pressed') !== 'true');
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) setMotion(true);
+  mountPaperMotion($('trace-toggle'));
   $('import-button').disabled = false;
   $('import-button').onclick = openPicker;
   const showWelcome = () => openWelcome({
@@ -468,12 +481,6 @@ async function start() {
     onImport: openPicker,
   });
   $('welcome-button').onclick = showWelcome;
-  try {
-    if (!location.hash && !sessionStorage.getItem('mission-control:entry')) {
-      sessionStorage.setItem('mission-control:entry', 'seen');
-      showWelcome();
-    }
-  } catch { /* The casebook is available when session storage is blocked. */ }
   input.onchange = async () => {
     const file = input.files[0];
     input.value = '';
@@ -481,6 +488,7 @@ async function start() {
     feedback.hidden = false;
     feedback.textContent = 'Reading the ZIP on this device.';
     $('import-button').disabled = true;
+    input.disabled = true;
     try {
       const imported = await importWorkspace(file);
       mount(imported);
@@ -489,6 +497,7 @@ async function start() {
       feedback.textContent = error.message;
     } finally {
       $('import-button').disabled = false;
+      input.disabled = false;
     }
   };
 }

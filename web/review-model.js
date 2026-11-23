@@ -83,7 +83,7 @@ export function chooseTour(cases) {
 export function selectCases(cases, { query = '', stage = '', gapsOnly = false } = {}) {
   const term = query.trim().toLocaleLowerCase();
   return cases.filter(item => {
-    if (term && ![item.id, item.label, item.requestType, item.product].some(value => String(value ?? '').toLocaleLowerCase().includes(term))) return false;
+    if (term && ![item.id, item.label, item.requestType, item.product, item.role].some(value => String(value ?? '').toLocaleLowerCase().includes(term))) return false;
     if (stage) return item.steps.some(step => step.id === stage && (gapsOnly ? step.status === 'missing' : step.evidence.length > 0));
     return !gapsOnly || item.steps.some(step => step.status === 'missing');
   });

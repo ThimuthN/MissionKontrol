@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/replay.css">
   <link rel="stylesheet" href="/account.css">
+  <link rel="stylesheet" href="/paper-motion.css">
   <link rel="stylesheet" href="/review-updates.css">
   <script type="module" src="/app.js"></script>
 </head>
@@ -69,6 +70,8 @@
       </div>
       <div id="desk" class="desk">
         <nav class="panel cases" aria-label="Workflow cases">
+          <button id="register-toggle" type="button" class="register-toggle" aria-expanded="false" aria-controls="case-register">Choose a case</button>
+          <div id="case-register">
           <div class="panel-title"><h3>Cases</h3><span id="case-count" aria-live="polite"></span></div>
           <label for="case-search" class="sr-only">Find a case</label>
           <input type="search" id="case-search" placeholder="Find a case">
@@ -81,6 +84,7 @@
             <summary>Filter by stage</summary>
             <div id="overview" class="overview" role="group" aria-label="Filter cases by stage"></div>
           </details>
+          </div>
         </nav>
         <section class="panel timeline" aria-labelledby="case-title">
           <div class="panel-title">

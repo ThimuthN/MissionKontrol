@@ -17,7 +17,7 @@ Use Node.js 22. The project has no package dependencies.
 npm run dev
 ```
 
-Open [http://127.0.0.1:4173](http://127.0.0.1:4173). Choose **Open demo** or **Import ZIP**. Use the workflow tabs to switch between the two case registers.
+Open [http://127.0.0.1:4173](http://127.0.0.1:4173). The demo opens directly on a case with an inferred link. Use the workflow tabs to change registers, **Import ZIP** to open an export, or the Mission Control mark to return to the dataset chooser.
 
 1. Follow a complete Teams thread through request, quote and approval.
 2. Inspect an Outlook order whose recipient matched an approved request by first name. Check what supported the link and why the app still calls it inferred.
