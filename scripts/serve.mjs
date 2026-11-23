@@ -11,6 +11,9 @@ const assets = new Map([
   ['/src/pipeline.mjs', ['src/pipeline.mjs', 'text/javascript']],
   ['/src/zip.mjs', ['src/zip.mjs', 'text/javascript']],
   ['/style.css', ['style.css', 'text/css']],
+  ['/mark.svg', ['mark.svg', 'image/svg+xml']],
+  ['/fonts/Bricolage-Grotesque-Latin.woff2', ['fonts/Bricolage-Grotesque-Latin.woff2', 'font/woff2']],
+  ['/review-model.js', ['review-model.js', 'text/javascript']],
   ['/report.json', ['report.json', 'application/json']],
 ]);
 const port = Number(process.env.PORT || 4173);

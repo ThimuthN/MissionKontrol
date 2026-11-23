@@ -3,61 +3,109 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#182b25">
-  <title>Mission Control · Workflow Review</title>
+  <meta name="theme-color" content="#151b32">
+  <meta name="description" content="Mission Control reconstructs how work moved across Teams and Outlook, with evidence you can inspect.">
+  <title>Mission Control | Process intelligence</title>
+  <link rel="icon" href="/mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/style.css">
   <script type="module" src="/app.js"></script>
 </head>
 <body>
+  <a class="skip" href="#case-lab">Skip to the case lab</a>
   <header class="topbar">
-    <button id="welcome-button" class="brand" type="button"><span class="mark" aria-hidden="true">M</span> Mission Control</button>
-    <div class="top-actions">
-      <span id="dataset">Workflow review</span>
-      <button id="import-button" type="button">Import ZIP</button>
-      <details id="export-menu">
-        <summary>Export</summary>
-        <button id="export-csv" type="button">Case and stage CSV</button>
-        <button id="export-json" type="button">Evidence and reviews JSON</button>
-      </details>
+    <div class="topbar-inner">
+      <button id="welcome-button" class="brand" type="button"><span class="mark" aria-hidden="true"></span>Mission Control</button>
+      <div class="top-actions">
+        <span id="dataset" class="dataset">Assessment demo</span>
+        <button id="import-button" class="nav-button" type="button" disabled>Import ZIP</button>
+        <details id="export-menu" class="export">
+          <summary class="nav-button">Export <span class="chevron" aria-hidden="true"></span></summary>
+          <div class="export-items">
+            <button id="export-csv" type="button" disabled>Case and stage CSV</button>
+            <button id="export-json" type="button" disabled>Evidence and reviews JSON</button>
+          </div>
+        </details>
+      </div>
+      <input id="import-file" type="file" accept=".zip,application/zip" hidden>
     </div>
-    <input id="import-file" type="file" accept=".zip,application/zip" hidden>
   </header>
   <main>
-    <div class="intro">
-      <h1 id="process">Workflow review</h1>
-      <p id="description">Inspect the evidence behind each step and record what needs review.</p>
-    </div>
-    <div class="overview" id="overview" aria-label="Filter by step" hidden></div>
+    <section class="intro" aria-labelledby="process">
+      <div class="intro-copy">
+        <h1 id="process">Laptop procurement</h1>
+        <p id="description">Open a case to trace a request through Teams and Outlook.</p>
+      </div>
+      <div class="briefing">
+        <p class="period" id="period" hidden></p>
+        <button id="start-tour" class="primary" type="button" disabled>Take the walkthrough <span class="arrow" aria-hidden="true"></span></button>
+      </div>
+    </section>
     <p id="workspace-status" class="workspace-status" role="status" hidden></p>
-    <p id="load-state" role="status">Loading cases…</p>
-    <div id="desk" class="desk" hidden>
-      <nav class="panel cases" aria-label="Workflow cases">
-        <h2>Cases <span id="case-count"></span></h2>
-        <label for="case-search" class="sr-only">Find a case</label>
-        <input type="search" id="case-search" placeholder="Find a case">
-        <button type="button" id="reset-filter" hidden>Clear stage filter</button>
-        <div id="case-list"></div>
-      </nav>
-      <section class="panel timeline" aria-labelledby="case-title">
-        <h2 id="case-title"></h2>
-        <div id="steps"></div>
-      </section>
-      <section class="panel inspector" aria-labelledby="evidence-title">
-        <h2 id="evidence-title"></h2>
-        <div id="records"></div>
-        <form id="review-form">
-          <label for="review-note">Review note</label>
-          <textarea id="review-note" rows="2" maxlength="500" placeholder="What should the next reviewer know?"></textarea>
-          <p class="review-state" id="review-state" role="status"></p>
-          <div class="actions">
-            <button name="decision" value="confirmed">Confirm</button>
-            <button name="decision" value="flagged">Flag</button>
-            <button id="clear-review" type="button" hidden>Clear</button>
+    <p id="load-state" class="workspace-status" role="status">Loading cases.</p>
+    <section id="case-lab" class="lab" aria-labelledby="lab-title" hidden>
+      <div class="brief">
+        <div>
+          <h2 id="lab-title" class="sr-only">Case lab</h2>
+          <p id="insight"></p>
+        </div>
+        <button id="copy-link" class="secondary" type="button">Copy case link</button>
+        <span id="copy-status" class="sr-only" role="status"></span>
+      </div>
+      <div id="tour" class="tour" aria-label="Guided walkthrough" hidden>
+        <div class="tour-copy"><p id="tour-count"></p><h3 id="tour-title"></h3><p id="tour-text"></p></div>
+        <div class="tour-actions">
+          <button id="tour-close" class="secondary" type="button">Exit walkthrough</button>
+          <button id="tour-next" class="primary" type="button">Next <span class="arrow" aria-hidden="true"></span></button>
+        </div>
+      </div>
+      <div id="desk" class="desk">
+        <nav class="panel cases" aria-label="Workflow cases">
+          <div class="panel-title"><h3>Cases</h3><span id="case-count" aria-live="polite"></span></div>
+          <label for="case-search" class="sr-only">Find a case</label>
+          <input type="search" id="case-search" placeholder="Find a case">
+          <div class="filters">
+            <button id="gaps-only" class="quiet" type="button" aria-pressed="false">Evidence gaps</button>
+            <button id="reset-filter" class="quiet" type="button" hidden>Clear filters</button>
           </div>
-        </form>
-      </section>
-    </div>
+          <div id="case-list"></div>
+          <details class="coverage">
+            <summary>Filter by stage</summary>
+            <div id="overview" class="overview" role="group" aria-label="Filter cases by stage"></div>
+          </details>
+        </nav>
+        <section class="panel timeline" aria-labelledby="case-title">
+          <div class="panel-title">
+            <h3 id="case-title" tabindex="-1"></h3>
+            <div class="case-nav" role="group" aria-label="Browse cases">
+              <button id="previous-case" type="button" aria-label="Previous case"><span class="arrow" aria-hidden="true"></span></button>
+              <span id="case-position"></span>
+              <button id="next-case" type="button" aria-label="Next case"><span class="arrow" aria-hidden="true"></span></button>
+            </div>
+          </div>
+          <p class="panel-subtitle" id="case-context"></p>
+          <ol id="steps"></ol>
+          <a class="jump-evidence" href="#evidence-title">View selected evidence <span class="arrow" aria-hidden="true"></span></a>
+        </section>
+        <section class="panel inspector" aria-labelledby="evidence-title">
+          <div class="panel-title"><h3 id="evidence-title"></h3></div>
+          <p class="panel-subtitle" id="evidence-context"></p>
+          <div class="inspection-sheet">
+            <div id="records"></div>
+            <form id="review-form">
+            <label for="review-note">Reviewer note</label>
+            <textarea id="review-note" rows="2" maxlength="500" placeholder="Add context for this step"></textarea>
+            <div class="actions">
+              <button name="decision" class="secondary" value="confirmed">Confirm</button>
+              <button name="decision" class="secondary" value="flagged">Flag for review</button>
+              <button id="clear-review" class="quiet" type="button" hidden>Clear</button>
+            </div>
+            <p class="review-state" id="review-state" role="status"></p>
+            </form>
+          </div>
+        </section>
+      </div>
+    </section>
   </main>
-  <footer>Mission Control <span id="counts"></span></footer>
+  <footer><span>Mission Control</span><span id="counts"></span></footer>
 </body>
 </html>

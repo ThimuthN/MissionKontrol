@@ -14,9 +14,29 @@ const reasons = {
   requested: 'This message starts a procurement thread.',
   quoted: 'The quote is a reply under the original request.',
   approved: 'The approval is a reply after the quote in the same thread.',
-  ordered: 'The recipient, quoted model, vendor and earlier approval point to one request.',
-  received: 'The message was linked by the original thread or a matching recipient after the order.',
 };
+
+function safeReason(step, record) {
+  if (step.id === 'ordered') return /first name/i.test(record.reason)
+    ? 'Only the first name matched. The vendor, model and earlier approval narrowed the order to one request.'
+    : 'The full recipient name, vendor and model matched one request that was approved before the email.';
+  if (step.id === 'received') return /coordinator/i.test(record.reason)
+    ? 'A coordinator reported receipt in the same request thread.'
+    : 'The recipient named in the order reported receipt in a Teams chat after the order.';
+  return reasons[step.id];
+}
+
+const publicCheckResults = {
+  Recipient: ['First name only', 'Full name matched'],
+  Supplier: ['Matched the approved quote'],
+  'Laptop model': ['Matched the approved quote'],
+  Approval: ['Recorded before the email'],
+};
+
+function safeChecks(checks = []) {
+  return checks.filter(check => Object.hasOwn(publicCheckResults, check.label) && publicCheckResults[check.label].includes(check.result))
+    .map(({ label, result, partial }) => ({ label, result, ...(partial === true && { partial: true }) }));
+}
 let recordId = 0;
 const cases = report.cases.map((item, caseIndex) => {
   const alias = `LP-${String(caseIndex + 1).padStart(2, '0')}`;
@@ -29,9 +49,11 @@ const cases = report.cases.map((item, caseIndex) => {
         const recordAlias = `Source record ${String(++recordId).padStart(2, '0')}`;
         const at = new Date(record.at);
         at.setUTCMinutes(Math.floor(at.getUTCMinutes() / 15) * 15, 0, 0);
+        const checks = safeChecks(record.checks);
         return {
           id: recordAlias, source: record.source, at: at.toISOString(), timeKind: 'Time rounded to 15 minutes',
-          text: descriptions[step.id], reason: reasons[step.id], origin: recordAlias,
+          text: descriptions[step.id], reason: safeReason(step, record), origin: recordAlias,
+          ...(checks.length && { checks }),
         };
       }),
     })),

@@ -94,8 +94,8 @@ function threadKey(event, providerId) {
   return JSON.stringify([event.channelId ?? event.channelName ?? '', String(providerId)]);
 }
 
-function addEvidence(records, stage, event, reason, inferred = false) {
-  records[stage].push({ event, reason, inferred });
+function addEvidence(records, stage, event, reason, inferred = false, checks) {
+  records[stage].push({ event, reason, inferred, checks });
 }
 
 function makeCase(event, match) {
@@ -158,7 +158,12 @@ function matchOrder(event, cases) {
   const reason = shortened
     ? 'The unique request matches the recipient’s first name, vendor, product, and earlier approval.'
     : 'The unique request matches the full recipient name, vendor, product, and earlier approval.';
-  addEvidence(item.records, 'ordered', event, reason, shortened);
+  addEvidence(item.records, 'ordered', event, reason, shortened, [
+    { label: 'Recipient', result: shortened ? 'First name only' : 'Full name matched', partial: shortened },
+    { label: 'Supplier', result: 'Matched the approved quote' },
+    { label: 'Laptop model', result: 'Matched the approved quote' },
+    { label: 'Approval', result: 'Recorded before the email' },
+  ]);
   item.recipient = recipient;
   item.orderReference = reference;
 }
@@ -198,10 +203,10 @@ function assembleProcurement(events, dataset) {
       return {
         ...stage,
         status: matching.length === 0 ? 'missing' : matching.every(record => record.inferred) ? 'inferred' : 'observed',
-        evidence: matching.map(({ event, reason }) => {
+        evidence: matching.map(({ event, reason, checks }) => {
           links.push({ eventId: event.id, caseId: item.id, stage: stage.id, rule: reason });
           return { id: event.id, source: event.source, at: event.at, timeKind: event.timeKind ?? 'recorded',
-            text: event.text, origin: event.origin, reason };
+            text: event.text, origin: event.origin, reason, ...(checks && { checks }) };
         }),
       };
     }),

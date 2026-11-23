@@ -37,13 +37,13 @@ The five stages form a process template. Times on individual evidence items refl
 | Report | `version`, `dataset`, `process`, `cases[]`, `stats` |
 | Case | `id`, `label`, procurement details and `steps[]` |
 | Step | `id`, `label`, `status`, `evidence[]` |
-| Evidence | `id`, `source`, `at`, `timeKind`, `text`, `origin`, `reason` |
+| Evidence | `id`, `source`, `at`, `timeKind`, `text`, `origin`, `reason`. Order records include `checks[]` with the matching fields and their outcomes. |
 | Review | Decision and optional note keyed to the dataset, case and step. Kept separately from the original evidence. |
 
 ## Validation and privacy
 
 - Check that a reply from a different thread cannot approve a request, a late approval cannot explain an earlier order, and competing matches leave an order unlinked. Inspect at least one linked order and one missing stage in the report.
-- The prototype recognizes patterns and vendors present in this dataset. Different templates, missing records, and overlapping cases reduce coverage. Screen titles indicate activity context and are insufficient to establish a procurement stage.
+- The prototype recognizes procurement message templates in this dataset and extracts vendor names from the records. Different templates, missing records, and overlapping cases reduce coverage. Screen titles indicate activity context and are insufficient to establish a procurement stage.
 - The public build includes a redacted report. Raw exports and full CLI output stay local. Anyone exporting an imported report from the browser should treat it like the source data.
 - Browser review state is saved on the current device. It is suitable for a prototype walkthrough. A shared workflow would need an audit history and authenticated reviewer identities.
 

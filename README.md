@@ -10,11 +10,15 @@ Use Node.js 22. The project has no package dependencies.
 npm run dev
 ```
 
-Open [http://127.0.0.1:4173](http://127.0.0.1:4173). Choose **Open demo** to use a redacted snapshot derived from the assessment dataset. Choose **Import data** to inspect the supplied ZIP in your browser.
+Open [http://127.0.0.1:4173](http://127.0.0.1:4173). The page opens on the redacted assessment snapshot. Select **Take the walkthrough** for a guided investigation or **Import ZIP** to inspect the supplied export in your browser.
 
-1. Select a procurement case. Compare the request, quote, approval, order and receipt stages.
-2. Open an order confirmation to see the matching evidence and rule. Find a case with missing evidence and compare its timeline.
-3. Confirm or flag a step and add a note. Review decisions are saved in this browser. Use the export actions to take the evidence and decisions as JSON or the case summary as CSV.
+1. Follow a complete Teams thread through request, quote and approval.
+2. Inspect an Outlook order whose recipient matched an approved request by first name. Check what supported the link and why the app still calls it inferred.
+3. See an order with no receipt report. Flag the step and add a note. Review decisions are saved in this browser.
+
+Outside the walkthrough, select a stage to filter cases and use **Evidence gaps** to reverse the filter. **Copy case link** opens the same case and step in the redacted demo. Export the evidence and decisions as JSON or the case summary as CSV.
+
+Order evidence includes a matching ledger for recipient, supplier, model, and approval timing. It highlights a partial recipient match without disclosing the underlying values in the public demo.
 
 ## Reproduce the analysis
 

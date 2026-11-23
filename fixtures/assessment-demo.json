@@ -67,8 +67,26 @@
               "at": "2026-03-03T04:15:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier email records an order and names the delivery recipient.",
-              "reason": "The recipient, quoted model, vendor and earlier approval point to one request.",
-              "origin": "Source record 04"
+              "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
+              "origin": "Source record 04",
+              "checks": [
+                {
+                  "label": "Recipient",
+                  "result": "Full name matched"
+                },
+                {
+                  "label": "Supplier",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Laptop model",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Approval",
+                  "result": "Recorded before the email"
+                }
+              ]
             }
           ]
         },
@@ -83,7 +101,7 @@
               "at": "2026-03-05T03:30:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
-              "reason": "The message was linked by the original thread or a matching recipient after the order.",
+              "reason": "The recipient named in the order reported receipt in a Teams chat after the order.",
               "origin": "Source record 05"
             }
           ]
@@ -154,8 +172,27 @@
               "at": "2026-03-03T06:45:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier email records an order and names the delivery recipient.",
-              "reason": "The recipient, quoted model, vendor and earlier approval point to one request.",
-              "origin": "Source record 09"
+              "reason": "Only the first name matched. The vendor, model and earlier approval narrowed the order to one request.",
+              "origin": "Source record 09",
+              "checks": [
+                {
+                  "label": "Recipient",
+                  "result": "First name only",
+                  "partial": true
+                },
+                {
+                  "label": "Supplier",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Laptop model",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Approval",
+                  "result": "Recorded before the email"
+                }
+              ]
             }
           ]
         },
@@ -170,7 +207,7 @@
               "at": "2026-03-06T04:15:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
-              "reason": "The message was linked by the original thread or a matching recipient after the order.",
+              "reason": "The recipient named in the order reported receipt in a Teams chat after the order.",
               "origin": "Source record 10"
             }
           ]
@@ -241,8 +278,26 @@
               "at": "2026-03-04T10:00:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier email records an order and names the delivery recipient.",
-              "reason": "The recipient, quoted model, vendor and earlier approval point to one request.",
-              "origin": "Source record 14"
+              "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
+              "origin": "Source record 14",
+              "checks": [
+                {
+                  "label": "Recipient",
+                  "result": "Full name matched"
+                },
+                {
+                  "label": "Supplier",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Laptop model",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Approval",
+                  "result": "Recorded before the email"
+                }
+              ]
             }
           ]
         },
@@ -257,7 +312,7 @@
               "at": "2026-03-09T03:15:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
-              "reason": "The message was linked by the original thread or a matching recipient after the order.",
+              "reason": "A coordinator reported receipt in the same request thread.",
               "origin": "Source record 15"
             }
           ]
@@ -328,8 +383,26 @@
               "at": "2026-03-10T06:30:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier email records an order and names the delivery recipient.",
-              "reason": "The recipient, quoted model, vendor and earlier approval point to one request.",
-              "origin": "Source record 19"
+              "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
+              "origin": "Source record 19",
+              "checks": [
+                {
+                  "label": "Recipient",
+                  "result": "Full name matched"
+                },
+                {
+                  "label": "Supplier",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Laptop model",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Approval",
+                  "result": "Recorded before the email"
+                }
+              ]
             }
           ]
         },
@@ -344,7 +417,7 @@
               "at": "2026-03-16T03:00:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
-              "reason": "The message was linked by the original thread or a matching recipient after the order.",
+              "reason": "The recipient named in the order reported receipt in a Teams chat after the order.",
               "origin": "Source record 20"
             }
           ]
@@ -415,8 +488,26 @@
               "at": "2026-03-13T04:30:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier email records an order and names the delivery recipient.",
-              "reason": "The recipient, quoted model, vendor and earlier approval point to one request.",
-              "origin": "Source record 24"
+              "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
+              "origin": "Source record 24",
+              "checks": [
+                {
+                  "label": "Recipient",
+                  "result": "Full name matched"
+                },
+                {
+                  "label": "Supplier",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Laptop model",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Approval",
+                  "result": "Recorded before the email"
+                }
+              ]
             }
           ]
         },
@@ -431,7 +522,7 @@
               "at": "2026-03-18T05:00:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
-              "reason": "The message was linked by the original thread or a matching recipient after the order.",
+              "reason": "A coordinator reported receipt in the same request thread.",
               "origin": "Source record 25"
             }
           ]
@@ -502,8 +593,26 @@
               "at": "2026-03-13T09:00:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier email records an order and names the delivery recipient.",
-              "reason": "The recipient, quoted model, vendor and earlier approval point to one request.",
-              "origin": "Source record 29"
+              "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
+              "origin": "Source record 29",
+              "checks": [
+                {
+                  "label": "Recipient",
+                  "result": "Full name matched"
+                },
+                {
+                  "label": "Supplier",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Laptop model",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Approval",
+                  "result": "Recorded before the email"
+                }
+              ]
             }
           ]
         },
@@ -518,7 +627,7 @@
               "at": "2026-03-17T09:45:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
-              "reason": "The message was linked by the original thread or a matching recipient after the order.",
+              "reason": "The recipient named in the order reported receipt in a Teams chat after the order.",
               "origin": "Source record 30"
             }
           ]
@@ -589,8 +698,27 @@
               "at": "2026-03-17T04:15:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier email records an order and names the delivery recipient.",
-              "reason": "The recipient, quoted model, vendor and earlier approval point to one request.",
-              "origin": "Source record 34"
+              "reason": "Only the first name matched. The vendor, model and earlier approval narrowed the order to one request.",
+              "origin": "Source record 34",
+              "checks": [
+                {
+                  "label": "Recipient",
+                  "result": "First name only",
+                  "partial": true
+                },
+                {
+                  "label": "Supplier",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Laptop model",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Approval",
+                  "result": "Recorded before the email"
+                }
+              ]
             }
           ]
         },
@@ -605,7 +733,7 @@
               "at": "2026-03-23T05:00:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
-              "reason": "The message was linked by the original thread or a matching recipient after the order.",
+              "reason": "A coordinator reported receipt in the same request thread.",
               "origin": "Source record 35"
             }
           ]
@@ -676,8 +804,26 @@
               "at": "2026-03-16T12:00:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier email records an order and names the delivery recipient.",
-              "reason": "The recipient, quoted model, vendor and earlier approval point to one request.",
-              "origin": "Source record 39"
+              "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
+              "origin": "Source record 39",
+              "checks": [
+                {
+                  "label": "Recipient",
+                  "result": "Full name matched"
+                },
+                {
+                  "label": "Supplier",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Laptop model",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Approval",
+                  "result": "Recorded before the email"
+                }
+              ]
             }
           ]
         },
@@ -692,7 +838,7 @@
               "at": "2026-03-23T04:00:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
-              "reason": "The message was linked by the original thread or a matching recipient after the order.",
+              "reason": "A coordinator reported receipt in the same request thread.",
               "origin": "Source record 40"
             }
           ]
@@ -763,8 +909,27 @@
               "at": "2026-03-20T06:00:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier email records an order and names the delivery recipient.",
-              "reason": "The recipient, quoted model, vendor and earlier approval point to one request.",
-              "origin": "Source record 44"
+              "reason": "Only the first name matched. The vendor, model and earlier approval narrowed the order to one request.",
+              "origin": "Source record 44",
+              "checks": [
+                {
+                  "label": "Recipient",
+                  "result": "First name only",
+                  "partial": true
+                },
+                {
+                  "label": "Supplier",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Laptop model",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Approval",
+                  "result": "Recorded before the email"
+                }
+              ]
             }
           ]
         },
@@ -779,7 +944,7 @@
               "at": "2026-03-26T03:30:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A Teams message reports that the laptop was received.",
-              "reason": "The message was linked by the original thread or a matching recipient after the order.",
+              "reason": "The recipient named in the order reported receipt in a Teams chat after the order.",
               "origin": "Source record 45"
             }
           ]
@@ -850,8 +1015,26 @@
               "at": "2026-03-24T09:00:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier email records an order and names the delivery recipient.",
-              "reason": "The recipient, quoted model, vendor and earlier approval point to one request.",
-              "origin": "Source record 49"
+              "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
+              "origin": "Source record 49",
+              "checks": [
+                {
+                  "label": "Recipient",
+                  "result": "Full name matched"
+                },
+                {
+                  "label": "Supplier",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Laptop model",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Approval",
+                  "result": "Recorded before the email"
+                }
+              ]
             }
           ]
         },
@@ -927,8 +1110,26 @@
               "at": "2026-03-25T05:45:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier email records an order and names the delivery recipient.",
-              "reason": "The recipient, quoted model, vendor and earlier approval point to one request.",
-              "origin": "Source record 53"
+              "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
+              "origin": "Source record 53",
+              "checks": [
+                {
+                  "label": "Recipient",
+                  "result": "Full name matched"
+                },
+                {
+                  "label": "Supplier",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Laptop model",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Approval",
+                  "result": "Recorded before the email"
+                }
+              ]
             }
           ]
         },
@@ -1004,8 +1205,27 @@
               "at": "2026-03-27T08:30:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier email records an order and names the delivery recipient.",
-              "reason": "The recipient, quoted model, vendor and earlier approval point to one request.",
-              "origin": "Source record 57"
+              "reason": "Only the first name matched. The vendor, model and earlier approval narrowed the order to one request.",
+              "origin": "Source record 57",
+              "checks": [
+                {
+                  "label": "Recipient",
+                  "result": "First name only",
+                  "partial": true
+                },
+                {
+                  "label": "Supplier",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Laptop model",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Approval",
+                  "result": "Recorded before the email"
+                }
+              ]
             }
           ]
         },
@@ -1081,8 +1301,26 @@
               "at": "2026-03-27T10:15:00.000Z",
               "timeKind": "Time rounded to 15 minutes",
               "text": "A supplier email records an order and names the delivery recipient.",
-              "reason": "The recipient, quoted model, vendor and earlier approval point to one request.",
-              "origin": "Source record 61"
+              "reason": "The full recipient name, vendor and model matched one request that was approved before the email.",
+              "origin": "Source record 61",
+              "checks": [
+                {
+                  "label": "Recipient",
+                  "result": "Full name matched"
+                },
+                {
+                  "label": "Supplier",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Laptop model",
+                  "result": "Matched the approved quote"
+                },
+                {
+                  "label": "Approval",
+                  "result": "Recorded before the email"
+                }
+              ]
             }
           ]
         },
