@@ -99,13 +99,13 @@ function accessPrompt() {
       <section class="access-story" aria-label="Mission Control workspace">
         <div class="access-brand"><span class="mark" aria-hidden="true"></span>Mission Control</div>
         <p class="access-eyebrow">HARBOURLINE WORKSPACE</p>
-        <h2>Pick up where<br>work left off.</h2>
+        <h2>See the work<br>behind each case.</h2>
         <p>See the messages, approvals and updates behind each case. Keep your review notes together.</p>
         <div class="access-path" aria-hidden="true"><span>Find a case</span><i></i><span>Check the sources</span><i></i><span>Leave a decision</span></div>
       </section>
       <section class="access-panel">
         <button class="access-theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme"></button>
-        <p class="access-eyebrow">SIGN IN</p>
+        <p class="access-eyebrow">ACCOUNT</p>
         <h2 id="access-title">Welcome back.</h2>
         <p class="access-description">Use your account on this device to continue reviewing cases.</p>
         <div class="access-modes" role="group" aria-label="Account access">
