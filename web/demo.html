@@ -21,7 +21,7 @@
 .blob{position:absolute;width:790px;height:790px;border-radius:50%;background:#94dfd152;filter:blur(130px);pointer-events:none}
 .s0-copy{position:absolute;top:205px;left:102px;width:690px}.s0-copy .display{margin:35px 0 40px}.s0-copy .copy{max-width:610px;color:#476476}.s0-email{left:830px;top:135px;width:950px;height:805px;padding:48px 56px;transform:rotate(-1deg)}
 .mail-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:32px;border-bottom:2px solid var(--line)}.mail-app{display:flex;align-items:center;gap:18px;color:#185f7f;font:770 33px Inter,Arial,sans-serif}.mail-symbol{width:50px;height:50px;display:grid;place-items:center;background:#1676a6;border-radius:12px;color:#fff;font-size:29px}.mail-meta{color:#6b8089;font-size:28px}.mail-subject{font:740 59px Bricolage,Arial,sans-serif;margin-top:45px;letter-spacing:-.04em}.mail-row{display:flex;gap:24px;margin:24px 0;font-size:30px}.mail-row b{width:110px;color:#78929b;font-weight:550}.mail-row strong{font-weight:650}.mail-body{padding-top:36px;border-top:2px solid var(--line);color:#405e69;font-size:34px;line-height:1.5}
-.mail-highlight{position:absolute;top:354px;left:150px;width:610px;height:58px;border:4px solid #d89c4d;border-radius:12px;pointer-events:none;background:#ffcf781b}.mail-warning{position:absolute;right:45px;bottom:52px;display:flex;align-items:center;gap:17px;color:#9d682d;background:#fff0db;border:2px solid #eac99b;border-radius:16px;padding:18px 24px;font:700 30px Inter,Arial,sans-serif}
+.mail-highlight{position:absolute;top:318px;left:150px;width:610px;height:66px;border:4px solid #d89c4d;border-radius:12px;pointer-events:none;background:#ffcf781b}.mail-warning{position:absolute;right:45px;bottom:52px;display:flex;align-items:center;gap:17px;color:#9d682d;background:#fff0db;border:2px solid #eac99b;border-radius:16px;padding:18px 24px;font:700 30px Inter,Arial,sans-serif}
 .s1-heading{position:absolute;left:114px;top:112px}.s1-heading .display{margin-top:20px}.s1-heading .copy{color:#b6d4d8;margin-top:18px}.s1-flow{position:absolute;left:140px;top:480px;width:1650px;height:450px}.flow-line{position:absolute;height:6px;left:65px;right:125px;top:94px;background:#69b9b6;border-radius:10px;transform-origin:left}
 .flow-step{position:absolute;top:0;width:285px}.flow-step.step-0{left:0}.flow-step.step-1{left:345px}.flow-step.step-2{left:690px}.flow-step.step-3{left:1035px}.flow-step.step-4{left:1380px}.flow-dot{width:166px;height:166px;display:grid;place-items:center;margin-bottom:35px;border:4px solid #68d6c5;border-radius:50%;background:#0d4b58;color:#c7f9ed;font:750 64px Bricolage,Arial,sans-serif;box-shadow:0 0 0 17px #22b49f20}.flow-step.inferred .flow-dot{border-color:#efb96b;background:#554630;color:#ffe1a7;box-shadow:0 0 0 17px #d49a4b24}.flow-step h3{font:730 38px/1.1 Bricolage,Arial,sans-serif;letter-spacing:-.03em;min-height:82px}.flow-step p{font:590 28px Inter,Arial,sans-serif;margin-top:14px;color:#87c4c0}.flow-step.inferred p{color:#f4b66c}
 .s2-heading{position:absolute;left:105px;top:150px;width:625px}.s2-heading .display{margin:28px 0 40px}.s2-heading .copy{color:#496878}.s2-ledger{left:805px;top:110px;width:1010px;height:850px;padding:50px 60px}.ledger-title{display:flex;align-items:center;justify-content:space-between;font:740 47px Bricolage,Arial,sans-serif;padding-bottom:37px;border-bottom:2px solid var(--line)}.ledger-row{display:flex;align-items:center;justify-content:space-between;padding:34px 0;border-bottom:2px solid #e2eceb}.ledger-row strong{font:650 36px Inter,Arial,sans-serif}.ledger-row span{font:630 29px Inter,Arial,sans-serif;color:#167b70}.ledger-row.partial{margin:0 -16px;padding:34px 16px;border:3px solid #dca65d;background:#fff7e9;border-radius:14px}.ledger-row.partial span{color:#9a6028}.ledger-foot{color:#6e8792;font:520 28px Inter,Arial,sans-serif;padding-top:27px}
@@ -57,6 +57,7 @@ html,body{width:100%;height:100%;background:#061b28}#root{transform-origin:0 0}
   .mobile-story p{font-size:13px}
 }
 </style>
+<link rel="stylesheet" href="/demo-player.css">
 </head><body>
 <div id="root" data-composition-id="main" data-width="1920" data-height="1080" data-duration="96" data-start="0">
  <section id="s0" class="clip scene scene-light" data-start="0" data-duration="12" data-track-index="0">
@@ -87,12 +88,37 @@ html,body{width:100%;height:100%;background:#061b28}#root{transform-origin:0 0}
   <div class="dark-frame s6-agent"><div class="agent-head"><div class="agent-avatar">M</div><strong>Mica</strong><span style="margin-left:auto;font-size:28px;color:#a8cbce">Case assistant</span></div><div class="agent-question">What needs checking in LP-02?</div><div class="agent-answer" id="s6-answer">Order confirmed now has no linked record. The previous record remains in the review history.<div class="agent-ref">Open LP-02 · Order confirmed</div></div><div class="agent-export" id="s6-export">Download case and review notes ↗</div></div>
  </section>
  <section id="s7" class="clip scene scene-teal" data-start="84" data-duration="12" data-track-index="0"><div class="s7-mark" id="s7-mark"><img src="/mark.svg" alt=""></div><div class="s7-copy" id="s7-copy"><h2 class="mega">Know what happened.<br>Keep what you don't know.</h2><p>Mission Control · Cases, sources and reviews in one workspace</p></div><div class="s7-url" id="s7-url">missionkontrol.vercel.app</div></section>
+ <div id="film-transition" class="film-transition" aria-hidden="true"></div>
 </div>
 <div class="demo-title">Mission Control / How a case gets reviewed</div>
+<p id="demo-caption" class="demo-caption" aria-live="off"></p>
+<p id="demo-audio-notice" class="demo-audio-notice" role="status" hidden>No voice is available on this device. You can still follow along with captions.</p>
 <section id="mobile-story" class="mobile-story" aria-label="Current walkthrough chapter">
   <div class="mobile-story-top"><span id="mobile-story-source"></span><span id="mobile-story-count"></span></div>
   <h2 id="mobile-story-title"></h2>
   <p id="mobile-story-description"></p>
 </section>
-<nav class="demo-toolbar" aria-label="Walkthrough controls"><button id="demo-play" type="button">Pause</button><input id="demo-progress" type="range" min="0" max="96" step="0.1" value="0" aria-label="Seek walkthrough"><span id="demo-time" class="demo-time">0:00 / 1:36</span><a href="/">Open workspace</a></nav>
+<nav class="demo-toolbar" aria-label="Walkthrough controls">
+  <button id="demo-play" type="button">Pause</button>
+  <input id="demo-progress" class="demo-progress" type="range" min="0" max="96" step="0.1" value="0" aria-label="Seek walkthrough">
+  <span id="demo-time" class="demo-time">0:00 / 1:36</span>
+  <button id="demo-narration" class="demo-secondary" type="button" aria-pressed="false" title="Speak the chapter narration using the voice available on your device">Listen</button>
+  <button id="demo-captions" class="demo-secondary" type="button" aria-pressed="true" title="Show or hide captions">CC</button>
+  <button id="demo-chapters" class="demo-secondary demo-chapters" type="button" aria-expanded="false" aria-controls="demo-chapter-drawer">Chapters</button>
+  <a href="/">Open workspace</a>
+</nav>
+<section id="demo-chapter-drawer" class="demo-chapter-drawer" aria-label="Walkthrough chapters" hidden>
+  <div class="demo-drawer-header"><h2>Jump to a chapter</h2><button id="demo-chapters-close" type="button" aria-label="Close chapters">×</button></div>
+  <div class="demo-chapter-list">
+    <button type="button" data-chapter="0"><span class="chapter-number">01</span><span>One loose end<small>0:00</small></span></button>
+    <button type="button" data-chapter="1"><span class="chapter-number">02</span><span>Following the trail<small>0:12</small></span></button>
+    <button type="button" data-chapter="2"><span class="chapter-number">03</span><span>Why the link is inferred<small>0:24</small></span></button>
+    <button type="button" data-chapter="3"><span class="chapter-number">04</span><span>Reviewer correction<small>0:36</small></span></button>
+    <button type="button" data-chapter="4"><span class="chapter-number">05</span><span>Missing evidence<small>0:48</small></span></button>
+    <button type="button" data-chapter="5"><span class="chapter-number">06</span><span>Booked versus attended<small>1:00</small></span></button>
+    <button type="button" data-chapter="6"><span class="chapter-number">07</span><span>Ask Mica, inspect the source<small>1:12</small></span></button>
+    <button type="button" data-chapter="7"><span class="chapter-number">08</span><span>Keep what you don't know<small>1:24</small></span></button>
+  </div>
+  <p class="demo-drawer-note">Space: pause or play · Arrow keys: seek 5 seconds · Captions remain available without sound. <a href="/demo-captions.vtt" download="mission-control-captions.vtt">Download caption file</a></p>
+</section>
 <script src="/demo.js"></script></body></html>
