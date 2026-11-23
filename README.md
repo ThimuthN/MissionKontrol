@@ -4,6 +4,8 @@
 
 **Reviewer route:** [Try the prototype](https://missionkontrol.vercel.app/) · [Check requirement coverage](docs/requirements.md) · [Read the system design](docs/architecture.md) · [Open the pipeline outputs](docs/examples/normalized.sample.json).
 
+For a fast evaluation, follow the [five-minute reviewer walkthrough](docs/walkthrough.md).
+
 Mission Control gives operations teams a place to follow a workflow, inspect its supporting records and make documented review decisions. The public Harbourline sample workspace reconstructs two workflows from a redacted March export.
 
 | Workflow | Cases in the sample workspace | What the records support |
@@ -30,6 +32,8 @@ Open [http://127.0.0.1:4173](http://127.0.0.1:4173). Create a local account with
 5. Remove an incorrect link and enter a reason. The timeline, assistant and exports reflect the correction. Restore the link from the excluded records. Review history stays on this device.
 
 After saving a decision, **Next step to check** takes you to an unreviewed inferred link or an evidence gap. Unsubmitted notes stay in the current tab as you move between cases. **Export → Print current case** opens a print sheet with the linked records, source times, matching reasons and saved decisions. Use your browser’s PDF option to share that case.
+
+The overview's **Next to verify** card shows the first open source-matching question (inferred links before missing evidence) and takes you straight to that checkpoint. Saving a decision removes it from the open queue, and the review form shows who saved it and when. The queue is computed from the effective report after local link corrections; it is not an AI-generated score.
 
 Outside the walkthrough, select a stage to filter cases and use **Evidence gaps** to reverse the filter. **Copy case link** opens the same case and step in the redacted demo. Export the evidence and decisions as JSON or the case summary as CSV.
 
