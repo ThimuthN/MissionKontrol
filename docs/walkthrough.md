@@ -1,6 +1,6 @@
 # Five minutes in Mission Control
 
-This is the shortest path through the parts that matter. Use the [live workspace](https://missionkontrol.vercel.app/) or run `npm run dev` and open the local address. The public sample is redacted; the matching engine and browser ZIP import can work with the supplied original export.
+This is the shortest path through the parts that matter. First [watch the 96-second demonstration](https://missionkontrol.vercel.app/demo.html) if you want the story without setting up an account. Then use the [live workspace](https://missionkontrol.vercel.app/) or run `npm ci && npm run dev` and open the local address. The public sample is redacted; the matching engine and browser ZIP import can work with the supplied original export.
 
 ## 0:00 — Enter the workspace
 

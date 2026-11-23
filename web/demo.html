@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" data-type="software">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mission Control — One link we cannot prove</title>
+<meta name="description" content="A 96-second walkthrough of a source-linked case review: an uncertain match, a correction, a missing report and a cited answer.">
+<meta name="page-type" content="software"><meta name="site-kind" content="software">
+<meta property="og:type" content="website"><meta property="og:title" content="Mission Control | Case review walkthrough">
+<meta property="og:description" content="Watch how reviewers handle an uncertain link without losing the source record.">
+<link rel="icon" href="/mark.svg" type="image/svg+xml">
+<script src="/gsap.min.js"></script>
+<style>
+@font-face{font-family:Bricolage;src:url('/fonts/Bricolage-Grotesque-Latin.woff2') format('woff2');font-weight:100 900}
+:root{--ink:#102b3b;--paper:#edf6f5;--white:#fff;--teal:#0a817e;--amber:#c2813c;--line:#d6e5e5}
+*{box-sizing:border-box}html,body{margin:0;width:1920px;height:1080px;overflow:hidden;font-family:Inter,Arial,sans-serif;color:var(--ink);background:var(--paper)}h1,h2,h3,p{margin:0}
+#root,.scene{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden}.scene-light{background:var(--paper)}.scene-white{background:#f8fcfc}.scene-dark{color:#f4ffff;background:linear-gradient(145deg,#0b3041,#0a1e2e)}.scene-amber{background:#f6f0e7}.scene-teal{background:#096e70;color:#fff}
+.scene::before{content:'';position:absolute;inset:0;pointer-events:none;background:url('/trail-map.svg') center/cover no-repeat;opacity:.11}.scene-dark::before,.scene-teal::before{opacity:.26;mix-blend-mode:screen}
+.display{font:750 112px/.98 Bricolage,Arial,sans-serif;letter-spacing:-.055em}.mega{font:760 150px/.90 Bricolage,Arial,sans-serif;letter-spacing:-.065em}.section-label{font:720 30px/1.2 Inter,Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase}.copy{font:430 37px/1.42 Inter,Arial,sans-serif;letter-spacing:-.018em}.source,.small{font:650 30px/1.3 Inter,Arial,sans-serif}.accent{color:var(--teal)}.amber{color:var(--amber)}
+.frame{position:absolute;background:#fff;border:2px solid #d7e5e5;border-radius:26px;box-shadow:0 28px 64px #0d35431b}.dark-frame{position:absolute;background:#11374a;border:2px solid #4f879040;box-shadow:0 28px 75px #00141d75}
+.tag{display:inline-flex;align-items:center;gap:13px;padding:11px 20px;border-radius:12px;background:#e3f5ed;color:#187c72;font-size:28px;font-weight:700}.tag::before{content:'';width:12px;height:12px;background:currentColor;border-radius:50%}.tag-amber{color:#91602a;background:#fff1db}.tag-missing{color:#9c5350;background:#ffebe7}
+.blob{position:absolute;width:790px;height:790px;border-radius:50%;background:#94dfd152;filter:blur(130px);pointer-events:none}
+.s0-copy{position:absolute;top:205px;left:102px;width:690px}.s0-copy .display{margin:35px 0 40px}.s0-copy .copy{max-width:610px;color:#476476}.s0-email{left:830px;top:135px;width:950px;height:805px;padding:48px 56px;transform:rotate(-1deg)}
+.mail-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:32px;border-bottom:2px solid var(--line)}.mail-app{display:flex;align-items:center;gap:18px;color:#185f7f;font:770 33px Inter,Arial,sans-serif}.mail-symbol{width:50px;height:50px;display:grid;place-items:center;background:#1676a6;border-radius:12px;color:#fff;font-size:29px}.mail-meta{color:#6b8089;font-size:28px}.mail-subject{font:740 59px Bricolage,Arial,sans-serif;margin-top:45px;letter-spacing:-.04em}.mail-row{display:flex;gap:24px;margin:24px 0;font-size:30px}.mail-row b{width:110px;color:#78929b;font-weight:550}.mail-row strong{font-weight:650}.mail-body{padding-top:36px;border-top:2px solid var(--line);color:#405e69;font-size:34px;line-height:1.5}
+.mail-highlight{position:absolute;top:354px;left:150px;width:610px;height:58px;border:4px solid #d89c4d;border-radius:12px;pointer-events:none;background:#ffcf781b}.mail-warning{position:absolute;right:45px;bottom:52px;display:flex;align-items:center;gap:17px;color:#9d682d;background:#fff0db;border:2px solid #eac99b;border-radius:16px;padding:18px 24px;font:700 30px Inter,Arial,sans-serif}
+.s1-heading{position:absolute;left:114px;top:112px}.s1-heading .display{margin-top:20px}.s1-heading .copy{color:#b6d4d8;margin-top:18px}.s1-flow{position:absolute;left:140px;top:480px;width:1650px;height:450px}.flow-line{position:absolute;height:6px;left:65px;right:125px;top:94px;background:#69b9b6;border-radius:10px;transform-origin:left}
+.flow-step{position:absolute;top:0;width:285px}.flow-step.step-0{left:0}.flow-step.step-1{left:345px}.flow-step.step-2{left:690px}.flow-step.step-3{left:1035px}.flow-step.step-4{left:1380px}.flow-dot{width:166px;height:166px;display:grid;place-items:center;margin-bottom:35px;border:4px solid #68d6c5;border-radius:50%;background:#0d4b58;color:#c7f9ed;font:750 64px Bricolage,Arial,sans-serif;box-shadow:0 0 0 17px #22b49f20}.flow-step.inferred .flow-dot{border-color:#efb96b;background:#554630;color:#ffe1a7;box-shadow:0 0 0 17px #d49a4b24}.flow-step h3{font:730 38px/1.1 Bricolage,Arial,sans-serif;letter-spacing:-.03em;min-height:82px}.flow-step p{font:590 28px Inter,Arial,sans-serif;margin-top:14px;color:#87c4c0}.flow-step.inferred p{color:#f4b66c}
+.s2-heading{position:absolute;left:105px;top:150px;width:625px}.s2-heading .display{margin:28px 0 40px}.s2-heading .copy{color:#496878}.s2-ledger{left:805px;top:110px;width:1010px;height:850px;padding:50px 60px}.ledger-title{display:flex;align-items:center;justify-content:space-between;font:740 47px Bricolage,Arial,sans-serif;padding-bottom:37px;border-bottom:2px solid var(--line)}.ledger-row{display:flex;align-items:center;justify-content:space-between;padding:34px 0;border-bottom:2px solid #e2eceb}.ledger-row strong{font:650 36px Inter,Arial,sans-serif}.ledger-row span{font:630 29px Inter,Arial,sans-serif;color:#167b70}.ledger-row.partial{margin:0 -16px;padding:34px 16px;border:3px solid #dca65d;background:#fff7e9;border-radius:14px}.ledger-row.partial span{color:#9a6028}.ledger-foot{color:#6e8792;font:520 28px Inter,Arial,sans-serif;padding-top:27px}
+.s3-left{position:absolute;left:110px;top:120px;width:680px}.s3-left .display{margin:30px 0}.s3-left .copy{color:#52707a}.s3-case{left:875px;top:115px;width:885px;height:785px;padding:46px}.review-case-title{display:flex;justify-content:space-between;font:760 44px Bricolage,Arial,sans-serif;padding-bottom:24px;border-bottom:2px solid #e0eceb}.review-record{margin-top:44px;border:2px solid #d9e5e4;border-radius:16px;padding:27px 33px;background:#f8fbfb}.review-record strong{display:block;font:720 38px Bricolage,Arial,sans-serif;margin-bottom:15px}.review-record p{font:470 29px/1.35 Inter,Arial,sans-serif;color:#4c6874}.review-button{margin-top:39px;display:inline-block;background:#0a817e;color:#fff;padding:20px 32px;border-radius:12px;font:740 31px Inter,Arial,sans-serif}.review-note{margin-top:25px;padding:20px 25px;border-radius:12px;border:2px solid #ddbb8f;color:#865d30;background:#fff7e8;font:570 29px Inter,Arial,sans-serif}.review-result{position:absolute;left:875px;top:922px;color:#a5574b;font:730 34px Bricolage,Arial,sans-serif}
+.s4-heading{position:absolute;left:110px;top:120px;width:760px}.s4-heading .display{margin:34px 0}.s4-heading .copy{color:#546b70}.s4-line{position:absolute;left:935px;top:245px;width:800px}.gap-step{padding:35px 42px;background:#fff;border:2px solid #d8e5e1;border-radius:19px;box-shadow:0 14px 34px #6c62521a}.gap-step h3{font:740 48px Bricolage,Arial,sans-serif}.gap-step p{font:550 30px Inter,Arial,sans-serif;margin-top:14px;color:#60747c}.gap-connector{width:4px;height:108px;background:repeating-linear-gradient(to bottom,#d08f70 0 15px,transparent 15px 27px);margin-left:60px}.gap-step.missing{border:3px dashed #bd736c;background:#fff8f5}.gap-step.missing h3{color:#9b534d}
+.s5-title{position:absolute;left:108px;top:105px;width:800px}.s5-title .display{margin:28px 0}.s5-title .copy{color:#516c78}.s5-cards{position:absolute;left:840px;top:130px;width:960px}.schedule-card{position:relative;height:325px;padding:43px 50px;margin-bottom:45px}.schedule-card .source{margin-bottom:21px;color:#35718a}.schedule-card h3{font:740 53px Bricolage,Arial,sans-serif;letter-spacing:-.04em}.schedule-card p{margin-top:28px;font:560 31px Inter,Arial,sans-serif;color:#5c7681}.schedule-card.secondary{left:58px}
+.s6-title{position:absolute;left:110px;top:125px;width:590px}.s6-title .display{margin:32px 0 38px}.s6-title .copy{color:#bbdce0}.s6-agent{left:770px;top:105px;width:1010px;height:850px;padding:48px 54px;border-radius:25px}.agent-head{display:flex;align-items:center;gap:23px;border-bottom:2px solid #87c4c43b;padding-bottom:28px}.agent-avatar{width:72px;height:72px;display:grid;place-items:center;border-radius:21px;background:#0f7d7a;font:750 48px Bricolage,Arial,sans-serif}.agent-head strong{font:760 44px Bricolage,Arial,sans-serif}.agent-question{margin:52px 0 34px 110px;padding:25px 30px;border:2px solid #74b0b255;background:#1b4b59;border-radius:19px;font:570 32px Inter,Arial,sans-serif}.agent-answer{padding:28px 32px;border-left:6px solid #6be2c8;background:#0e3746;border-radius:0 15px 15px 0;font:490 31px/1.48 Inter,Arial,sans-serif}.agent-ref{margin-top:32px;color:#a5e8dc;font:700 28px Inter,Arial,sans-serif}.agent-export{margin-top:38px;background:#bff4e8;color:#0d5053;border-radius:13px;padding:23px 30px;display:inline-block;font:740 31px Inter,Arial,sans-serif}
+.s7-mark{position:absolute;left:146px;top:173px;width:154px;height:154px;background:#ecfffa;border-radius:34px;display:grid;place-items:center;box-shadow:0 26px 70px #003e486b}.s7-mark img{width:112px;height:112px}.s7-copy{position:absolute;left:145px;top:405px}.s7-copy .mega{max-width:1550px}.s7-copy p{margin-top:62px;font:600 37px Inter,Arial,sans-serif;color:#c4fbef}.s7-url{position:absolute;left:145px;bottom:93px;font:750 35px Inter,Arial,sans-serif;letter-spacing:-.015em;color:#e7fff8;border-bottom:2px solid #c7fff2;padding-bottom:12px}
+.visual-label{position:absolute;bottom:42px;right:66px;color:#69939a;font:500 25px Inter,Arial,sans-serif}
+
+/* Browser playback controls are separate from the film canvas. */
+html,body{width:100%;height:100%;background:#061b28}#root{transform-origin:0 0}
+.demo-toolbar{position:fixed;z-index:20;left:50%;bottom:max(25px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:center;gap:16px;padding:10px 14px;background:#061e2bee;color:#ecfffb;border:1px solid #8cc8c55a;border-radius:18px;box-shadow:0 16px 42px #0008;backdrop-filter:blur(20px);font:600 14px Inter,Arial,sans-serif;max-width:calc(100vw - 28px)}
+.demo-toolbar button,.demo-toolbar a{display:inline-flex;align-items:center;justify-content:center;min-height:40px;border-radius:11px;padding:8px 15px;color:#f2fffd;font:700 14px Inter,Arial,sans-serif;text-decoration:none;cursor:pointer;white-space:nowrap}
+.demo-toolbar button{background:#178b87;border:1px solid #72d2c7}.demo-toolbar a{background:transparent;border:1px solid #73a8ae63}.demo-toolbar input{width:clamp(95px,24vw,360px);accent-color:#84e8d5}.demo-toolbar button:focus-visible,.demo-toolbar a:focus-visible,.demo-toolbar input:focus-visible{outline:3px solid #d7fbed;outline-offset:2px}.demo-time{font-variant-numeric:tabular-nums;white-space:nowrap}.demo-title{position:fixed;z-index:20;top:22px;left:30px;color:#d9f9f4;padding:10px 14px;background:#061e2bc9;border-radius:10px;font:700 14px Inter,Arial,sans-serif;letter-spacing:.01em}
+@media(max-width:560px){.demo-title{display:none}.demo-toolbar{gap:8px;padding:8px}.demo-toolbar button,.demo-toolbar a{padding:8px 10px}.demo-time{font-size:12px}}
+</style>
+</head><body>
+<div id="root" data-composition-id="main" data-width="1920" data-height="1080" data-duration="96" data-start="0">
+ <section id="s0" class="clip scene scene-light" data-start="0" data-duration="12" data-track-index="0">
+  <div class="blob" style="left:-370px;top:-350px"></div>
+  <div class="s0-copy"><p class="section-label accent">Outlook / order update</p><h1 class="display">One email.<br>One loose end.</h1><p class="copy">The supplier confirmed the order. But does it belong to this request?</p></div>
+  <div id="s0-email" class="frame s0-email"><div class="mail-top"><div class="mail-app"><span class="mail-symbol">O</span>Outlook</div><span class="mail-meta">3 Mar 2026</span></div><h2 class="mail-subject">Order confirmed</h2><div class="mail-row"><b>From</b><strong>Supplier · anonymised</strong></div><div class="mail-row"><b>To</b><strong>Delivery recipient · first name only</strong></div><div class="mail-body">An order was placed. The supplier message names a delivery recipient and confirms the laptop model.</div><div id="s0-scan" class="mail-highlight"></div><div id="s0-warning" class="mail-warning">◈ Match needs checking</div></div>
+  <div class="visual-label">Recreated from redacted source records</div>
+ </section>
+ <section id="s1" class="clip scene scene-dark" data-start="12" data-duration="12" data-track-index="0">
+  <div class="s1-heading"><p class="section-label" style="color:#8cdbc9">Mission Control / LP-02</p><h2 class="display">A case comes together.</h2><p class="copy">Five linked records. One suggested match.</p></div>
+  <div class="s1-flow"><div id="s1-line" class="flow-line"></div>
+   <div class="flow-step step-0"><div class="flow-dot">01</div><h3>Request<br>raised</h3><p>Observed · Teams</p></div><div class="flow-step step-1"><div class="flow-dot">02</div><h3>Quote<br>proposed</h3><p>Observed · Teams</p></div><div class="flow-step step-2"><div class="flow-dot">03</div><h3>Purchase<br>approved</h3><p>Observed · Teams</p></div><div class="flow-step step-3 inferred" id="s1-uncertain"><div class="flow-dot">?</div><h3>Order<br>confirmed</h3><p>Inferred · Outlook</p></div><div class="flow-step step-4"><div class="flow-dot">05</div><h3>Receipt<br>reported</h3><p>Observed · Teams</p></div>
+  </div>
+ </section>
+ <section id="s2" class="clip scene scene-white" data-start="24" data-duration="12" data-track-index="0"><div class="s2-heading"><p class="section-label accent">LP-02 / order confirmed</p><h2 class="display">A likely link<br>isn't proof.</h2><p class="copy">The system shows the checks behind its suggestion.</p></div>
+  <div class="frame s2-ledger"><div class="ledger-title">Why this record was linked <span class="tag tag-amber">Inferred</span></div><div class="ledger-row"><strong>Supplier</strong><span>Matches approved quote ✓</span></div><div class="ledger-row"><strong>Laptop model</strong><span>Matches approved quote ✓</span></div><div class="ledger-row"><strong>Approval</strong><span>Recorded before order ✓</span></div><div class="ledger-row partial" id="s2-partial"><strong>Recipient</strong><span>First name only ◈</span></div><p class="ledger-foot">Source record 09 · Outlook · 3 Mar 2026</p></div>
+ </section>
+ <section id="s3" class="clip scene scene-light" data-start="36" data-duration="12" data-track-index="0"><div class="s3-left"><p class="section-label accent">Human review</p><h2 class="display">Correct the link.<br>Keep the record.</h2><p class="copy">A reviewer can unlink a record and leave a reason. Nothing disappears from the history.</p></div>
+  <div class="frame s3-case"><div class="review-case-title">LP-02 / Order confirmed <span class="tag tag-amber">Inferred</span></div><div class="review-record"><strong>Outlook · Source record 09</strong><p>Recipient matched by first name only. Supplier, model and approval match.</p></div><div class="review-button">Remove link</div><div id="s3-note" class="review-note">Reason: Recipient not confirmed</div></div><div id="s3-result" class="review-result">Updated to Missing · Record kept in review history</div>
+ </section>
+ <section id="s4" class="clip scene scene-amber" data-start="48" data-duration="12" data-track-index="0"><div class="s4-heading"><p class="section-label amber">LP-10 / receipt reported</p><h2 class="display">No receipt<br>report found.</h2><p class="copy">That doesn't mean the laptop wasn't delivered. This export has no matching receipt report.</p></div>
+  <div class="s4-line"><div class="gap-step"><span class="tag">Observed</span><h3 style="margin-top:24px">Order confirmed</h3><p>Outlook · Order message linked</p></div><div class="gap-connector" id="s4-connector"></div><div class="gap-step missing" id="s4-missing"><span class="tag tag-missing">Missing</span><h3 style="margin-top:24px">Receipt reported</h3><p>No matching record in this export</p></div></div>
+ </section>
+ <section id="s5" class="clip scene scene-white" data-start="60" data-duration="12" data-track-index="0"><div class="s5-title"><p class="section-label accent">RC-01 / recruitment</p><h2 class="display">Booked isn't<br>attended.</h2><p class="copy">Calendar entries show plans. A separate Teams message can support a reported conversation.</p></div>
+  <div class="s5-cards"><div class="frame schedule-card" id="s5-booking"><p class="source">Calendar</p><h3>Screening scheduled</h3><p><span class="tag">Observed booking</span></p></div><div class="frame schedule-card secondary" id="s5-report"><p class="source">Teams</p><h3>Screening reported</h3><p><span class="tag tag-amber">Inferred link</span></p></div></div>
+ </section>
+ <section id="s6" class="clip scene scene-dark" data-start="72" data-duration="12" data-track-index="0"><div class="s6-title"><p class="section-label" style="color:#91dfd2">Ask Mica / export</p><h2 class="display">The answer<br>points back.</h2><p class="copy">Mica reads the reviewed case and links you to the record. Export includes your decisions.</p></div>
+  <div class="dark-frame s6-agent"><div class="agent-head"><div class="agent-avatar">M</div><strong>Mica</strong><span style="margin-left:auto;font-size:28px;color:#a8cbce">Case assistant</span></div><div class="agent-question">What needs checking in LP-02?</div><div class="agent-answer" id="s6-answer">Order confirmed now has no linked record. The previous record remains in the review history.<div class="agent-ref">Open LP-02 · Order confirmed</div></div><div class="agent-export" id="s6-export">Download case and review notes ↗</div></div>
+ </section>
+ <section id="s7" class="clip scene scene-teal" data-start="84" data-duration="12" data-track-index="0"><div class="s7-mark" id="s7-mark"><img src="/mark.svg" alt=""></div><div class="s7-copy" id="s7-copy"><h2 class="mega">Know what happened.<br>Keep what you don't know.</h2><p>Mission Control · Cases, sources and reviews in one workspace</p></div><div class="s7-url" id="s7-url">missionkontrol.vercel.app</div></section>
+</div>
+<div class="demo-title">Mission Control / How a case gets reviewed</div>
+<nav class="demo-toolbar" aria-label="Walkthrough controls"><button id="demo-play" type="button">Pause</button><input id="demo-progress" type="range" min="0" max="96" step="0.1" value="0" aria-label="Seek walkthrough"><span id="demo-time" class="demo-time">0:00 / 1:36</span><a href="/">Open workspace</a></nav>
+<script>
+const tl=gsap.timeline({paused:true});
+const enter=(selector,at,dy=36,duration=.72)=>tl.fromTo(selector,{opacity:0,y:dy},{opacity:1,y:0,duration,ease:'power4.out',immediateRender:false},at);
+const grow=(selector,at,duration=.9)=>tl.fromTo(selector,{scaleX:0},{scaleX:1,duration,ease:'power2.inOut',transformOrigin:'left center',immediateRender:false},at);
+enter('#s0-warning',3.2,28,.6);grow('#s0-scan',2.1,.9);
+grow('#s1-line',13.4,2.2);enter('#s1-uncertain',16,75,.85);
+enter('#s2-partial',27.1,44,.8);
+enter('#s3-note',39,35,.7);enter('#s3-result',43,18,.75);
+enter('#s4-missing',52,75,.95);grow('#s4-connector',51,.9);
+enter('#s5-report',65,65,.95);
+enter('#s6-answer',75,30,.9);enter('#s6-export',79.2,25,.75);
+tl.fromTo('#s7-mark',{opacity:0,scale:.72,rotation:-16},{opacity:1,scale:1,rotation:0,duration:.95,ease:'power4.out',immediateRender:false},85.1);
+enter('#s7-copy',86,36,1);enter('#s7-url',89,24,.65);
+tl.to({},{duration:96},0);
+window.__timelines ??= {};
+window.__timelines['main']=tl;
+const root=document.getElementById('root');
+const scenes=[...root.querySelectorAll('.scene')];
+const progress=document.getElementById('demo-progress');
+const play=document.getElementById('demo-play');
+const clock=document.getElementById('demo-time');
+const formatTime=time=>Math.floor(time/60)+':'+String(Math.floor(time%60)).padStart(2,'0');
+function sync(){
+  const t=Math.min(95.999,tl.time());
+  for(const scene of scenes){const start=Number(scene.dataset.start);scene.style.visibility=t>=start&&t<start+Number(scene.dataset.duration)?'visible':'hidden';}
+  progress.value=String(t);clock.textContent=formatTime(tl.time())+' / 1:36';
+  play.textContent=tl.progress()>=1?'Replay':tl.paused()?'Play':'Pause';
+}
+function fit(){const scale=Math.min(innerWidth/1920,innerHeight/1080);root.style.transform='translate('+Math.max(0,(innerWidth-1920*scale)/2)+'px,'+Math.max(0,(innerHeight-1080*scale)/2)+'px) scale('+scale+')';}
+window.addEventListener('resize',fit,{passive:true});
+play.addEventListener('click',()=>{if(tl.progress()>=1)tl.restart();else if(tl.paused())tl.play();else tl.pause();sync();});
+progress.addEventListener('input',()=>{tl.pause().time(Number(progress.value));sync();});
+document.addEventListener('keydown',event=>{if(event.target.closest('button,a,input'))return;if(event.code==='Space'){event.preventDefault();play.click();}if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();tl.pause().time(Math.max(0,Math.min(96,tl.time()+(event.key==='ArrowRight'?5:-5))));sync();}});
+tl.eventCallback('onUpdate',sync);tl.eventCallback('onComplete',sync);
+fit();tl.seek(0);sync();if(!matchMedia('(prefers-reduced-motion: reduce)').matches)tl.play();
+</script></body></html>

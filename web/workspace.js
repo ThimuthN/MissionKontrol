@@ -1,4 +1,5 @@
 import { readWorkspace } from './read-workspace.js';
+export { casesCsv } from './csv.js';
 
 export async function importWorkspace(file) {
   if (typeof Worker !== 'function') return readWorkspace(file);
@@ -27,20 +28,4 @@ export function download(name, content, type) {
   link.download = name;
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-
-function csvCell(input) {
-  let text = String(input ?? '');
-  if (/^[\s]*[=+@-]/.test(text) || /^[\t\r\n]/.test(text)) text = "'" + text;
-  return '"' + text.replaceAll('"', '""') + '"';
-}
-
-export function casesCsv(report, reviews) {
-  const rows = [['Workflow', 'Case', 'Request type', 'Role', 'Stage', 'Evidence status', 'Evidence count', 'Reviewer decision', 'Note', 'Reviewer', 'Reviewed at']];
-  for (const item of report.cases) for (const step of item.steps) {
-    const review = reviews[`${item.id}/${step.id}`];
-    rows.push([report.process, item.label ?? item.id, item.requestType, item.role, step.label, step.status,
-      step.evidence.length, review?.decision, review?.note, review?.reviewer, review?.at]);
-  }
-  return rows.map(row => row.map(csvCell).join(',')).join('\r\n') + '\r\n';
 }

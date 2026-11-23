@@ -84,17 +84,17 @@ export function chooseTour(cases) {
     item.steps.some(step => step.id === 'received' && step.status === 'missing'));
   const stops = [];
   if (complete) stops.push({
-    caseId: complete.id, stepId: complete.steps[0].id, title: 'Start with the thread',
-    text: 'This case has evidence at every stage. Open the request, then follow the quote and approval in the same Teams thread.',
+    caseId: complete.id, stepId: complete.steps[0].id, title: 'Follow a complete order',
+    text: 'Start with the Teams request. The quote, approval and order are linked here.',
   });
   if (inference) stops.push({
     caseId: inference.id, stepId: inference.steps.find(step => step.status === 'inferred').id,
-    title: 'Challenge the match',
-    text: 'The order matches one approved request by vendor, model and timing. The recipient match uses only a first name, so the step stays marked as inferred.',
+    title: 'Check a suggested match',
+    text: 'The supplier and model match, but the recipient only matches by first name. Would you confirm this link?',
   });
   if (gap) stops.push({
-    caseId: gap.id, stepId: 'received', title: 'Stop where the evidence stops',
-    text: 'Outlook confirms the order, but the export contains no matching receipt report. Flag the gap for follow-up without changing the source record.',
+    caseId: gap.id, stepId: 'received', title: 'Find a missing record',
+    text: 'The order was confirmed. There is no receipt report in this export. Mark it for follow-up if needed.',
   });
   return stops;
 }

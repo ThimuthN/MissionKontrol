@@ -25,7 +25,12 @@ async function fallbackSweep(next) {
   beam.className = 'theme-swoosh-beam';
   curtain.append(beam);
   sweep.append(curtain);
-  document.body.append(sweep);
+  // A modal dialog lives in the browser's top layer. A body-level animation
+  // would run *behind* the account form, which made the first-use choice look
+  // instantaneous. Put the sweep in the visible surface instead.
+  const host = document.querySelector('dialog.access-dialog[open]') ?? document.body;
+  if (host !== document.body) sweep.classList.add('theme-swoosh--dialog');
+  host.append(sweep);
   try {
     await curtain.animate([
       { transform: 'translateX(-122%) skewX(-18deg)' },
@@ -41,9 +46,44 @@ async function fallbackSweep(next) {
   }
 }
 
+async function secondSwipe(next) {
+  // A separate, brighter pass crossing the *revealed* interface. This is not
+  // the exit edge of the first curtain: the two swipes remain distinguishable.
+  const host = document.querySelector('dialog.access-dialog[open]') ?? document.body;
+  const stage = document.createElement('div');
+  stage.className = `theme-echo-stage theme-echo-stage--${next}`;
+  stage.setAttribute('aria-hidden', 'true');
+  if (host !== document.body) stage.classList.add('theme-echo-stage--dialog');
+  const first = document.createElement('i');
+  first.className = 'theme-echo-wide';
+  const second = document.createElement('i');
+  second.className = 'theme-echo-fine';
+  stage.append(first, second);
+  host.append(stage);
+  try {
+    const curves = [
+      first.animate([
+        { transform: 'translateX(0) skewX(-17deg)', opacity: .85 },
+        { offset: .55, opacity: .98 },
+        { transform: 'translateX(440%) skewX(-17deg)', opacity: 0 },
+      ], { duration: 880, easing: 'cubic-bezier(.46,.04,.22,1)', fill: 'both' }).finished,
+      second.animate([
+        { transform: 'translateX(0) skewX(-17deg)', opacity: .15 },
+        { offset: .4, opacity: .96 },
+        { transform: 'translateX(620%) skewX(-17deg)', opacity: 0 },
+      ], { delay: 165, duration: 880, easing: 'cubic-bezier(.37,0,.18,1)', fill: 'both' }).finished,
+    ];
+    await Promise.all(curves);
+  } finally { stage.remove(); }
+}
+
 async function sweepTo(next) {
   if (reducedMotion.matches || typeof Element.prototype.animate !== 'function') { apply(next); return; }
-  if (typeof document.startViewTransition !== 'function') { await fallbackSweep(next); return; }
+  if (document.querySelector('dialog.access-dialog[open]') || typeof document.startViewTransition !== 'function') {
+    await fallbackSweep(next);
+    await secondSwipe(next);
+    return;
+  }
 
   // Transition between two actual screenshots. The new palette travels across
   // the old one, instead of changing invisibly behind a solid-color curtain.
@@ -58,6 +98,7 @@ async function sweepTo(next) {
     easing: 'cubic-bezier(.68,0,.2,1)', fill: 'both',
   }).finished;
   await transition.finished;
+  await secondSwipe(next);
 }
 
 async function drainRequests() {

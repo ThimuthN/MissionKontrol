@@ -98,16 +98,16 @@ function accessPrompt() {
     <div class="access-layout">
       <section class="access-story" aria-label="Mission Control workspace">
         <div class="access-brand"><span class="mark" aria-hidden="true"></span>Mission Control</div>
-        <p class="access-eyebrow">KEEP WORK MOVING</p>
-        <h2>Follow the<br>handoff.</h2>
-        <p>A message in Teams. An approval somewhere else. Piece together what the records show—and leave room for what they don't.</p>
+        <p class="access-eyebrow">HARBOURLINE WORKSPACE</p>
+        <h2>Pick up where<br>work left off.</h2>
+        <p>See the messages, approvals and updates behind each case. Keep your review notes together.</p>
         <div class="access-path" aria-hidden="true"><span>Find a case</span><i></i><span>Check the sources</span><i></i><span>Leave a decision</span></div>
       </section>
       <section class="access-panel">
         <button class="access-theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme"></button>
-        <p class="access-eyebrow">YOUR WORKSPACE</p>
+        <p class="access-eyebrow">SIGN IN</p>
         <h2 id="access-title">Welcome back.</h2>
-        <p class="access-description">Sign in to pick up your reviews where you left off.</p>
+        <p class="access-description">Use your account on this device to continue reviewing cases.</p>
         <div class="access-modes" role="group" aria-label="Account access">
           <button type="button" class="access-mode" data-access-mode="sign-in" aria-pressed="true">Sign in</button>
           <button type="button" class="access-mode" data-access-mode="sign-up" aria-pressed="false">Create account</button>
@@ -126,7 +126,7 @@ function accessPrompt() {
             </span>
           </label>
           <fieldset class="access-preference signup-only">
-            <legend>Choose your look</legend>
+            <legend>Appearance</legend>
             <div class="access-preference-options" role="group" aria-label="Color preference">
               <button type="button" data-appearance="light" aria-pressed="false"><span class="appearance-swatch swatch-light" aria-hidden="true"></span>Light</button>
               <button type="button" data-appearance="dark" aria-pressed="false"><span class="appearance-swatch swatch-dark" aria-hidden="true"></span>Dark</button>
@@ -140,7 +140,8 @@ function accessPrompt() {
           <p class="access-divider"><span>or</span></p>
           <a class="access-github" href="/api/session?action=login"><span class="access-github-mark" aria-hidden="true">GH</span> Continue with GitHub</a>
         </div>
-        <p class="access-privacy">Accounts and review notes stay in this browser. They don't sync between devices or grant shared team access.</p>
+        <p class="access-privacy">This demo saves accounts and reviews in your browser. They won't sync to another device.</p>
+        <a class="access-demo-link" href="/demo.html">See how a case review works <span aria-hidden="true">↗</span></a>
       </section>
     </div>`;
   dialog.addEventListener('cancel', event => event.preventDefault());
@@ -159,10 +160,10 @@ function accessPrompt() {
   function selectMode(mode) {
     const signUp = mode === 'sign-up';
     dialog.dataset.mode = mode;
-    dialog.querySelector('#access-title').textContent = signUp ? 'Start your workspace.' : 'Welcome back.';
+    dialog.querySelector('#access-title').textContent = signUp ? 'Create your account' : 'Welcome back';
     dialog.querySelector('.access-description').textContent = signUp
-      ? 'Create an account to save your decisions and return to them later.'
-      : 'Sign in to pick up your reviews where you left off.';
+      ? 'Save your review notes and pick up later on this device.'
+      : 'Sign in to continue reviewing cases on this device.';
     submit.textContent = signUp ? 'Create account' : 'Sign in';
     name.required = signUp;
     password.autocomplete = signUp ? 'new-password' : 'current-password';
@@ -236,6 +237,9 @@ function showAccess(message = '') {
   dialog.querySelector('.access-error').textContent = message;
   dialog.querySelector('.access-error').hidden = !message;
   if (!dialog.open) dialog.showModal();
+  // Focus the first meaningful field instead of the appearance button in the
+  // corner. Sign-in stays keyboard-operable without guessing where to begin.
+  dialog.querySelector(dialog.dataset.mode === 'sign-up' ? '[name="displayName"]' : '[name="email"]').focus();
 }
 
 function render(control, user) {

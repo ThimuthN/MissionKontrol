@@ -2,9 +2,9 @@
 // projection, so an excluded record cannot reappear in an assistant answer.
 const examples = {
   brief: ['summarize this case', 'walk me through the timeline', 'what happened here', 'give me an overview'],
-  review: ['what needs a second look', 'what is missing', 'which links are uncertain', 'find gaps in this case', 'what should I check'],
+  review: ['what needs a second look', 'what needs checking', 'what is missing', 'which links are uncertain', 'find gaps in this case', 'what should I check'],
   coverage: ['compare coverage across cases', 'how many cases in this workflow', 'which stages have least evidence across the whole process', 'how often is each step recorded'],
-  triage: ['find a case to review next', 'prioritize cases for review', 'where should the team focus next', 'which cases have the most uncertain matches'],
+  triage: ['find a case to review next', 'which case should I review', 'prioritize cases for review', 'where should the team focus next', 'which cases have the most uncertain matches'],
   handoff: ['prepare a team brief', 'what should we improve before automation', 'where does work change hands', 'what questions should we ask employees about this process', 'what repeats across the team'],
   search: ['why was this record linked', 'show the supporting evidence', 'where is the original source', 'did the interview happen', 'find the message about the supplier'],
 };
@@ -71,8 +71,8 @@ function prioritize(cases) {
   entries.sort((a,b) => b.uncertain.length - a.uncertain.length || b.gaps.length - a.gaps.length || a.item.id.localeCompare(b.item.id));
   return entries.slice(0, 3).map(({ item, uncertain, gaps }) => {
     const link = uncertain[0], stage = link?.step ?? gaps[0];
-    const message = [uncertain.length + ' inferred evidence ' + (uncertain.length === 1 ? 'link' : 'links'),
-      gaps.length + (gaps.length === 1 ? ' stage without evidence.' : ' stages without evidence.')].join(', ');
+    const message = [uncertain.length + (uncertain.length === 1 ? ' suggested link' : ' suggested links'),
+      gaps.length + (gaps.length === 1 ? ' missing step' : ' missing steps')].join(' · ');
     return { title: (item.label ?? item.id) + ' · ' + stage.label, status: stage.status,
       message, ref: reference(item, stage, link?.record) };
   });
@@ -116,8 +116,8 @@ export function teamBrief(report) {
   const gap = [...stages.values()].filter(row => row.missing).sort((a,b) => b.missing / b.total - a.missing / a.total)[0];
   if (gap) findings.push({ title:gap.label, message:gap.missing + ' of ' + gap.total +
     ' cases have no linked record for this step. Would you expect one in every case? If so, where would you look?', ref:gap.example });
-  return { title:report.process, intro:findings.length ? 'Bring these questions to the people who do the work.' :
-    'These cases show no adjacent stages with a change of source and no missing stages. There is no recurring handoff to report from these checks.', findings, canExport:true };
+  return { title:report.process, intro:findings.length ? 'Questions to discuss with the team:' :
+    'No recurring handoffs or missing steps found in these cases.', findings, canExport:true };
 }
 
 export function briefText(result) {
@@ -152,8 +152,8 @@ export function investigate({ report, currentCase, step }, question, intent) {
   if (intent === 'handoff') return teamBrief(report);
   if (intent === 'triage') {
     const findings = prioritize(report.cases);
-    return { title: report.process, intro: findings.length ? 'Start with these cases. Cases with more inferred links come first, followed by cases with more gaps.' :
-      'Every stage has direct supporting evidence in this workflow.', findings };
+    return { title: report.process, intro: findings.length ? 'Suggested matches first, then missing records.' :
+      'Nothing pending in this workflow.', findings };
   }
   if (intent === 'coverage') {
     const stages = new Map();
@@ -163,22 +163,22 @@ export function investigate({ report, currentCase, step }, question, intent) {
       if (stage.evidence.length) counts.linked++;
       stages.set(stage.id, counts);
     }
-    return { title: report.process, intro: 'Evidence coverage across ' + report.cases.length + ' cases.',
-      findings: [...stages.values()].map(row => ({ title: row.label, message: row.linked + ' of ' + row.total + ' cases have linked evidence.' })) };
+    return { title: report.process, intro: 'Records across ' + report.cases.length + ' cases',
+      findings: [...stages.values()].map(row => ({ title: row.label, message: row.linked + ' of ' + row.total + ' cases have a record.' })) };
   }
-  if (intent === 'brief') return { title: item.label ?? item.id, intro: 'Here’s what the records show, step by step.',
+  if (intent === 'brief') return { title: item.label ?? item.id, intro: 'Case summary',
     findings: item.steps.map(stage => finding(item, stage)) };
   if (intent === 'review') {
     const unresolved = item.steps.filter(stage => stage.status !== 'observed' || !stage.evidence.length);
-    return { title: item.label ?? item.id, intro: unresolved.length ? 'These stages need a closer look.' : 'Every stage has observed evidence. You can still inspect the source links.',
+    return { title: item.label ?? item.id, intro: unresolved.length ? 'Steps to check' : 'No missing records or suggested links in this case.',
       findings: unresolved.map(stage => finding(item, stage)) };
   }
   const findings = relevantRecords(question, item, item.id === currentCase.id ? step : null);
   const attendance = /\b(interview|interviews)\b/i.test(question) && /\b(attend(?:ed|ance)?|happen(?:ed)?|held|occur(?:red)?|took place|show up)\b/i.test(question);
   const interview = item.steps.find(stage => stage.id === 'interview_scheduled');
   if (attendance && interview) return { title: item.label ?? item.id, intro: interview.evidence.length
-    ? 'Interview attendance is unconfirmed. This case records a scheduled interview; the appointment alone cannot establish who attended.'
-    : 'Interview attendance is unconfirmed. This case has no linked interview appointment.', findings: [finding(item, interview)] };
-  return { title: item.label ?? item.id, intro: findings.length ? 'The closest matching records in this case are below.' :
-    'I couldn’t find a matching record in this case. Try a stage name, a source, or a case summary.', findings };
+    ? 'An interview was scheduled, but attendance is not confirmed.'
+    : 'No interview booking or attendance record found.', findings: [finding(item, interview)] };
+  return { title: item.label ?? item.id, intro: findings.length ? 'Matching records' :
+    'No matching record found. Try a stage or source name.', findings };
 }

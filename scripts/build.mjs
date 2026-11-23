@@ -14,4 +14,17 @@ for (const filename of ['normalize.mjs', 'pipeline.mjs', 'recruitment.mjs', 'zip
 }
 await cp(new URL('../fixtures/assessment-demo.json', import.meta.url), new URL('report.json', destination));
 publicPaths.push('report.json');
+// Preserve Three.js as an npm dependency and serve its unmodified, MIT-licensed
+// browser modules from our own origin. There is no runtime CDN requirement.
+for (const filename of ['three.module.js', 'three.core.js']) {
+  await cp(new URL(`../node_modules/three/build/${filename}`, import.meta.url), new URL(filename, destination));
+  publicPaths.push(filename);
+}
+await cp(new URL('../node_modules/three/LICENSE', import.meta.url), new URL('THREE-LICENSE.txt', destination));
+publicPaths.push('THREE-LICENSE.txt');
+// The source-grounded case walkthrough is self-hosted too.
+await cp(new URL('../node_modules/gsap/dist/gsap.min.js', import.meta.url), new URL('gsap.min.js', destination));
+publicPaths.push('gsap.min.js');
+await cp(new URL('../node_modules/gsap/README.md', import.meta.url), new URL('GSAP-NOTICE.md', destination));
+publicPaths.push('GSAP-NOTICE.md');
 console.log('Built Mission Control in dist/');

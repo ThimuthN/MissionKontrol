@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="820" viewBox="0 0 1100 820" fill="none">
+  <defs>
+    <linearGradient id="trace" x1="80" y1="270" x2="1040" y2="710" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#66DCD2" stop-opacity="0"/>
+      <stop offset=".35" stop-color="#67D9D0" stop-opacity=".42"/>
+      <stop offset=".78" stop-color="#82C9DB" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#66DCD2" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="pool" cx="0" cy="0" r="1" gradientTransform="translate(760 360) rotate(90) scale(380 440)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#67D9D0" stop-opacity=".11"/>
+      <stop offset="1" stop-color="#67D9D0" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="pin" width="64" height="64" patternUnits="userSpaceOnUse">
+      <circle cx="32" cy="32" r="1" fill="#A6F7EB" fill-opacity=".24"/>
+    </pattern>
+  </defs>
+  <path fill="url(#pool)" d="M0 0h1100v820H0z"/>
+  <path fill="url(#pin)" d="M0 0h1100v820H0z"/>
+  <g stroke="url(#trace)" stroke-width="1.2">
+    <path d="M-100 118C111 74 189 231 365 216S593 74 764 108s165 197 437 96"/>
+    <path d="M-125 163C93 112 184 273 354 259S601 108 784 150s142 192 432 109"/>
+    <path d="M-126 208C74 160 183 319 360 302s244-148 434-110 145 192 422 119"/>
+    <path d="M-120 255C77 206 196 368 367 350s241-143 432-114 142 192 411 119"/>
+    <path d="M-115 307C82 257 200 419 377 399s233-151 430-125 154 189 401 127"/>
+    <path d="M-109 365C95 311 218 479 387 455s219-149 426-126 158 191 388 132"/>
+    <path d="M-98 427C109 365 226 534 401 512s226-156 425-130 157 192 372 139"/>
+    <path d="M-84 488C118 420 240 591 414 571s237-159 431-135 153 197 357 149"/>
+    <path d="M-60 552C143 476 257 642 434 627s226-161 427-139 151 193 345 154"/>
+    <path d="M-35 623C163 538 286 712 452 687s216-146 430-140 145 193 325 156"/>
+  </g>
+  <path d="M122 424C270 366 365 356 483 431S661 566 782 502s153-134 271-113" stroke="#72EFDE" stroke-opacity=".52" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round"/>
+  <path d="M122 424C252 451 356 541 482 490" stroke="#E9B974" stroke-opacity=".54" stroke-width="1.5" stroke-dasharray="5 10"/>
+  <path d="M782 502C832 474 868 432 936 442" stroke="#B9E3E2" stroke-opacity=".54" stroke-width="1.3" stroke-dasharray="1 9"/>
+  <g stroke="#BBF5EC" stroke-opacity=".44">
+    <circle cx="122" cy="424" r="15"/>
+    <circle cx="483" cy="431" r="17"/>
+    <circle cx="782" cy="502" r="23"/>
+    <circle cx="1053" cy="389" r="16"/>
+  </g>
+  <circle cx="122" cy="424" r="4" fill="#8BF4DE"/>
+  <circle cx="483" cy="431" r="5" fill="#8BF4DE"/>
+  <circle cx="782" cy="502" r="5" fill="#EBC18B"/>
+  <circle cx="936" cy="442" r="5" stroke="#EBC18B" stroke-width="1.5" stroke-dasharray="2 2"/>
+  <circle cx="1053" cy="389" r="4" fill="#8BF4DE"/>
+  <g font-family="monospace" font-size="11" letter-spacing="2" fill="#C1FAF1" fill-opacity=".54">
+    <text x="103" y="390">01 / SIGNAL</text>
+    <text x="454" y="395">02 / LINK</text>
+    <text x="756" y="464">03 / CHECK</text>
+    <text x="905" y="420">?</text>
+  </g>
+</svg>

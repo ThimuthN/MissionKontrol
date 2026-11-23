@@ -10,10 +10,10 @@ const drawer = document.createElement('dialog');
 drawer.className = 'case-assistant';
 drawer.setAttribute('aria-labelledby', 'assistant-heading');
 drawer.innerHTML = `
-  <header class="assistant-head"><div class="assistant-identity"><img src="/signal-mark.svg" alt="" aria-hidden="true"><div><p class="assistant-kicker">YOUR WORKFLOW GUIDE</p><h2 id="assistant-heading">Mica</h2></div></div>
+  <header class="assistant-head"><div class="assistant-identity"><img src="/signal-mark.svg" alt="" width="48" height="48" aria-hidden="true"><div><p class="assistant-kicker">CASE ASSISTANT</p><h2 id="assistant-heading">Mica</h2></div></div>
     <button class="assistant-close" type="button" aria-label="Close assistant">×</button></header>
   <p class="assistant-context"></p>
-  <div class="assistant-body"><div class="assistant-starters"><p>What would you like to check?</p></div>
+  <div class="assistant-body"><div class="assistant-starters"><p>Ask about this case</p></div>
     <div class="assistant-log" role="log" aria-label="Conversation" aria-live="polite"></div></div>
   <form class="assistant-form"><label for="assistant-question">Your question</label>
     <div><textarea id="assistant-question" rows="2" maxlength="700" placeholder="What’s missing from this case?"></textarea>
@@ -36,7 +36,7 @@ function element(tag, value, className) {
 function display(result) {
   const group = document.createElement('article');
   group.className = 'assistant-answer';
-  group.append(element('small', `${result.title} · Workspace insight`), element('p', result.intro));
+  group.append(element('small', result.title), element('p', result.intro));
   for (const finding of result.findings) {
     const section = document.createElement('section');
     section.append(element('strong', finding.title));
@@ -63,7 +63,7 @@ function display(result) {
   log.append(group);
   group.scrollIntoView({ block: 'start' });
 }
-for (const title of ['Walk me through this case', 'What needs a second look?', 'Find a case to review next', 'Prepare a team brief']) {
+for (const title of ['Summarize this case', 'What needs checking?', 'Which case should I review?', 'Prepare a team brief']) {
   const button = element('button', title);
   button.type = 'button';
   button.onclick = () => { input.value = title; form.requestSubmit(); };

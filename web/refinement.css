@@ -112,6 +112,14 @@ html[data-theme="dark"] .secondary { background: #172f40; border-color: #365365;
     linear-gradient(145deg,#082334,#0d263a 55%,#081d2e);
   box-shadow: 0 22px 48px #0f4a5721, inset 0 1px 0 #ffffff20;
 }
+.scene-frame::before {
+  content: ''; position: absolute; z-index: 0; inset: 0;
+  pointer-events: none; opacity: .2;
+  background: url('/trail-map.svg') center 48% / cover no-repeat;
+  mix-blend-mode: screen;
+}
+.light-ripple { position: absolute; z-index: 0; inset: 0; pointer-events: none; opacity: .58; mix-blend-mode: screen; mask-image: linear-gradient(90deg,transparent 0%,#000 36%,#000 100%); }
+.light-ripple canvas { display: block; width: 100%; height: 100%; }
 html[data-theme="dark"] .scene-frame {
   background:
     radial-gradient(ellipse 48% 73% at 84% 18%, #174b795d, transparent 83%),
@@ -125,7 +133,7 @@ html[data-theme="dark"] .scene-frame {
   opacity: .15; transition: opacity .4s ease-out;
 }
 .scene-frame:hover::after, .scene-frame:focus-within::after { opacity: 1; }
-.scene-frame > :not(.ambient-stage) { position: relative; z-index: 2; }
+.scene-frame > :not(.ambient-stage):not(.light-ripple) { position: relative; z-index: 2; }
 .ambient-stage { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; opacity: .85; mask-image: none; }
 .process-switch { margin-top: 0; gap: .5rem; }
 .process-choice { background: #ffffff0d; border-color: #bbf0f045; color: #c7e1e6; border-radius: 100px; }
@@ -409,6 +417,7 @@ html.motion-paused .agent-launcher,html.motion-paused .agent-avatar::before { an
 .assistant-form { background: var(--panel); border-color: var(--line); }
 .assistant-form button { border-radius: 11px; }
 .theme-swoosh { position: fixed; inset: 0; z-index: 120; overflow: hidden; pointer-events: none; contain: paint; }
+.theme-swoosh--dialog { position: absolute; z-index: 100; border-radius: inherit; }
 .theme-swoosh::before {
   content: ''; position: absolute; inset: 0;
   background: radial-gradient(ellipse 45% 60% at 58% 45%,#52e2d146,transparent 86%);
@@ -428,6 +437,35 @@ html.motion-paused .agent-launcher,html.motion-paused .agent-avatar::before { an
   position: absolute; top: -9%; right: 1%; width: 15%; height: 118%;
   background: linear-gradient(90deg,transparent,#fff9,#b4fff0ab,transparent);
   filter: blur(21px); opacity: .88;
+}
+.theme-echo-stage {
+  position: fixed; inset: 0; overflow: hidden; pointer-events: none;
+  z-index: 121; isolation: isolate; border-radius: inherit;
+}
+.theme-echo-stage--dialog { position: absolute; z-index: 101; }
+.theme-echo-stage i {
+  position: absolute; display: block; top: -24%; height: 148%;
+  will-change: transform, opacity; pointer-events: none;
+}
+.theme-echo-wide {
+  left: -48%; width: 44%;
+  background: linear-gradient(90deg,transparent 0%,#39d8ce15 8%,#6be9df74 46%,#eafff9b0 65%,#5ae3d526 86%,transparent 100%);
+  border-right: 2px solid #defff6c9;
+  box-shadow: 15px 0 58px #32d3cc6b, inset -22px 0 55px #ffffff21;
+}
+.theme-echo-fine {
+  left: -30%; width: 25%;
+  background: linear-gradient(90deg,transparent 0%,#b4fff15c 56%,#f7fffdde 69%,transparent 100%);
+  border-right: 1px solid #ecfffbe0;
+  box-shadow: 10px 0 32px #6bebdf72;
+}
+.theme-echo-stage--light .theme-echo-wide {
+  background: linear-gradient(90deg,transparent,#087f7634 25%,#4dcbb5a3 60%,#ecfff9bb 72%,transparent);
+  border-right-color: #52bdb7d9; box-shadow: 15px 0 56px #0b96915c;
+}
+.theme-echo-stage--light .theme-echo-fine {
+  background: linear-gradient(90deg,transparent,#0c989238 40%,#a9fff2c4 70%,transparent);
+  border-right-color: #0a9286b8;
 }
 @keyframes theme-swoosh-haze { 0% { opacity: 0; } 40% { opacity: 1; } 100% { opacity: 0; } }
 /* The old screenshot remains visible as the new interface crosses it. */
@@ -449,9 +487,13 @@ html.motion-paused .agent-launcher,html.motion-paused .agent-avatar::before { an
   background: radial-gradient(ellipse at 75% 24%,#15969080,transparent 58%),linear-gradient(145deg,#073c48,#0b2335);
 }
 .access-story::before {
-  content: ''; position: absolute; inset: -18%; pointer-events: none;
-  background: repeating-radial-gradient(ellipse at 76% 31%,#9bd8e11d 0 1px,transparent 2px 55px);
-  transform: rotate(-24deg); animation: halo-drift 34s linear infinite;
+  content: ''; position: absolute; inset: -8%; pointer-events: none;
+  background: url('/trail-map.svg') center / cover no-repeat;
+  opacity: .64; animation: trail-drift 25s ease-in-out infinite alternate;
+}
+@keyframes trail-drift {
+  from { transform: translate3d(-2%,1%,0) scale(1.04); }
+  to { transform: translate3d(3%,-1%,0) scale(1.08); }
 }
 .access-story > * { position: relative; z-index: 1; }
 .access-brand { display: inline-flex; align-items: center; gap: .7rem; font: 680 1.15rem var(--display); margin-bottom: auto; }
@@ -522,6 +564,9 @@ html[data-theme="dark"] .access-theme-toggle::before { content: '☀'; }
 .access-dialog.access-enabled .access-github-unavailable { display: none; }
 .access-note { color: #6e8792; font-size: .75rem; line-height: 1.5; margin-top: .3rem; }
 .access-privacy { margin-top: 1.05rem; border-top: 1px solid #e0e9e9; padding-top: .85rem; color: #6b828b; font-size: .74rem; line-height: 1.55; }
+.access-demo-link { display:inline-flex; align-items:center; gap:.45rem; align-self:flex-start; margin-top:.75rem; color:#087f7a; font-size:.79rem; font-weight:730; text-underline-offset:.25em; }
+.access-demo-link:hover { color:#045e60; }
+.access-demo-link:focus-visible { outline:2px solid #1ab9a8; outline-offset:4px; border-radius:3px; }
 html[data-theme="dark"] .access-dialog { background: #122738; color: #e4f4f6; border-color: #48717d; }
 html[data-theme="dark"] .access-panel { background: #122738; }
 html[data-theme="dark"] .access-panel h2 { color: #f1fbfd; }
@@ -544,6 +589,7 @@ html[data-theme="dark"] .access-error { color: #ffb7ae; background: #422d35; bor
 html[data-theme="dark"] .access-divider span { background: #122738; }
 html[data-theme="dark"] .access-divider::before { background: #34505e; }
 html[data-theme="dark"] .access-privacy { color: #9fb7c1; border-color: #365262; }
+html[data-theme="dark"] .access-demo-link { color:#9ce6d9; }
 @media (max-width: 1050px) {
   .intro { grid-template-columns: minmax(0,1fr) minmax(300px,340px); }
   .desk { grid-template-columns: minmax(186px,215px) minmax(0,1fr); }
@@ -602,7 +648,16 @@ html[data-theme="dark"] .access-privacy { color: #9fb7c1; border-color: #365262;
 }
 @media (prefers-reduced-motion: reduce) {
   .access-story::before { animation: none; }
-  .theme-swoosh { display: none; }
+  .theme-swoosh,.theme-echo-stage { display: none; }
   .priority-indicator { animation: none; }
   .agent-launcher,.agent-avatar::before,.case-assistant[open] { animation: none; }
 }
+
+/* Consistent keyboard focus across both palettes; status colours alone are
+   never used as the interactive focus cue. */
+:focus-visible { outline: 3px solid #087d79; outline-offset: 3px; }
+html[data-theme="dark"] :focus-visible { outline-color: #8bf5e8; }
+.access-preference-options button:focus-visible,
+.access-mode:focus-visible { outline: 3px solid #087d79; outline-offset: 2px; }
+html[data-theme="dark"] .access-preference-options button:focus-visible,
+html[data-theme="dark"] .access-mode:focus-visible { outline-color: #8bf5e8; }

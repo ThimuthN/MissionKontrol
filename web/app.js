@@ -6,11 +6,13 @@ import { currentReviewer, currentReviewerId, mountAccount } from './account.js';
 import { mountPaperMotion } from './paper-motion.js';
 import { printCase } from './case-sheet.js';
 import './assistant.js';
+import './sidebar.js';
+import './shader-background.js';
 import './experience.js';
 import './theme.js';
 
 const $ = id => document.getElementById(id);
-const states = { observed: 'Observed', inferred: 'Inferred link', missing: 'Evidence gap' };
+const states = { observed: 'Observed', inferred: 'Inferred', missing: 'Missing' };
 const sources = { email: 'Outlook', teams: 'Teams', calendar: 'Calendar', screen: 'Screen log' };
 const date = new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeZone: 'Asia/Colombo' });
 const timestamp = new Intl.DateTimeFormat('en-GB', {
@@ -90,7 +92,7 @@ function openRecord(record, expanded, isDemo, onCorrection) {
     submit.type = 'submit';
     const actions = node('div', undefined, 'actions');
     actions.append(submit, cancel);
-    correction.append(node('p', 'The original record and matching reason will stay in the review history.'), note, actions);
+    correction.append(node('p', 'The record will remain in the review history.'), note, actions);
     correction.onsubmit = event => {
       event.preventDefault();
       const reason = note.value.trim();
@@ -161,14 +163,14 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
   $('dataset').textContent = isDemo ? 'Harbourline · Sample workspace' : 'Imported workspace';
   $('description').textContent = isDemo
     ? active.primary
-      ? 'Follow a device request from the first message through to delivery.'
-      : 'Track scheduled screenings, interview progress and candidate responses.'
-    : machineReport.description ?? 'Choose a case to review its activity and supporting records.';
+      ? 'Track laptop requests, approvals, orders and deliveries.'
+      : 'Screening, interviews and offer responses in one place.'
+    : machineReport.description ?? 'Select a case to see its records.';
   $('method-note').textContent = isDemo
     ? active.primary
-      ? 'A matching name can suggest an order. It cannot prove the link on its own.'
-      : 'A calendar invite proves a booking—not that the conversation happened.'
-    : 'Source records, inferred links and evidence gaps stay distinct as you review.';
+      ? 'Some orders need a person to confirm the match.'
+      : 'A booking is not proof that a meeting took place.'
+    : 'Suggested matches and missing records are marked for review.';
   $('period').textContent = isDemo ? 'Harbourline Talent / March 2026' : 'Your workspace';
   $('period').hidden = false;
   $('case-lab').hidden = !activeCase;
@@ -223,8 +225,8 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
   if (!activeCase) {
     $('priority-count').textContent = 'No cases';
     $('priority-case').textContent = report.process;
-    $('priority-title').textContent = 'No cases to review.';
-    $('priority-rationale').textContent = 'This export did not produce a case for the selected workflow.';
+    $('priority-title').textContent = 'No cases yet';
+    $('priority-rationale').textContent = 'No matching cases were found in this file.';
     $('priority-rail').replaceChildren();
     $('priority-open').disabled = true;
     renderReplay(report, null);
@@ -256,22 +258,22 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
     const { stages, gaps } = summarize(report);
     const priorities = reviewPriorities(report.cases, reviews);
     const priority = priorities[0];
-    $('priority-count').textContent = `${priorities.length} open ${priorities.length === 1 ? 'question' : 'questions'}`;
+    $('priority-count').textContent = `${priorities.length} to review`;
     $('priority-case').textContent = priority
-      ? `${priority.item.label ?? priority.item.id} / ${priority.step.status === 'inferred' ? 'Suggested link' : 'Missing evidence'}`
-      : `${report.cases.length} cases / Review queue clear`;
-    $('priority-title').textContent = priority ? priority.step.label : 'The open queue is clear.';
+      ? `${priority.item.label ?? priority.item.id} / ${priority.step.status === 'inferred' ? 'Suggested match' : 'Missing record'}`
+      : `${report.cases.length} cases / Up to date`;
+    $('priority-title').textContent = priority ? priority.step.label : 'All caught up';
     $('priority-rationale').textContent = priority
       ? priority.step.status === 'inferred'
-        ? priority.step.evidence[0]?.reason ?? 'The link is based on matching clues. Check the source before accepting it.'
-        : 'There is no linked record for this step. Check with the team before treating it as complete.'
-      : 'Every uncertain link and evidence gap has a recorded decision. You can revisit any case.';
+        ? priority.step.evidence[0]?.reason ?? 'This record looks like a match. Check before confirming.'
+        : 'No matching record was found. Check with the team if this step should be complete.'
+      : 'There are no pending questions. You can still open any case.';
     $('priority-rail').replaceChildren(...(priority?.item.steps ?? []).map(step => {
       const dot = node('span', undefined, `priority-node ${step.status}`);
       dot.title = `${step.label}: ${states[step.status]}`;
       return dot;
     }));
-    $('priority-open').textContent = priority ? 'Review this step' : 'Browse cases';
+    $('priority-open').textContent = priority ? 'Open case' : 'View cases';
     $('priority-open').disabled = !report.cases.length;
     $('priority-open').onclick = () => {
       clearFilters(); moveTour(-1);
@@ -281,12 +283,12 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
       $('evidence-title').focus({ preventScroll: true });
     };
     $('insight').textContent = gaps
-      ? `${number.format(gaps)} of ${number.format(report.cases.length)} cases need a closer look.`
-      : `All ${number.format(report.cases.length)} cases have supporting records at every checkpoint.`;
+      ? `${number.format(gaps)} of ${number.format(report.cases.length)} cases have missing records.`
+      : `All ${number.format(report.cases.length)} cases have records at every step.`;
     const removed = report.stats.removedEvidenceLinks ?? 0;
     const summary = [`${number.format(report.stats.rows ?? report.stats.normalized)} source rows`,
       `${number.format(report.stats.linked)} linked records`, 'Sri Lanka time'];
-    if (removed) summary.splice(2, 0, `${number.format(removed)} ${removed === 1 ? 'link' : 'links'} removed in review`);
+    if (removed) summary.splice(2, 0, `${number.format(removed)} ${removed === 1 ? 'record' : 'records'} unlinked`);
     $('counts').textContent = summary.join(' / ');
     const filtered = selectCases(report.cases, { query: $('case-search').value, stage, gapsOnly });
     if (filtered.length && !filtered.includes(activeCase)) showCase(filtered[0]);
@@ -323,7 +325,7 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
       const header = node('span', undefined, 'case-label');
       const missing = item.steps.filter(step => step.status === 'missing').length;
       const inferred = item.steps.filter(step => step.status === 'inferred').length;
-      const state = missing ? `${missing} ${missing === 1 ? 'gap' : 'gaps'}` : inferred ? `${inferred} inferred` : 'All observed';
+      const state = missing ? `${missing} missing` : inferred ? `${inferred} inferred` : 'Complete record';
       header.append(node('strong', item.label ?? item.id), node('span', state, `case-tag ${missing ? 'gap' : inferred ? 'inferred' : ''}`));
       button.append(header, node('span', item.requestType, 'case-type'));
       return button;
@@ -359,7 +361,7 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
         if (button.disabled) $('case-title').focus({ preventScroll: true });
       };
     }
-    $('case-title').textContent = `Case ${activeCase.label ?? activeCase.id}`;
+    $('case-title').textContent = activeCase.label ?? activeCase.id;
     $('case-context').textContent = [activeCase.requestType ?? activeCase.role,
       first ? `${first.source === 'calendar' ? 'First booking' : 'First record'} · ${date.format(new Date(first.at))}` : undefined].filter(Boolean).join(' / ');
     const totals = activeCase.steps.reduce((counts, step) => {
@@ -367,7 +369,7 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
       return counts;
     }, {});
     $('case-summary').replaceChildren(...[
-      [`${activeCase.steps.length} checkpoint${activeCase.steps.length === 1 ? '' : 's'}`, 'total'],
+      [`${activeCase.steps.length} steps`, 'total'],
       [`${totals.observed ?? 0} observed`, 'observed'],
       ...(totals.inferred ? [[`${totals.inferred} inferred`, 'inferred']] : []),
       ...(totals.missing ? [[`${totals.missing} gap${totals.missing === 1 ? '' : 's'}`, 'missing']] : []),
@@ -395,41 +397,41 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
       const record = step.evidence[0];
       const label = record
         ? [...new Set(step.evidence.map(item => sources[item.source] ?? item.source))].join(' + ')
-        : step.excludedEvidence?.length ? 'Link removed in review' : 'No supporting record';
+        : step.excludedEvidence?.length ? 'Link removed' : 'No matching record';
       const glyph = node('span', step.status === 'missing' ? '–' : step.status === 'inferred' ? '◈'
         : step.id === 'approved' || step.id === 'decision' ? '✓' : '•', 'step-index');
       glyph.setAttribute('aria-hidden', 'true');
       button.append(glyph, primary,
-        node('small', decision ? `Reviewer: ${decision}` : label, 'step-meta'));
+        node('small', decision ? `Reviewed: ${decision}` : label, 'step-meta'));
       li.append(button);
       return li;
     }));
     $('evidence-title').textContent = activeStep.label;
     $('evidence-context').replaceChildren(badge(activeStep.status), node('span', `${activeStep.evidence.length} ${activeStep.evidence.length === 1 ? 'record' : 'records'}`));
     const interpretations = {
-      observed: 'Direct source evidence is linked to this checkpoint. Open the record below to check exactly what it says.',
-      inferred: 'This link was reconstructed from matching clues, not a uniquely verified identifier. Check the matching rationale before confirming.',
-      missing: 'No supporting record was linked in the export. This does not establish that the work did not happen.',
+      observed: 'Linked to a source record. Open it to see the details.',
+      inferred: 'Suggested match. Review the matching details before confirming.',
+      missing: 'No matching record found. The step may still have happened.',
     };
     $('step-interpretation').textContent = interpretations[activeStep.status] ?? '';
     $('step-interpretation').dataset.status = activeStep.status;
     $('records').replaceChildren(...activeStep.evidence.map((record, index) => openRecord(record, index === 0, isDemo, correct)));
     if (!activeStep.evidence.length) {
       const message = activeStep.excludedEvidence?.length
-        ? 'All supporting links for this step were removed during review.'
-        : 'No matching record was found in the export. Flag this step if the team should follow up.';
+        ? 'The linked record was removed during review.'
+        : 'No record found. Mark this for follow-up if you need to check with the team.';
       $('records').append(node('p', message, 'empty evidence-gap'));
     }
     if (activeStep.excludedEvidence?.length) {
       const history = node('div', undefined, 'evidence-history');
-      history.append(node('p', `Original status: ${states[activeStep.machineStatus]}`, 'history-caption'),
+      history.append(node('p', `Before review: ${states[activeStep.machineStatus]}`, 'history-caption'),
         ...activeStep.excludedEvidence.map(record => openRecord(record, true, isDemo, correct)));
       $('records').append(history);
     }
     const review = reviews[activeKey()];
     $('review-note').value = draftNotes.get(draftKey()) ?? review?.note ?? '';
-    $('review-state').textContent = draftNotes.has(draftKey()) ? 'Draft in this tab. Confirm or flag to save.' :
-      review?.decision ? `Saved locally as ${review.decision}.` : 'Your review stays in this browser.';
+    $('review-state').textContent = draftNotes.has(draftKey()) ? 'Unsaved note. Choose a decision to save.' :
+      review?.decision ? `Saved: ${review.decision}.` : 'Saved on this device.';
     $('review-byline').hidden = !review?.decision;
     $('review-byline').textContent = review?.decision
       ? `Reviewed by ${review.reviewer ?? 'Local reviewer'} · ${review.at ? timestamp.format(new Date(review.at)) : 'Date not recorded'}` : '';
@@ -461,7 +463,7 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
       reviews = updated;
       return true;
     } catch {
-      $('correction-status').textContent = 'Could not save this change. Browser storage is unavailable.';
+      $('correction-status').textContent = 'Couldn’t save. Check your browser storage settings.';
       return false;
     }
   }
@@ -483,7 +485,7 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
     $('start-tour').hidden = stops.length === 0;
     render();
     $('evidence-title').focus({ preventScroll: true });
-    $('correction-status').textContent = action === 'unlink' ? 'Link removed from this step.' : 'Link restored to this step.';
+    $('correction-status').textContent = action === 'unlink' ? 'Record unlinked.' : 'Record restored.';
   }
 
   function clearFilters() {
@@ -500,7 +502,7 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
     if (!stop) return;
     clearFilters();
     showCase(report.cases.find(item => item.id === stop.caseId), stop.stepId);
-    $('tour-count').textContent = `Walkthrough ${index + 1} of ${stops.length}`;
+    $('tour-count').textContent = `${index + 1} of ${stops.length}`;
     $('tour-title').textContent = stop.title;
     $('tour-text').textContent = stop.text;
     $('tour-next').firstChild.nodeValue = index === stops.length - 1 ? 'Finish ' : 'Next ';
@@ -524,7 +526,7 @@ function mount(workspace, { useLink = false, processKey, focusProcess = false } 
     const value = $('review-note').value;
     if (value === (reviews[activeKey()]?.note ?? '')) draftNotes.delete(draftKey());
     else draftNotes.set(draftKey(), value);
-    $('review-state').textContent = draftNotes.has(draftKey()) ? 'Draft in this tab. Confirm or flag to save.' : 'Your review stays in this browser.';
+    $('review-state').textContent = draftNotes.has(draftKey()) ? 'Unsaved note. Choose a decision to save.' : 'Saved on this device.';
   };
   $('clear-review').onclick = () => { if (save(null)) render(); $('review-note').focus(); };
   $('case-search').oninput = render;

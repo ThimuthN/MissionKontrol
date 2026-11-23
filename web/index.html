@@ -1,10 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-type="software">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#e8f5f3">
-  <meta name="description" content="Mission Control helps teams follow workflows, review source records and move work forward with confidence.">
+  <meta name="description" content="Review work across Teams, Outlook and calendar records. Check the source, resolve gaps and keep a record of decisions.">
+  <meta name="page-type" content="software">
+  <meta name="site-kind" content="software">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mission Control | Workflow operations">
+  <meta property="og:description" content="Follow the records behind each case. Review uncertain links and save your decisions.">
   <title>Mission Control | Workflow operations</title>
   <script src="/theme-init.js"></script>
   <link rel="icon" href="/mark.svg" type="image/svg+xml">
@@ -16,12 +21,61 @@
   <link rel="stylesheet" href="/review-updates.css">
   <link rel="stylesheet" href="/experience.css">
   <link rel="stylesheet" href="/refinement.css">
+  <link rel="stylesheet" href="/sidebar.css">
   <script type="module" src="/app.js"></script>
 </head>
-<body>
+<body data-sidebar="expanded">
   <a class="skip" href="#case-lab">Skip to the casebook</a>
+  <aside id="workspace-sidebar" class="workspace-sidebar" aria-label="Workspace navigation">
+    <div class="sidebar-header">
+      <span class="sidebar-brand"><span class="mark" aria-hidden="true"></span><span class="sidebar-label">Mission Control</span></span>
+      <button id="sidebar-toggle" class="sidebar-icon-button" type="button" aria-label="Collapse navigation" aria-expanded="true" aria-controls="sidebar-navigation" title="Collapse navigation">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM10 5v14M7 10l-2 2 2 2"/></svg>
+      </button>
+    </div>
+    <div id="sidebar-navigation" class="sidebar-navigation">
+      <p class="sidebar-kicker sidebar-label">REVIEW</p>
+      <nav class="sidebar-group" aria-label="Navigate workspace">
+        <button type="button" id="nav-overview" class="sidebar-link" aria-label="Overview" aria-current="page" title="Overview">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="5" rx="1.5"/><rect x="13" y="10" width="8" height="11" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/></svg><span class="sidebar-label">Overview</span>
+        </button>
+        <button type="button" id="nav-questions" class="sidebar-link" aria-label="Needs review" title="Needs review" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h12M8 12h12M8 19h8M3.5 5h.01M3.5 12h.01M3.5 19h.01"/></svg><span class="sidebar-label">Needs review</span><span id="sidebar-count" class="sidebar-count sidebar-label" aria-hidden="true"></span>
+        </button>
+        <button type="button" id="nav-casebook" class="sidebar-link" aria-label="Cases" title="Cases" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h14a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2zM4 18a2 2 0 0 1 2-2h14M8 9h8M8 12h5"/></svg><span class="sidebar-label">Cases</span>
+        </button>
+        <button type="button" id="nav-example" class="sidebar-link" aria-label="Quick tour" title="Quick tour" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z"/></svg><span class="sidebar-label">Quick tour</span>
+        </button>
+        <a class="sidebar-link" href="/demo.html" aria-label="Watch walkthrough" title="Watch walkthrough">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m10 8 5 4-5 4z"/></svg><span class="sidebar-label">Watch walkthrough</span>
+        </a>
+        <button type="button" id="nav-mica" class="sidebar-link" aria-label="Ask Mica" title="Ask Mica" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5z"/></svg><span class="sidebar-label">Ask Mica</span><span class="sidebar-pulse" aria-hidden="true"></span>
+        </button>
+      </nav>
+      <p class="sidebar-kicker sidebar-label sidebar-kicker-secondary">DATA</p>
+      <nav class="sidebar-group" aria-label="Data actions">
+        <button type="button" id="nav-dataset" class="sidebar-link" aria-label="Switch dataset" title="Switch dataset" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5zM3 12l9 5 9-5M3 16l9 5 9-5"/></svg><span class="sidebar-label">Switch dataset</span>
+        </button>
+        <button type="button" id="nav-import" class="sidebar-link" aria-label="Import ZIP" title="Import ZIP" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V3m0 0L7 8m5-5 5 5M4 16v4h16v-4"/></svg><span class="sidebar-label">Import ZIP</span>
+        </button>
+        <button type="button" id="nav-export" class="sidebar-link" aria-label="Export options" title="Export options" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v13m0 0 5-5m-5 5-5-5M4 18v3h16v-3"/></svg><span class="sidebar-label">Export</span>
+        </button>
+      </nav>
+    </div>
+    <div class="sidebar-bottom">
+      <span class="sidebar-live" aria-hidden="true"></span><span class="sidebar-label"><strong>On this device</strong><small>Reviews saved locally</small></span>
+    </div>
+  </aside>
+  <button id="sidebar-scrim" class="sidebar-scrim" type="button" aria-label="Close navigation" hidden></button>
   <header class="topbar">
     <div class="topbar-inner">
+      <button id="sidebar-mobile-toggle" class="sidebar-mobile-toggle" type="button" aria-label="Open navigation" aria-controls="workspace-sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
       <button id="welcome-button" class="brand" type="button" aria-label="Mission Control, choose a dataset"><span class="mark" aria-hidden="true"></span>Mission Control</button>
       <div class="top-actions">
         <span id="dataset" class="dataset">Harbourline · Sample workspace</span>
@@ -30,9 +84,9 @@
         <details id="export-menu" class="export">
           <summary class="nav-button">Export <span class="chevron" aria-hidden="true"></span></summary>
           <div class="export-items">
-            <button id="print-case" type="button" disabled>Print current case</button>
-            <button id="export-csv" type="button" disabled>Case and stage CSV</button>
-            <button id="export-json" type="button" disabled>Evidence and reviews JSON</button>
+            <button id="print-case" type="button" disabled>Print case</button>
+            <button id="export-csv" type="button" disabled>Download CSV</button>
+            <button id="export-json" type="button" disabled>Download JSON</button>
           </div>
         </details>
       </div>
@@ -45,23 +99,23 @@
       <section class="intro" aria-labelledby="process">
         <div class="hero-orbit" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
         <div class="intro-copy">
-          <p class="eyebrow"><span class="eyebrow-spark" aria-hidden="true"></span>THE EVIDENCE TRAIL</p>
+          <p class="eyebrow"><span class="eyebrow-spark" aria-hidden="true"></span>CURRENT WORKFLOW</p>
           <h1 id="process">Laptop procurement</h1>
           <p id="description">Open a case to trace a request through Teams and Outlook.</p>
           <p id="method-note" class="method-note"></p>
         </div>
         <div class="briefing" aria-label="Review priority">
           <div class="priority-top">
-            <p class="priority-eyebrow"><span class="priority-indicator" aria-hidden="true"></span>NEXT TO VERIFY</p>
+            <p class="priority-eyebrow"><span class="priority-indicator" aria-hidden="true"></span>NEEDS REVIEW</p>
             <span id="priority-count" class="priority-count"></span>
           </div>
           <div id="priority-rail" class="priority-rail" aria-hidden="true"></div>
           <p id="priority-case" class="priority-case"></p>
-          <h2 id="priority-title" class="priority-title">Find the next uncertain link.</h2>
+          <h2 id="priority-title" class="priority-title">Review the next case</h2>
           <p id="priority-rationale" class="priority-rationale"></p>
           <div class="priority-actions">
-            <button id="priority-open" class="priority-open" type="button" disabled>Review this step</button>
-            <button id="start-tour" class="quiet" type="button" disabled>Tour</button>
+            <button id="priority-open" class="priority-open" type="button" disabled>Open case</button>
+            <button id="start-tour" class="quiet" type="button" disabled>Quick tour</button>
           </div>
           <p class="period" id="period" hidden></p>
           <div class="trace-controls" id="trace-controls" hidden>
@@ -76,24 +130,24 @@
     <section id="case-lab" class="lab" aria-labelledby="lab-title" hidden>
       <div class="brief">
         <div class="brief-message">
-          <p class="brief-eyebrow">CASE REVIEW</p>
-          <h2 id="lab-title">The review desk</h2>
+          <p class="brief-eyebrow">WORKSPACE</p>
+          <h2 id="lab-title">Cases</h2>
           <p id="insight"></p>
         </div>
         <div class="brief-tools">
           <div class="evidence-legend" role="group" aria-label="How to read evidence statuses">
             <span class="legend-item"><i class="legend-dot observed" aria-hidden="true"></i><strong>Observed</strong><small>Direct record</small></span>
             <span class="legend-item"><i class="legend-dot inferred" aria-hidden="true"></i><strong>Inferred</strong><small>Clue-based link</small></span>
-            <span class="legend-item"><i class="legend-dot missing" aria-hidden="true"></i><strong>Gap</strong><small>No linked record</small></span>
+            <span class="legend-item"><i class="legend-dot missing" aria-hidden="true"></i><strong>Missing</strong><small>No linked record</small></span>
           </div>
           <button id="copy-link" class="secondary" type="button">Copy case link</button>
         </div>
         <span id="copy-status" class="sr-only" role="status"></span>
       </div>
-      <div id="tour" class="tour" aria-label="Guided walkthrough" hidden>
+      <div id="tour" class="tour" role="region" aria-label="Quick tour" aria-live="polite" hidden>
         <div class="tour-copy"><p id="tour-count"></p><h3 id="tour-title"></h3><p id="tour-text"></p></div>
         <div class="tour-actions">
-          <button id="tour-close" class="secondary" type="button">Exit walkthrough</button>
+          <button id="tour-close" class="secondary" type="button">Exit tour</button>
           <button id="tour-next" class="primary" type="button">Next</button>
         </div>
       </div>
@@ -103,9 +157,9 @@
           <div id="case-register">
           <div class="panel-title"><h3>Cases</h3><span id="case-count" aria-live="polite"></span></div>
           <label for="case-search" class="sr-only">Find a case</label>
-          <input type="search" id="case-search" placeholder="Find a case">
+          <input type="search" id="case-search" placeholder="Search cases">
           <div class="filters">
-            <button id="gaps-only" class="quiet" type="button" aria-pressed="false">Evidence gaps</button>
+            <button id="gaps-only" class="quiet" type="button" aria-pressed="false">Missing records</button>
             <button id="reset-filter" class="quiet" type="button" hidden>Clear filters</button>
           </div>
           <div id="case-list"></div>
@@ -117,7 +171,7 @@
         </nav>
         <section class="panel timeline" aria-labelledby="case-title">
           <div class="panel-title">
-            <div class="case-heading"><p class="case-heading-kicker">CASE IN FOCUS</p><h3 id="case-title" tabindex="-1"></h3></div>
+            <div class="case-heading"><p class="case-heading-kicker">CASE</p><h3 id="case-title" tabindex="-1"></h3></div>
             <div class="case-nav" role="group" aria-label="Browse cases">
               <button id="previous-case" type="button" aria-label="Previous case"><span class="arrow" aria-hidden="true"></span></button>
               <span id="case-position"></span>
@@ -139,24 +193,24 @@
             <div id="records"></div>
             <form id="review-form">
             <label for="review-note">Reviewer note</label>
-            <textarea id="review-note" rows="2" maxlength="500" placeholder="Add context for this step"></textarea>
+            <textarea id="review-note" rows="2" maxlength="500" placeholder="Add a note (optional)"></textarea>
             <div class="actions">
               <button name="decision" class="secondary" value="confirmed">Confirm</button>
-              <button name="decision" class="secondary" value="flagged">Flag for review</button>
+              <button name="decision" class="secondary" value="flagged">Needs follow-up</button>
               <button id="clear-review" class="quiet" type="button" hidden>Clear</button>
             </div>
             <p class="review-state" id="review-state" role="status"></p>
             <p class="review-byline" id="review-byline" hidden></p>
-            <button id="next-review" class="quiet" type="button" hidden>Next step to check</button>
+            <button id="next-review" class="quiet" type="button" hidden>Next case to review</button>
             </form>
           </div>
         </section>
       </div>
     </section>
   </main>
-  <footer><span class="footer-credit"><span class="footer-dot" aria-hidden="true"></span>Mission Control <span class="footer-separator">/</span> Every conclusion has a source.</span><span id="counts"></span></footer>
+  <footer><span class="footer-credit"><span class="footer-dot" aria-hidden="true"></span>Mission Control <span class="footer-separator">/</span> Case review workspace</span><span id="counts"></span></footer>
   <button id="agent-launcher" class="agent-launcher" type="button" aria-label="Ask Mica about this case" title="Ask Mica" disabled hidden>
-    <span class="agent-avatar" aria-hidden="true"><img src="/signal-mark.svg" alt=""></span>
+    <span class="agent-avatar" aria-hidden="true"><img src="/signal-mark.svg" alt="" width="48" height="48"></span>
     <span class="agent-label"><strong>Mica</strong><small>Ask about a case</small></span>
     <span class="agent-availability" aria-hidden="true"></span>
   </button>

@@ -3,12 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "engines": { "node": "22.x" },
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "node scripts/serve.mjs",
     "test": "node --test --experimental-test-isolation=none",
     "ingest": "node scripts/ingest.mjs",
     "redact": "node scripts/redact.mjs"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "three": "^0.187.0"
   }
 }
