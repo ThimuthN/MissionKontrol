@@ -78,7 +78,7 @@ async function secondSwipe(next) {
 }
 
 async function sweepTo(next) {
-  if (reducedMotion.matches || typeof Element.prototype.animate !== 'function') { apply(next); return; }
+  if (reducedMotion.matches || document.documentElement.classList.contains('motion-paused') || typeof Element.prototype.animate !== 'function') { apply(next); return; }
   if (document.querySelector('dialog.access-dialog[open]') || typeof document.startViewTransition !== 'function') {
     await fallbackSweep(next);
     await secondSwipe(next);
