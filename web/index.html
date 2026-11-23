@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#182b25">
+  <title>Mission Control · Workflow Review</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <button id="welcome-button" class="brand" type="button"><span class="mark" aria-hidden="true">M</span> Mission Control</button>
+    <div class="top-actions">
+      <span id="dataset">Workflow review</span>
+      <button id="import-button" type="button">Import ZIP</button>
+      <details id="export-menu">
+        <summary>Export</summary>
+        <button id="export-csv" type="button">Case and stage CSV</button>
+        <button id="export-json" type="button">Evidence and reviews JSON</button>
+      </details>
+    </div>
+    <input id="import-file" type="file" accept=".zip,application/zip" hidden>
+  </header>
+  <main>
+    <div class="intro">
+      <h1 id="process">Workflow review</h1>
+      <p id="description">Inspect the evidence behind each step and record what needs review.</p>
+    </div>
+    <div class="overview" id="overview" aria-label="Filter by step" hidden></div>
+    <p id="workspace-status" class="workspace-status" role="status" hidden></p>
+    <p id="load-state" role="status">Loading cases…</p>
+    <div id="desk" class="desk" hidden>
+      <nav class="panel cases" aria-label="Workflow cases">
+        <h2>Cases <span id="case-count"></span></h2>
+        <label for="case-search" class="sr-only">Find a case</label>
+        <input type="search" id="case-search" placeholder="Find a case">
+        <button type="button" id="reset-filter" hidden>Clear stage filter</button>
+        <div id="case-list"></div>
+      </nav>
+      <section class="panel timeline" aria-labelledby="case-title">
+        <h2 id="case-title"></h2>
+        <div id="steps"></div>
+      </section>
+      <section class="panel inspector" aria-labelledby="evidence-title">
+        <h2 id="evidence-title"></h2>
+        <div id="records"></div>
+        <form id="review-form">
+          <label for="review-note">Review note</label>
+          <textarea id="review-note" rows="2" maxlength="500" placeholder="What should the next reviewer know?"></textarea>
+          <p class="review-state" id="review-state" role="status"></p>
+          <div class="actions">
+            <button name="decision" value="confirmed">Confirm</button>
+            <button name="decision" value="flagged">Flag</button>
+            <button id="clear-review" type="button" hidden>Clear</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+  <footer>Mission Control <span id="counts"></span></footer>
+</body>
+</html>

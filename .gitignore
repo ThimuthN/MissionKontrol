@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vercel/
+.agents/
+.env*
+data/
+private/
+*.zip
+*.pdf

@@ -1,0 +1,9 @@
+[
+  {"id":"demo-email-01","source":"email","at":"2026-03-09T09:07:00+05:30","text":"INT-104 · Interview request for the operations analyst role.","origin":"Sample / email 01"},
+  {"id":"demo-chat-01","source":"teams","at":"2026-03-09T10:32:00+05:30","text":"For INT-104, the panel is available after 2 pm on Wednesday.","origin":"Sample / Teams 01"},
+  {"id":"demo-chat-02","source":"teams","at":"2026-03-09T11:05:00+05:30","text":"The candidate is available Wednesday at 2:30 for INT-104.","origin":"Sample / Teams 02"},
+  {"id":"demo-calendar-01","source":"calendar","at":"2026-03-11T14:30:00+05:30","timeKind":"Scheduled start","text":"INT-104 · Operations analyst interview","origin":"Sample / calendar 01"},
+  {"id":"demo-email-02","source":"email","at":"2026-03-10T09:17:00+05:30","text":"INT-108 · Interview request for the client coordinator role.","origin":"Sample / email 02"},
+  {"id":"demo-chat-03","source":"teams","at":"2026-03-10T13:45:00+05:30","text":"INT-108 · The panel is available on Thursday. Waiting for the candidate.","origin":"Sample / Teams 03"},
+  {"id":"demo-screen-01","source":"screen","at":"2026-03-10T13:49:00+05:30","text":"Calendar · INT-108","origin":"Sample / screen 01"}
+]
