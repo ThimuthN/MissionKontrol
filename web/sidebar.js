@@ -23,6 +23,9 @@ function setMobileOpen(open) {
   mobileToggle.setAttribute('aria-expanded', String(active));
   mobileToggle.setAttribute('aria-label', active ? 'Close navigation' : 'Open navigation');
   scrim.hidden = !active;
+  // A translated-offscreen drawer is still in the keyboard tab order unless
+  // its subtree is made inert. Restore it immediately before opening.
+  sidebar.inert = smallScreen.matches && !active;
   if (active) sidebar.querySelector('#nav-overview').focus();
 }
 
@@ -90,6 +93,7 @@ smallScreen.addEventListener('change', () => setMobileOpen(false));
 
 try { setExpanded(localStorage.getItem('mission-control:sidebar') !== 'compact'); }
 catch { setExpanded(true); }
+setMobileOpen(false);
 sync();
 document.addEventListener('mission-ready', sync);
 new MutationObserver(sync).observe(document.getElementById('priority-count'), { childList: true, characterData: true, subtree: true });

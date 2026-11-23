@@ -28,12 +28,30 @@ const progress = document.getElementById('demo-progress');
 const play = document.getElementById('demo-play');
 const clock = document.getElementById('demo-time');
 const formatTime = time => Math.floor(time / 60) + ':' + String(Math.floor(time % 60)).padStart(2, '0');
+const mobilePortrait = matchMedia('(max-width:700px) and (orientation:portrait)');
+const chapterSource = document.getElementById('mobile-story-source');
+const chapterCount = document.getElementById('mobile-story-count');
+const chapterTitle = document.getElementById('mobile-story-title');
+const chapterDescription = document.getElementById('mobile-story-description');
+let lastChapter = -1;
 
 function sync() {
   const t = Math.min(95.999, tl.time());
-  for (const scene of scenes) {
+  let chapter = 0;
+  for (const [index, scene] of scenes.entries()) {
     const start = Number(scene.dataset.start);
-    scene.style.visibility = t >= start && t < start + Number(scene.dataset.duration) ? 'visible' : 'hidden';
+    const visible = t >= start && t < start + Number(scene.dataset.duration);
+    scene.style.visibility = visible ? 'visible' : 'hidden';
+    if (visible) chapter = index;
+  }
+  if (lastChapter !== chapter) {
+    const scene = scenes[chapter];
+    const heading = scene.querySelector('.display,.mega');
+    chapterSource.textContent = scene.querySelector('.section-label')?.textContent ?? 'Mission Control';
+    chapterCount.textContent = String(chapter + 1).padStart(2, '0') + ' / ' + String(scenes.length).padStart(2, '0');
+    chapterTitle.textContent = heading?.innerText.replace(/\s+/g, ' ').trim() ?? '';
+    chapterDescription.textContent = scene.querySelector('.copy,.s7-copy p')?.textContent ?? '';
+    lastChapter = chapter;
   }
   progress.value = String(t);
   clock.textContent = formatTime(tl.time()) + ' / 1:36';
@@ -41,9 +59,15 @@ function sync() {
 }
 
 function fit() {
+  if (mobilePortrait.matches) {
+    root.style.transform = 'translate(0px, 54px) scale(' + innerWidth / 1920 + ')';
+    root.setAttribute('aria-hidden', 'true');
+    return;
+  }
   const scale = Math.min(innerWidth / 1920, innerHeight / 1080);
   root.style.transform = 'translate(' + Math.max(0, (innerWidth - 1920 * scale) / 2) + 'px,' +
     Math.max(0, (innerHeight - 1080 * scale) / 2) + 'px) scale(' + scale + ')';
+  root.removeAttribute('aria-hidden');
 }
 window.addEventListener('resize', fit, { passive: true });
 play.addEventListener('click', () => {
